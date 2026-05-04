@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIORA | Architecte de Systèmes</title>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+
     <style>
         :root {
             /* Palette de nuances pour les diapositives */
             --bg-1: #05051a; /* Bleu nuit originel */
-            --bg-2: #080826; /* Nuance légèrement plus claire pour le diagnostic */
-            --bg-3: #030312; /* Nuance plus sombre pour l'offre finale */
+            --bg-2: #080826; /* Nuance légèrement plus claire */
+            --bg-3: #030312; /* Nuance plus sombre */
             
             --text: #ffffff;
             --accent: #00f2ff; /* Cyan Électrique */
@@ -25,8 +25,8 @@
         
         html { scroll-behavior: smooth; }
 
-        body { 
-            color: var(--text); 
+        body {
+            color: var(--text);
             font-family: 'Space Grotesk', sans-serif;
             scroll-snap-type: y mandatory;
             overflow-y: scroll;
@@ -34,7 +34,7 @@
         }
 
         section {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -54,50 +54,71 @@
             margin: 0 auto;
         }
 
-        h1, h2, h3 { 
-            font-family: 'Syne', sans-serif; 
+        h1, h2, h3 {
+            font-family: 'Syne', sans-serif;
             text-transform: uppercase;
             line-height: 0.9;
         }
 
-        /* --- DIAPO 1: HERO --- */
+        /* --- LAYOUTS --- */
         .hero-layout {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
             gap: 60px;
             align-items: center;
         }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+
         h1 { font-size: clamp(3rem, 8vw, 6rem); }
-        
-        .hero-img { 
-            border: var(--border-white); 
+
+        .hero-img {
+            border: var(--border-white);
             box-shadow: var(--shadow-white);
             filter: grayscale(1);
             width: 100%;
             background: #fff;
+            object-fit: cover;
         }
 
-        /* --- DIAPO 2: DIAGNOSTIC --- */
+        .section-title {
+            font-size: 4rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .section-sub {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+
         .diag-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
+
         .card {
-            background: rgba(255, 255, 255, 0.03); /* Léger contraste sur le fond nuancé */
+            background: rgba(255, 255, 255, 0.03);
             border: var(--border-white);
             padding: 40px;
             box-shadow: var(--shadow-white);
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .card:hover { 
-            transform: translate(-10px, -10px); 
+        .card:hover {
+            transform: translate(-10px, -10px);
             box-shadow: 15px 15px 0px var(--accent);
             border-color: var(--accent);
         }
-        .section-title { font-size: 4rem; margin-bottom: 60px; text-align: center; }
 
-        /* --- DIAPO 3: OFFRE --- */
         .offer-box {
             background: transparent;
             padding: 80px;
@@ -106,8 +127,15 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: var(--shadow-white);
+            gap: 40px;
         }
-        .price { font-size: 7rem; font-weight: 800; color: var(--accent); font-family: 'Syne'; }
+
+        .price {
+            font-size: 7rem;
+            font-weight: 800;
+            color: var(--accent);
+            font-family: 'Syne';
+        }
 
         .btn-cta {
             background: var(--text);
@@ -115,89 +143,6 @@
             padding: 25px 50px;
             text-decoration: none;
             font-family: 'Syne', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             text-transform: uppercase;
-            font-weight: 800;
-            display: inline-block;
-            transition: 0.4s;
-        }
-        .btn-cta:hover { 
-            background: var(--accent); 
-            color: #000;
-            transform: scale(1.05); 
-        }
-
-        @media (max-width: 900px) {
-            .hero-layout, .diag-grid, .offer-box { grid-template-columns: 1fr; flex-direction: column; text-align: center; }
-            section { height: auto; min-height: 100vh; padding: 100px 20px; }
-            .price { font-size: 4.5rem; margin: 20px 0; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- DIAPOSITIVE 1 -->
-    <section class="slide-1">
-        <div class="container hero-layout">
-            <div data-aos="fade-right" data-aos-duration="2500">
-                <h1>On arrête le cirque.</h1>
-                <p style="font-size: 1.5rem; margin-top: 30px; border-left: 5px solid var(--accent); padding-left: 20px; font-weight: 300;">
-                    Stabilisons ton revenu de coaching.<br> 
-                    Pas de tunnels compliqués.<br> 
-                    Juste des systèmes qui marchent.
-                </p>
-            </div>
-            <div data-aos="zoom-in" data-aos-duration="3000" data-aos-delay="500">
-                <img src="Cheval.png" alt="Miora" class="hero-img">
-            </div>
-        </div>
-    </section>
-
-    <!-- DIAPOSITIVE 2 -->
-    <section class="slide-2">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-down" data-aos-duration="2000">Est-ce que c'est toi ?</h2>
-            <div class="diag-grid">
-                <div class="card" data-aos="fade-up" data-aos-duration="1800" data-aos-delay="200">
-                    <h3>Le Yo-Yo</h3>
-                    <p style="margin-top:15px; opacity: 0.9;">Tes revenus sont imprévisibles et ton énergie s'épuise à essayer de tout contrôler.</p>
-                </div>
-                <div class="card" data-aos="fade-up" data-aos-duration="1800" data-aos-delay="600">
-                    <h3>Le Bricolage</h3>
-                    <p style="margin-top:15px; opacity: 0.9;">Tu passes ton temps à "être présente" sans comprendre ce qui génère réellement des ventes.</p>
-                </div>
-                <div class="card" data-aos="fade-up" data-aos-duration="1800" data-aos-delay="1000">
-                    <h3>La Fatigue</h3>
-                    <p style="margin-top:15px; opacity: 0.9;">Tu veux un système robuste, pas un emploi à plein temps.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DIAPOSITIVE 3 -->
-    <section class="slide-3">
-        <div class="container">
-            <div class="offer-box" data-aos="zoom-in" data-aos-duration="2500">
-                <div>
-                    <h2 style="font-size: 3.5rem;">L'Accélérateur Simple</h2>
-                    <p style="font-size: 1.2rem; margin-top: 10px; opacity: 0.7;">4 SESSIONS POUR TOUT CHANGER</p>
-                </div>
-                <div style="text-align: right;">
-                    <div class="price">800€</div>
-                    <a href="mailto:votre@email.com" class="btn-cta">Démarrer maintenant</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            once: false,
-            mirror: true,
-            duration: 2000
-        });
-    </script>
-
-</body>
-</html>
+            
