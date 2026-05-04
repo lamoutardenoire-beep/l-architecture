@@ -11,12 +11,12 @@
     <style>
         :root {
             /* Palette de nuances pour les diapositives */
-            --bg-1: #05051a; /* Bleu nuit originel */
-            --bg-2: #080826; /* Nuance légèrement plus claire */
-            --bg-3: #030312; /* Nuance plus sombre */
+            --bg-1: #05051a; 
+            --bg-2: #080826; 
+            --bg-3: #030312; 
             
             --text: #ffffff;
-            --accent: #00f2ff; /* Cyan Électrique */
+            --accent: #00f2ff; /* Ton Cyan Électrique */
             --border-white: 3px solid #ffffff;
             --shadow-white: 8px 8px 0px #ffffff;
         }
@@ -30,6 +30,7 @@
             font-family: 'Space Grotesk', sans-serif;
             scroll-snap-type: y mandatory;
             overflow-y: scroll;
+            background-color: var(--bg-1);
             -webkit-font-smoothing: antialiased;
         }
 
@@ -38,12 +39,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px;
+            padding: 60px 40px;
             scroll-snap-align: start;
             position: relative;
         }
 
-        /* Application des nuances par diapositive */
+        /* Nuances par diapositive */
         .slide-1 { background-color: var(--bg-1); }
         .slide-2 { background-color: var(--bg-2); }
         .slide-3 { background-color: var(--bg-3); }
@@ -61,67 +62,66 @@
         }
 
         /* --- LAYOUTS --- */
-        .hero-layout {
+        .hero-layout, .two-col {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
             gap: 60px;
             align-items: center;
         }
 
-        .two-col {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        h1 { font-size: clamp(3rem, 8vw, 6rem); }
+        h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); }
 
         .hero-img {
             border: var(--border-white);
             box-shadow: var(--shadow-white);
             filter: grayscale(1);
             width: 100%;
+            height: auto;
             background: #fff;
             object-fit: cover;
+            transition: 0.5s ease;
         }
 
         .section-title {
-            font-size: 4rem;
+            font-size: clamp(2rem, 5vw, 4rem);
             margin-bottom: 40px;
             text-align: center;
         }
 
         .section-sub {
             text-align: center;
-            max-width: 700px;
-            margin: 0 auto 40px auto;
-            font-size: 1.1rem;
-            opacity: 0.85;
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0.9;
         }
 
         .diag-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             border: var(--border-white);
             padding: 40px;
             box-shadow: var(--shadow-white);
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
         .card:hover {
             transform: translate(-10px, -10px);
             box-shadow: 15px 15px 0px var(--accent);
             border-color: var(--accent);
         }
 
+        .card h3 { color: var(--accent); margin-bottom: 15px; }
+
         .offer-box {
-            background: transparent;
-            padding: 80px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 60px;
             border: var(--border-white);
             display: flex;
             justify-content: space-between;
@@ -131,7 +131,7 @@
         }
 
         .price {
-            font-size: 7rem;
+            font-size: clamp(4rem, 8vw, 7rem);
             font-weight: 800;
             color: var(--accent);
             font-family: 'Syne';
@@ -140,9 +140,178 @@
         .btn-cta {
             background: var(--text);
             color: #000;
-            padding: 25px 50px;
+            padding: 20px 40px;
             text-decoration: none;
             font-family: 'Syne', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
-            
+            font-weight: 800;
+            display: inline-block;
+            transition: 0.4s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-cta:hover {
+            background: var(--accent);
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        ul { list-style: none; margin-top: 25px; }
+        ul li { margin-bottom: 12px; font-size: 1.1rem; }
+        ul li::before {
+            content: "→ ";
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            background: #02020b;
+        }
+
+        @media (max-width: 960px) {
+            .hero-layout, .two-col, .offer-box { grid-template-columns: 1fr; flex-direction: column; text-align: center; }
+            section { height: auto; min-height: 100vh; padding: 80px 20px; }
+            .price { margin: 20px 0; }
+            .offer-box { padding: 40px 20px; }
+            h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1 : HERO -->
+    <section class="slide-1">
+        <div class="container hero-layout">
+            <div data-aos="fade-right" data-aos-duration="1500">
+                <h1>On arrête le cirque.</h1>
+                <p style="font-size: 1.4rem; margin-top: 30px; border-left: 5px solid var(--accent); padding-left: 20px; font-weight: 300; line-height: 1.5;">
+                    Stabilisons ton revenu de coaching. 
+                    Ici, on enlève le superflu et on garde ce qui marche pour que tu repartes avec un plan simple.
+                </p>
+                <ul data-aos="fade-up" data-aos-delay="400">
+                    <li>Arrêter de bricoler ta com’ au feeling.</li>
+                    <li>Un système clair pour des appels chaque mois.</li>
+                    <li>Rester toi‑même sans jouer un personnage.</li>
+                </ul>
+                <a href="mailto:votre.email@domaine.com" class="btn-cta" style="margin-top:35px;">
+                    Je veux mon plan personnalisé
+                </a>
+            </div>
+            <div data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="300">
+                <img src="Cheval.png" alt="Miora Architecture" class="hero-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 2 : DIAGNOSTIC -->
+    <section class="slide-2">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-down">Est-ce que c'est toi ?</h2>
+            <p class="section-sub" data-aos="fade-up">
+                Tu n'as pas besoin d'une énième stratégie miracle, tu as besoin d'un système qui respecte ton énergie.
+            </p>
+            <div class="diag-grid">
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Le Yo-Yo</h3>
+                    <p>Tes revenus sont imprévisibles et ton énergie s'épuise à essayer de tout contrôler.</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Le Bricolage</h3>
+                    <p>Tu es présente partout sans savoir ce qui génère réellement tes ventes.</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="600">
+                    <h3>La Fatigue</h3>
+                    <p>Tu veux un système robuste, pas un second job à plein temps.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 3 : PROGRAMME -->
+    <section class="slide-2" style="border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-down">L'Accélérateur en 4 sessions</h2>
+            <div class="diag-grid">
+                <div class="card" data-aos="flip-left" data-aos-delay="100">
+                    <h3>01. Clarté</h3>
+                    <p>On définit qui tu accompagnes et pourquoi on te choisit toi.</p>
+                </div>
+                <div class="card" data-aos="flip-left" data-aos-delay="200">
+                    <h3>02. Message</h3>
+                    <p>On simplifie tes angles de contenu et ton invitation à l'appel.</p>
+                </div>
+                <div class="card" data-aos="flip-left" data-aos-delay="300">
+                    <h3>03. Système</h3>
+                    <p>On crée ton mini système d'acquisition sans usine à gaz.</p>
+                </div>
+                <div class="card" data-aos="flip-left" data-aos-delay="400">
+                    <h3>04. Action</h3>
+                    <p>Ton plan concret sur 30 jours pour passer à l'action.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 4 : L'OFFRE -->
+    <section class="slide-3">
+        <div class="container">
+            <div class="offer-box" data-aos="zoom-in">
+                <div>
+                    <h2 style="font-size: clamp(2rem, 4vw, 3.5rem);">L'Accélérateur Simple</h2>
+                    <p style="font-size: 1.1rem; margin-top: 15px; opacity: 0.8; max-width: 500px;">
+                        On nettoie, on structure et tu repars avec un système que tu peux tenir seule.
+                    </p>
+                    <p style="font-size: 0.9rem; margin-top: 20px; color: var(--accent);">
+                        800€ (Possibilité de 2x 400€)
+                    </p>
+                </div>
+                <div style="text-align: right;">
+                    <div class="price">800€</div>
+                    <a href="mailto:votre.email@domaine.com" class="btn-cta">Réserver un appel</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 5 : À PROPOS -->
+    <section class="slide-1">
+        <div class="container two-col">
+            <div data-aos="fade-right">
+                <h2 style="font-size: 3rem;">Miora</h2>
+                <p style="font-size: 1.1rem; margin-top: 25px; line-height: 1.7;">
+                    J'accompagne les coachs à stabiliser leurs revenus via des systèmes agnostiques et durables. 
+                    Après avoir construit des architectures complexes pour de gros business, j'ai choisi de revenir à l'essentiel : l'efficacité sans le cirque.
+                </p>
+                <p style="font-size: 1.1rem; margin-top: 15px; line-height: 1.7;">
+                    Mon but ? Que ton système travaille pour toi, et pas l'inverse.
+                </p>
+            </div>
+            <div data-aos="zoom-in">
+                <img src="portrait-miora.jpg" alt="Miora Portrait" class="hero-img">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 Miora – L’Accélérateur Simple | Architecte de Systèmes
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: false,
+            mirror: true,
+            duration: 1200,
+            offset: 100
+        });
+    </script>
+
+</body>
+</html>
