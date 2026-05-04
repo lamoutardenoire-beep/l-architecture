@@ -10,7 +10,7 @@
     
     <style>
         :root {
-            --bg-dark: #05051a; /* Ton bleu nuit profond */
+            --bg-dark: #05051a; 
             --bg-accent: #0a0a2e;
             --text-main: #FFFFFF;
             --text-muted: #a8a8c2;
@@ -24,7 +24,6 @@
 
         body {
             background-color: var(--bg-dark);
-            /* Gradient radial pour la profondeur architecturale */
             background: radial-gradient(circle at 75% 30%, var(--bg-accent) 0%, var(--bg-dark) 80%);
             color: var(--text-main);
             font-family: var(--font-main);
@@ -76,7 +75,6 @@
             font-weight: 300;
         }
 
-        /* Accentuation du plan simple */
         .cta-sub {
             font-weight: 500 !important;
             color: var(--text-main) !important;
@@ -85,7 +83,7 @@
             padding-left: 20px;
         }
 
-        /* --- BOUTON INTERACTIF --- */
+        /* --- BOUTON --- */
         .btn-premium {
             display: inline-block;
             padding: 20px 40px;
@@ -107,7 +105,7 @@
             box-shadow: 0 15px 40px rgba(255,255,255,0.1);
         }
 
-        /* --- VISUEL --- */
+        /* --- VISUEL (IMAGE D'ORIGINE) --- */
         .hero-visual {
             display: flex;
             justify-content: center;
@@ -119,11 +117,10 @@
             max-width: 100%;
             width: 500px;
             height: auto;
-            filter: brightness(0) invert(1); /* Image en blanc pur */
+            /* Aucun filtre appliqué ici pour garder l'aspect original */
             animation: float 8s ease-in-out infinite;
         }
 
-        /* Animations */
         @keyframes fadeIn {
             to { opacity: 1; transform: translateY(0); }
         }
@@ -133,7 +130,6 @@
             50% { transform: translateY(-20px); }
         }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 992px) {
             .hero-layout {
                 grid-template-columns: 1fr;
@@ -163,7 +159,6 @@
             </div>
 
             <div class="hero-visual">
-                <!-- L'image de ton manège/cheval, épurée -->
                 <img src="Cheval.png" alt="Stabilité systémique" class="carousel-img">
             </div>
         </div>
