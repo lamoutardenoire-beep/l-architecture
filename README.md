@@ -23,7 +23,7 @@
             color: var(--text-main);
             font-family: var(--font-main);
             line-height: 1.6;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         .container {
@@ -39,7 +39,6 @@
             position: relative;
         }
 
-        /* Halo blanc diffus */
         .hero::before {
             content: '';
             position: absolute;
@@ -103,38 +102,31 @@
             transform: translateY(-5px);
         }
 
-        /* --- LE CHEVAL EN LIGNE CONTINUE (SVG) --- */
-        .horse-container {
-            width: 350px;
-            height: 350px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: carouselMove 3s ease-in-out infinite; /* Le mouvement de haut en bas */
-        }
-
-        .horse-svg {
-            width: 100%;
+        /* --- CARROUSEL FILAIRE --- */
+        .carousel-svg {
+            width: 320px;
             height: auto;
             stroke: #ffffff;
-            stroke-width: 1;
+            stroke-width: 0.8;
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
-            opacity: 0.8;
         }
 
-        /* Mouvement fluide de haut en bas */
-        @keyframes carouselMove {
-            0%, 100% { transform: translateY(-20px); }
-            50% { transform: translateY(20px); }
+        /* Animation du mouvement vertical */
+        .animated-horse {
+            animation: gallop 3s ease-in-out infinite;
+        }
+
+        @keyframes gallop {
+            0%, 100% { transform: translateY(-15px); }
+            50% { transform: translateY(15px); }
         }
 
         @media (max-width: 900px) {
             .hero-layout { flex-direction: column; text-align: center; padding-top: 50px; }
             .hero-text h1 { font-size: 2.2rem; }
-            .hero-text p { margin: 0 auto 20px auto; }
-            .horse-container { width: 250px; height: 250px; }
+            .carousel-svg { width: 220px; }
         }
     </style>
 </head>
@@ -150,14 +142,31 @@
             </div>
 
             <div class="hero-visual">
-                <div class="horse-container">
-                    <!-- SVG One-Line Horse -->
-                    <svg class="horse-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20,60 C20,60 25,40 40,35 C55,30 65,35 70,30 C75,25 75,15 75,15 M75,15 C75,15 80,25 70,40 C60,55 45,55 35,65 C25,75 25,85 25,85 M25,85 L45,85 M55,85 L75,85 M50,10 L50,90" />
-                        <circle cx="50" cy="10" r="1" fill="white" />
-                        <circle cx="50" cy="90" r="1" fill="white" />
-                    </svg>
-                </div>
+                <!-- SVG MANÈGE FILAIRE -->
+                <svg class="carousel-svg" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Toit du manège -->
+                    <path d="M10,40 L50,10 L90,40 Z" />
+                    <path d="M10,40 Q50,30 90,40" />
+                    <path d="M10,40 L10,45 Q50,35 90,45 L90,40" />
+                    
+                    <!-- Barre centrale -->
+                    <line x1="50" y1="45" x2="50" y2="110" />
+                    
+                    <!-- Cheval animé (Tracé simplifié) -->
+                    <g class="animated-horse">
+                        <!-- Barre du cheval -->
+                        <line x1="50" y1="50" x2="50" y2="100" stroke-dasharray="2,2" opacity="0.5" />
+                        <!-- Corps du cheval -->
+                        <path d="M35,75 Q35,60 50,60 Q65,60 70,50 Q75,45 75,55 Q70,75 55,75 Q45,75 40,85 Q35,90 30,80 Z" />
+                        <!-- Jambes -->
+                        <path d="M40,85 L35,95 M45,85 L42,95 M55,75 L58,85 M65,75 L68,85" />
+                        <!-- Queue -->
+                        <path d="M30,80 Q20,75 25,65" />
+                    </g>
+
+                    <!-- Socle -->
+                    <path d="M20,110 L80,110 L85,115 L15,115 Z" />
+                </svg>
             </div>
         </div>
     </section>
