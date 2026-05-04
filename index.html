@@ -10,24 +10,27 @@
     
     <style>
         :root {
-            --bg: #f4f1ea;
-            --dark: #000000;
-            --accent: #ff4d00;
-            --border-thick: 3px solid #000;
+            /* Harmonisation Branding */
+            --bg: #05051a; 
+            --text: #ffffff;
+            --accent: #ff4d00; /* Ton orange Rebelle */
+            --border-white: 3px solid #ffffff;
+            --shadow-white: 8px 8px 0px #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        html { scroll-behavior: smooth; }
+
         body { 
             background-color: var(--bg); 
-            color: var(--dark); 
+            color: var(--text); 
             font-family: 'Space Grotesk', sans-serif;
-            /* Permet un défilement fluide entre les sections */
             scroll-snap-type: y mandatory;
             overflow-y: scroll;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Chaque section prend 100% de la hauteur de l'écran (Full Video Style) */
         section {
             height: 100vh;
             display: flex;
@@ -44,70 +47,86 @@
             margin: 0 auto;
         }
 
-        h1, h2 { 
+        h1, h2, h3 { 
             font-family: 'Syne', sans-serif; 
             text-transform: uppercase;
             line-height: 0.9;
+            color: var(--text);
         }
 
         /* --- SECTION 1: HERO --- */
         .hero-layout {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
+            gap: 60px;
             align-items: center;
         }
         h1 { font-size: clamp(3rem, 8vw, 6rem); }
+        
         .hero-img { 
-            border: var(--border-thick); 
-            box-shadow: 12px 12px 0px #000;
+            border: var(--border-white); 
+            box-shadow: var(--shadow-white);
             filter: grayscale(1);
             width: 100%;
+            background: #fff; /* Pour faire ressortir le PNG si besoin */
         }
 
         /* --- SECTION 2: DIAGNOSTIC --- */
         .diag-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 30px;
         }
         .card {
-            background: #fff;
-            border: var(--border-thick);
+            background: transparent;
+            border: var(--border-white);
             padding: 40px;
-            box-shadow: 6px 6px 0px #000;
+            box-shadow: var(--shadow-white);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .section-title { font-size: 4rem; margin-bottom: 50px; text-align: center; }
+        .card:hover { 
+            transform: translate(-10px, -10px); 
+            box-shadow: 15px 15px 0px var(--accent);
+            border-color: var(--accent);
+        }
+        .section-title { font-size: 4rem; margin-bottom: 60px; text-align: center; }
 
         /* --- SECTION 3: OFFRE --- */
         .offer-box {
-            background: var(--dark);
-            color: #fff;
+            background: transparent;
+            color: var(--text);
             padding: 80px;
-            border: var(--border-thick);
+            border: var(--border-white);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: var(--shadow-white);
         }
-        .price { font-size: 7rem; font-weight: 800; color: var(--accent); }
+        .price { font-size: 7rem; font-weight: 800; color: var(--accent); font-family: 'Syne'; }
 
         .btn-cta {
-            background: var(--accent);
-            color: #fff;
+            background: var(--text);
+            color: var(--bg);
             padding: 25px 50px;
             text-decoration: none;
             font-family: 'Syne', sans-serif;
             font-size: 1.5rem;
             text-transform: uppercase;
+            font-weight: 800;
             display: inline-block;
             transition: 0.4s;
         }
-        .btn-cta:hover { transform: scale(1.05); }
+        .btn-cta:hover { 
+            background: var(--accent); 
+            color: #fff;
+            transform: scale(1.05); 
+        }
 
         @media (max-width: 900px) {
             .hero-layout, .diag-grid, .offer-box { grid-template-columns: 1fr; flex-direction: column; text-align: center; }
-            section { height: auto; min-height: 100vh; padding: 80px 20px; }
-            .price { font-size: 4rem; }
+            section { height: auto; min-height: 100vh; padding: 100px 20px; }
+            .price { font-size: 4.5rem; margin: 20px 0; }
+            .offer-box { padding: 40px; }
         }
     </style>
 </head>
@@ -116,36 +135,36 @@
     <!-- SCÈNE 1: ON ARRÊTE -->
     <section>
         <div class="container hero-layout">
-            <div data-aos="fade-right" data-aos-duration="2000">
+            <div data-aos="fade-right" data-aos-duration="2500">
                 <h1>On arrête le cirque.</h1>
-                <p style="font-size: 1.5rem; margin-top: 20px; border-left: 5px solid black; padding-left: 20px;">
-                    Stabilisons ton revenu de coaching. 
-                    Pas de tunnels compliqués. 
+                <p style="font-size: 1.5rem; margin-top: 30px; border-left: 5px solid var(--accent); padding-left: 20px; font-weight: 300;">
+                    Stabilisons ton revenu de coaching.<br> 
+                    Pas de tunnels compliqués.<br> 
                     Juste des systèmes qui marchent.
                 </p>
             </div>
-            <div data-aos="zoom-in" data-aos-duration="2500" data-aos-delay="500">
+            <div data-aos="zoom-in" data-aos-duration="3000" data-aos-delay="500">
                 <img src="Cheval.png" alt="Miora" class="hero-img">
             </div>
         </div>
     </section>
 
     <!-- SCÈNE 2: DIAGNOSTIC -->
-    <section style="background: #fff;">
+    <section>
         <div class="container">
             <h2 class="section-title" data-aos="fade-down" data-aos-duration="2000">Est-ce que c'est toi ?</h2>
             <div class="diag-grid">
-                <div class="card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+                <div class="card" data-aos="fade-up" data-aos-duration="1800" data-aos-delay="200">
                     <h3>Le Yo-Yo</h3>
-                    <p>Tes revenus sont imprévisibles et ton énergie s'épuise à essayer de tout contrôler.</p>
+                    <p style="margin-top:15px; opacity: 0.9;">Tes revenus sont imprévisibles et ton énergie s'épuise à essayer de tout contrôler.</p>
                 </div>
-                <div class="card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="600">
+                <div class="card" data-aos="fade-up" data-aos-duration="1800" data-aos-delay="600">
                     <h3>Le Bricolage</h3>
-                    <p>Tu passes ton temps à "être présente" sans comprendre ce qui génère réellement des ventes.</p>
+                    <p style="margin-top:15px; opacity: 0.9;">Tu passes ton temps à "être présente" sans comprendre ce qui génère réellement des ventes.</p>
                 </div>
-                <div class="card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1000">
+                <div class="card" data-aos="fade-up" data-aos-duration="1800" data-aos-delay="1000">
                     <h3>La Fatigue</h3>
-                    <p>Tu veux un système, pas un emploi à plein temps.</p>
+                    <p style="margin-top:15px; opacity: 0.9;">Tu veux un système robuste, pas un emploi à plein temps.</p>
                 </div>
             </div>
         </div>
@@ -154,14 +173,14 @@
     <!-- SCÈNE 3: L'OFFRE -->
     <section>
         <div class="container">
-            <div class="offer-box" data-aos="fade-up" data-aos-duration="2000">
+            <div class="offer-box" data-aos="zoom-in" data-aos-duration="2500">
                 <div>
                     <h2 style="font-size: 3.5rem;">L'Accélérateur Simple</h2>
-                    <p style="font-size: 1.2rem; margin-top: 10px; opacity: 0.8;">4 sessions pour tout changer.</p>
+                    <p style="font-size: 1.2rem; margin-top: 10px; opacity: 0.7; letter-spacing: 2px;">4 SESSIONS POUR TOUT CHANGER</p>
                 </div>
                 <div style="text-align: right;">
                     <div class="price">800€</div>
-                    <a href="#" class="btn-cta">C'est parti</a>
+                    <a href="mailto:votre@email.com" class="btn-cta">Démarrer maintenant</a>
                 </div>
             </div>
         </div>
@@ -170,8 +189,9 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
-            once: false, // Les animations se rejouent pour garder l'effet vidéo
-            mirror: true // S'anime aussi quand tu remontes
+            once: false,
+            mirror: true,
+            duration: 2000
         });
     </script>
 
