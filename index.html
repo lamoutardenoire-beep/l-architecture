@@ -10,10 +10,13 @@
     
     <style>
         :root {
-            /* Harmonisation Branding */
-            --bg: #05051a; 
+            /* Palette de nuances pour les diapositives */
+            --bg-1: #05051a; /* Bleu nuit originel */
+            --bg-2: #080826; /* Nuance légèrement plus claire pour le diagnostic */
+            --bg-3: #030312; /* Nuance plus sombre pour l'offre finale */
+            
             --text: #ffffff;
-            --accent: #ff4d00; /* Ton orange Rebelle */
+            --accent: #00f2ff; /* Cyan Électrique */
             --border-white: 3px solid #ffffff;
             --shadow-white: 8px 8px 0px #ffffff;
         }
@@ -23,7 +26,6 @@
         html { scroll-behavior: smooth; }
 
         body { 
-            background-color: var(--bg); 
             color: var(--text); 
             font-family: 'Space Grotesk', sans-serif;
             scroll-snap-type: y mandatory;
@@ -41,6 +43,11 @@
             position: relative;
         }
 
+        /* Application des nuances par diapositive */
+        .slide-1 { background-color: var(--bg-1); }
+        .slide-2 { background-color: var(--bg-2); }
+        .slide-3 { background-color: var(--bg-3); }
+
         .container {
             max-width: 1200px;
             width: 100%;
@@ -51,10 +58,9 @@
             font-family: 'Syne', sans-serif; 
             text-transform: uppercase;
             line-height: 0.9;
-            color: var(--text);
         }
 
-        /* --- SECTION 1: HERO --- */
+        /* --- DIAPO 1: HERO --- */
         .hero-layout {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
@@ -68,17 +74,17 @@
             box-shadow: var(--shadow-white);
             filter: grayscale(1);
             width: 100%;
-            background: #fff; /* Pour faire ressortir le PNG si besoin */
+            background: #fff;
         }
 
-        /* --- SECTION 2: DIAGNOSTIC --- */
+        /* --- DIAPO 2: DIAGNOSTIC --- */
         .diag-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
         .card {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.03); /* Léger contraste sur le fond nuancé */
             border: var(--border-white);
             padding: 40px;
             box-shadow: var(--shadow-white);
@@ -91,10 +97,9 @@
         }
         .section-title { font-size: 4rem; margin-bottom: 60px; text-align: center; }
 
-        /* --- SECTION 3: OFFRE --- */
+        /* --- DIAPO 3: OFFRE --- */
         .offer-box {
             background: transparent;
-            color: var(--text);
             padding: 80px;
             border: var(--border-white);
             display: flex;
@@ -106,7 +111,7 @@
 
         .btn-cta {
             background: var(--text);
-            color: var(--bg);
+            color: #000;
             padding: 25px 50px;
             text-decoration: none;
             font-family: 'Syne', sans-serif;
@@ -118,7 +123,7 @@
         }
         .btn-cta:hover { 
             background: var(--accent); 
-            color: #fff;
+            color: #000;
             transform: scale(1.05); 
         }
 
@@ -126,14 +131,13 @@
             .hero-layout, .diag-grid, .offer-box { grid-template-columns: 1fr; flex-direction: column; text-align: center; }
             section { height: auto; min-height: 100vh; padding: 100px 20px; }
             .price { font-size: 4.5rem; margin: 20px 0; }
-            .offer-box { padding: 40px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- SCÈNE 1: ON ARRÊTE -->
-    <section>
+    <!-- DIAPOSITIVE 1 -->
+    <section class="slide-1">
         <div class="container hero-layout">
             <div data-aos="fade-right" data-aos-duration="2500">
                 <h1>On arrête le cirque.</h1>
@@ -149,8 +153,8 @@
         </div>
     </section>
 
-    <!-- SCÈNE 2: DIAGNOSTIC -->
-    <section>
+    <!-- DIAPOSITIVE 2 -->
+    <section class="slide-2">
         <div class="container">
             <h2 class="section-title" data-aos="fade-down" data-aos-duration="2000">Est-ce que c'est toi ?</h2>
             <div class="diag-grid">
@@ -170,13 +174,13 @@
         </div>
     </section>
 
-    <!-- SCÈNE 3: L'OFFRE -->
-    <section>
+    <!-- DIAPOSITIVE 3 -->
+    <section class="slide-3">
         <div class="container">
             <div class="offer-box" data-aos="zoom-in" data-aos-duration="2500">
                 <div>
                     <h2 style="font-size: 3.5rem;">L'Accélérateur Simple</h2>
-                    <p style="font-size: 1.2rem; margin-top: 10px; opacity: 0.7; letter-spacing: 2px;">4 SESSIONS POUR TOUT CHANGER</p>
+                    <p style="font-size: 1.2rem; margin-top: 10px; opacity: 0.7;">4 SESSIONS POUR TOUT CHANGER</p>
                 </div>
                 <div style="text-align: right;">
                     <div class="price">800€</div>
