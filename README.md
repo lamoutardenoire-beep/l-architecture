@@ -58,19 +58,19 @@
             gap: 80px;
         }
 
-        .hero-text { flex: 1.3; }
-        .hero-visual { flex: 0.7; display: flex; justify-content: center; align-items: center; }
+        .hero-text { flex: 1.2; }
+        .hero-visual { flex: 0.8; display: flex; justify-content: center; align-items: center; }
 
         .hero-text h1 {
             font-family: var(--font-title);
-            font-size: 3.2rem;
+            font-size: 3rem;
             line-height: 1.1;
             margin-bottom: 30px;
             letter-spacing: -2px;
         }
 
         .hero-text p {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
             margin-bottom: 25px;
             max-width: 550px;
@@ -93,40 +93,54 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             font-size: 0.75rem;
-            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: 0.4s;
         }
 
         .btn-premium:hover {
             background: white;
             color: #05051a;
-            transform: translateY(-5px);
         }
 
-        /* --- CARROUSEL FILAIRE --- */
+        /* --- MANÈGE FILAIRE ANIMÉ --- */
+        .carousel-container {
+            width: 400px;
+            height: 400px;
+            position: relative;
+        }
+
         .carousel-svg {
-            width: 320px;
+            width: 100%;
             height: auto;
             stroke: #ffffff;
             stroke-width: 0.8;
             fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
         }
 
-        /* Animation du mouvement vertical */
-        .animated-horse {
-            animation: gallop 3s ease-in-out infinite;
+        /* Animation Rotation simulée */
+        .horse-group {
+            animation: carouselRotate 8s linear infinite;
         }
+
+        /* Animation Haut/Bas décalée pour chaque cheval */
+        .horse { animation: gallop 3s ease-in-out infinite; }
+        .h2 { animation-delay: -1s; }
+        .h3 { animation-delay: -2s; }
 
         @keyframes gallop {
-            0%, 100% { transform: translateY(-15px); }
-            50% { transform: translateY(15px); }
+            0%, 100% { transform: translateY(-8px); }
+            50% { transform: translateY(8px); }
+        }
+
+        @keyframes carouselRotate {
+            0% { transform: translateX(10px); opacity: 0.8; }
+            50% { transform: translateX(-10px); opacity: 1; }
+            100% { transform: translateX(10px); opacity: 0.8; }
         }
 
         @media (max-width: 900px) {
             .hero-layout { flex-direction: column; text-align: center; padding-top: 50px; }
             .hero-text h1 { font-size: 2.2rem; }
-            .carousel-svg { width: 220px; }
+            .carousel-container { width: 280px; height: 280px; }
         }
     </style>
 </head>
@@ -142,31 +156,39 @@
             </div>
 
             <div class="hero-visual">
-                <!-- SVG MANÈGE FILAIRE -->
-                <svg class="carousel-svg" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Toit du manège -->
-                    <path d="M10,40 L50,10 L90,40 Z" />
-                    <path d="M10,40 Q50,30 90,40" />
-                    <path d="M10,40 L10,45 Q50,35 90,45 L90,40" />
-                    
-                    <!-- Barre centrale -->
-                    <line x1="50" y1="45" x2="50" y2="110" />
-                    
-                    <!-- Cheval animé (Tracé simplifié) -->
-                    <g class="animated-horse">
-                        <!-- Barre du cheval -->
-                        <line x1="50" y1="50" x2="50" y2="100" stroke-dasharray="2,2" opacity="0.5" />
-                        <!-- Corps du cheval -->
-                        <path d="M35,75 Q35,60 50,60 Q65,60 70,50 Q75,45 75,55 Q70,75 55,75 Q45,75 40,85 Q35,90 30,80 Z" />
-                        <!-- Jambes -->
-                        <path d="M40,85 L35,95 M45,85 L42,95 M55,75 L58,85 M65,75 L68,85" />
-                        <!-- Queue -->
-                        <path d="M30,80 Q20,75 25,65" />
-                    </g>
+                <div class="carousel-container">
+                    <svg class="carousel-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Toit (Inspiré de téléchargement.png) -->
+                        <path d="M10,40 L60,10 L110,40 Z" />
+                        <path d="M10,40 Q60,30 110,40" />
+                        <path d="M10,40 C10,45 20,50 30,45 C40,40 50,50 60,45 C70,40 80,50 90,45 C100,40 110,45 110,40" />
 
-                    <!-- Socle -->
-                    <path d="M20,110 L80,110 L85,115 L15,115 Z" />
-                </svg>
+                        <!-- Barre Centrale et Plateau -->
+                        <line x1="60" y1="10" x2="60" y2="105" stroke-dasharray="2,2" />
+                        
+                        <g class="horse-group">
+                            <!-- Cheval 1 -->
+                            <g class="horse h1">
+                                <line x1="30" y1="45" x2="30" y2="95" opacity="0.3" />
+                                <path d="M25,75 Q30,65 35,70 Q40,75 38,85 Q35,90 28,88 Z" stroke-width="0.6"/>
+                            </g>
+                            <!-- Cheval 2 (Centre) -->
+                            <g class="horse h2">
+                                <line x1="60" y1="48" x2="60" y2="98" opacity="0.3" />
+                                <path d="M55,78 Q60,68 65,73 Q70,78 68,88 Q65,93 58,91 Z" stroke-width="0.6"/>
+                            </g>
+                            <!-- Cheval 3 -->
+                            <g class="horse h3">
+                                <line x1="90" y1="45" x2="90" y2="95" opacity="0.3" />
+                                <path d="M85,75 Q90,65 95,70 Q100,75 98,85 Q95,90 88,88 Z" stroke-width="0.6"/>
+                            </g>
+                        </g>
+
+                        <!-- Socle -->
+                        <ellipse cx="60" cy="105" rx="50" ry="8" />
+                        <path d="M15,108 L105,108 L110,115 L10,115 Z" />
+                    </svg>
+                </div>
             </div>
         </div>
     </section>
