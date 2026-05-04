@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stabilité & Systèmes | Démanteler le cirque du coaching</title>
+    
+    <!-- Polices Premium -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-dark: #05051a;
+            --bg-dark: #05051a; /* Ton bleu nuit profond */
             --bg-accent: #0a0a2e;
             --text-main: #FFFFFF;
             --text-muted: #a8a8c2;
@@ -22,7 +24,8 @@
 
         body {
             background-color: var(--bg-dark);
-            background: radial-gradient(circle at 70% 30%, var(--bg-accent) 0%, var(--bg-dark) 70%);
+            /* Gradient radial pour la profondeur architecturale */
+            background: radial-gradient(circle at 75% 30%, var(--bg-accent) 0%, var(--bg-dark) 80%);
             color: var(--text-main);
             font-family: var(--font-main);
             line-height: 1.5;
@@ -46,11 +49,11 @@
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
             align-items: center;
-            gap: 60px;
+            gap: 80px;
             width: 100%;
         }
 
-        /* --- TEXTE --- */
+        /* --- SECTION TEXTE --- */
         .hero-text {
             opacity: 0;
             transform: translateY(20px);
@@ -59,50 +62,49 @@
 
         .hero-text h1 {
             font-family: var(--font-title);
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
             line-height: 1.05;
             margin-bottom: 24px;
             letter-spacing: -0.03em;
         }
 
         .hero-text p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-size: clamp(1rem, 2vw, 1.2rem);
             color: var(--text-muted);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             max-width: 600px;
             font-weight: 300;
         }
 
+        /* Accentuation du plan simple */
         .cta-sub {
             font-weight: 500 !important;
             color: var(--text-main) !important;
-            margin-bottom: 40px !important;
-            border-left: 2px solid var(--accent-white);
+            margin-bottom: 45px !important;
+            border-left: 3px solid var(--accent-white);
             padding-left: 20px;
         }
 
-        /* --- BOUTON --- */
+        /* --- BOUTON INTERACTIF --- */
         .btn-premium {
             display: inline-block;
-            padding: 18px 36px;
+            padding: 20px 40px;
             background: transparent;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.4);
             color: white;
             text-decoration: none;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
             font-size: 0.8rem;
-            position: relative;
             transition: var(--transition);
         }
 
         .btn-premium:hover {
             background: var(--accent-white);
             color: var(--bg-dark);
-            border-color: var(--accent-white);
-            box-shadow: 0 10px 30px rgba(255,255,255,0.15);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.1);
         }
 
         /* --- VISUEL --- */
@@ -110,26 +112,25 @@
             display: flex;
             justify-content: center;
             opacity: 0;
-            animation: fadeIn 1s forwards 0.5s;
+            animation: fadeIn 1s forwards 0.6s;
         }
 
         .carousel-img {
             max-width: 100%;
-            width: 480px;
+            width: 500px;
             height: auto;
-            filter: brightness(0) invert(1);
-            animation: float 6s ease-in-out infinite;
-            pointer-events: none;
+            filter: brightness(0) invert(1); /* Image en blanc pur */
+            animation: float 8s ease-in-out infinite;
         }
 
-        /* --- ANIMATIONS --- */
+        /* Animations */
         @keyframes fadeIn {
             to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-20px); }
         }
 
         /* --- RESPONSIVE --- */
@@ -137,13 +138,13 @@
             .hero-layout {
                 grid-template-columns: 1fr;
                 text-align: center;
-                padding: 100px 0;
+                padding: 80px 0;
             }
             .hero-text { order: 2; }
-            .hero-visual { order: 1; }
+            .hero-visual { order: 1; margin-bottom: 40px; }
             .hero-text p { margin-left: auto; margin-right: auto; }
-            .cta-sub { border-left: none; border-bottom: 2px solid white; padding-left: 0; padding-bottom: 20px; }
-            .carousel-img { width: 300px; }
+            .cta-sub { border-left: none; border-bottom: 2px solid white; padding: 0 0 20px 0; }
+            .carousel-img { width: 320px; }
         }
     </style>
 </head>
@@ -153,13 +154,17 @@
         <div class="container hero-layout">
             <div class="hero-text">
                 <h1>On arrête le cirque,<br>on stabilise ton revenu.</h1>
+                
                 <p>Tu es coach, tu as déjà des clientes, mais ton revenu fait le yo‑yo et tu es épuisée par les stratégies miracles.</p>
+                
                 <p class="cta-sub">On enlève le superflu, on garde ce qui marche : repars avec un plan simple que tu peux tenir.</p>
+                
                 <a href="#" class="btn-premium">Démarrer le démantèlement</a>
             </div>
 
             <div class="hero-visual">
-                <img src="Cheval.png" alt="Système de vente stable" class="carousel-img">
+                <!-- L'image de ton manège/cheval, épurée -->
+                <img src="Cheval.png" alt="Stabilité systémique" class="carousel-img">
             </div>
         </div>
     </section>
