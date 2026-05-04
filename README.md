@@ -39,17 +39,6 @@
             position: relative;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            left: 50%; top: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px; height: 800px;
-            background: var(--accent-glow);
-            filter: blur(150px);
-            z-index: -1;
-        }
-
         .hero-layout {
             display: flex;
             align-items: center;
@@ -101,18 +90,30 @@
             color: #05051a;
         }
 
-        /* --- STYLE DE L'IMAGE --- */
-        .carousel-img {
+        /* --- LE CERCLE BLANC --- */
+        .circle-frame {
             width: 400px;
+            height: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.4); /* Cercle fin */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.05); /* Halo léger */
+        }
+
+        .carousel-img {
+            width: 70%; /* L'image prend 70% du cercle pour respirer */
             height: auto;
-            filter: brightness(0) invert(1); /* Transforme ton image noire en blanc pur */
+            filter: brightness(0) invert(1); /* Rend l'image blanche */
             opacity: 0.9;
         }
 
         @media (max-width: 900px) {
             .hero-layout { flex-direction: column; text-align: center; padding-top: 50px; }
             .hero-text h1 { font-size: 2.2rem; }
-            .carousel-img { width: 280px; }
+            .circle-frame { width: 280px; height: 280px; }
         }
     </style>
 </head>
@@ -128,8 +129,10 @@
             </div>
 
             <div class="hero-visual">
-                <!-- On appelle ton fichier ici -->
-                <img src="téléchargement_2.png" alt="Manège" class="carousel-img">
+                <!-- Le cadre circulaire -->
+                <div class="circle-frame">
+                    <img src="téléchargement_2.png" alt="Manège" class="carousel-img">
+                </div>
             </div>
         </div>
     </section>
