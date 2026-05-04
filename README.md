@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lamoutardenoire | Systèmes de Vente</title>
+    <!-- Titre ajusté pour l'onglet du navigateur -->
+    <title>Stabilité & Systèmes | J'optimise votre système de vente</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
@@ -94,17 +95,17 @@
         .circle-frame {
             width: 400px;
             height: 400px;
-            border: 1px solid rgba(255, 255, 255, 0.4); /* Cercle fin */
+            border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.05); /* Halo léger */
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
         }
 
         .carousel-img {
-            width: 70%; /* L'image prend 70% du cercle pour respirer */
+            width: 70%;
             height: auto;
             filter: brightness(0) invert(1); /* Rend l'image blanche */
             opacity: 0.9;
@@ -122,16 +123,16 @@
     <section class="hero">
         <div class="container hero-layout">
             <div class="hero-text">
-                <h1>On arrête le cirque,<br>on stabilise ton revenu de coaching !</h1>
+                <h1>On arrête le cirque,<br>on stabilise ton revenu !</h1>
                 <p>Tu es coach, tu as déjà des clientes, mais ton revenu fait le yo‑yo et tu es épuisée par les “stratégies miracles” et les to‑do listes infinies.</p>
                 <p class="cta-sub">Ici, on enlève le superflu, on garde ce qui marche, et tu repars avec un plan simple que tu peux tenir.</p>
                 <a href="#" class="btn-premium">Démarrer le démantèlement</a>
             </div>
 
             <div class="hero-visual">
-                <!-- Le cadre circulaire -->
                 <div class="circle-frame">
-                    <img src="téléchargement_2.png" alt="Manège" class="carousel-img">
+                    <!-- Chemin mis à jour vers Cheval.png -->
+                    <img src="Cheval.png" alt="Manège" class="carousel-img">
                 </div>
             </div>
         </div>
