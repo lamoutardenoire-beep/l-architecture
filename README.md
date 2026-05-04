@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- RESET & BASES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
@@ -40,7 +39,6 @@
             position: relative;
         }
 
-        /* Halo blanc en fond */
         .hero::before {
             content: '';
             position: absolute;
@@ -65,14 +63,14 @@
 
         .hero-text h1 {
             font-family: var(--font-title);
-            font-size: 3rem;
+            font-size: 3.2rem;
             line-height: 1.1;
             margin-bottom: 30px;
             letter-spacing: -2px;
         }
 
         .hero-text p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-muted);
             margin-bottom: 25px;
             max-width: 550px;
@@ -103,17 +101,18 @@
             color: #05051a;
         }
 
-        /* --- IMAGE MANÈGE STATIQUE --- */
-        .carousel-static {
-            width: 380px;
+        /* --- STYLE DE L'IMAGE --- */
+        .carousel-img {
+            width: 400px;
             height: auto;
-            fill: #ffffff; /* L'image sera en blanc sur ton fond bleu */
+            filter: brightness(0) invert(1); /* Transforme ton image noire en blanc pur */
+            opacity: 0.9;
         }
 
         @media (max-width: 900px) {
             .hero-layout { flex-direction: column; text-align: center; padding-top: 50px; }
             .hero-text h1 { font-size: 2.2rem; }
-            .carousel-static { width: 280px; }
+            .carousel-img { width: 280px; }
         }
     </style>
 </head>
@@ -129,29 +128,8 @@
             </div>
 
             <div class="hero-visual">
-                <!-- Reproduction fidèle de téléchargement_2.png en SVG blanc -->
-                <svg class="carousel-static" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Toit -->
-                    <path d="M10,40 L50,15 L90,40 Z" />
-                    <path d="M10,40 Q50,30 90,40 L90,45 Q50,35 10,45 Z" />
-                    <path d="M10,45 A5,5 0 0 0 20,45 A5,5 0 0 0 30,45 A5,5 0 0 0 40,45 A5,5 0 0 0 50,45 A5,5 0 0 0 60,45 A5,5 0 0 0 70,45 A5,5 0 0 0 80,45 A5,5 0 0 0 90,45" fill="none" stroke="white" stroke-width="1"/>
-                    
-                    <!-- Barre centrale -->
-                    <rect x="49" y="15" width="2" height="75" />
-                    
-                    <!-- Chevaux (Silhouettes simplifiées de l'image) -->
-                    <!-- Gauche -->
-                    <rect x="24" y="45" width="1" height="35" />
-                    <path d="M18,65 Q25,58 32,65 L32,72 Q25,78 18,72 Z" />
-                    <!-- Centre -->
-                    <path d="M43,68 Q50,61 57,68 L57,75 Q50,81 43,75 Z" />
-                    <!-- Droite -->
-                    <rect x="74" y="45" width="1" height="35" />
-                    <path d="M68,65 Q75,58 82,65 L82,72 Q75,78 68,72 Z" />
-                    
-                    <!-- Socle -->
-                    <path d="M15,90 L85,90 L90,95 L10,95 Z" />
-                </svg>
+                <!-- On appelle ton fichier ici -->
+                <img src="téléchargement_2.png" alt="Manège" class="carousel-img">
             </div>
         </div>
     </section>
