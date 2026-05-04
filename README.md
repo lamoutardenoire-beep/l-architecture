@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Titre ajusté pour l'onglet du navigateur -->
-    <title>Stabilité & Systèmes | J'optimise votre système de vente</title>
+    <title>Stabilité & Systèmes | Démanteler le cirque du coaching</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
@@ -91,30 +90,17 @@
             color: #05051a;
         }
 
-        /* --- LE CERCLE BLANC --- */
-        .circle-frame {
-            width: 400px;
-            height: 400px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
-        }
-
+        /* --- L'IMAGE SANS CERCLE --- */
         .carousel-img {
-            width: 70%;
+            width: 450px; /* Légèrement agrandie car elle n'est plus contrainte par le cercle */
             height: auto;
-            filter: brightness(0) invert(1); /* Rend l'image blanche */
-            opacity: 0.9;
+            
         }
 
         @media (max-width: 900px) {
             .hero-layout { flex-direction: column; text-align: center; padding-top: 50px; }
             .hero-text h1 { font-size: 2.2rem; }
-            .circle-frame { width: 280px; height: 280px; }
+            .carousel-img { width: 300px; }
         }
     </style>
 </head>
@@ -130,10 +116,8 @@
             </div>
 
             <div class="hero-visual">
-                <div class="circle-frame">
-                    <!-- Chemin mis à jour vers Cheval.png -->
-                    <img src="Cheval.png" alt="Manège" class="carousel-img">
-                </div>
+                <!-- Image brute sans conteneur circulaire -->
+                <img src="Cheval.png" alt="Manège" class="carousel-img">
             </div>
         </div>
     </section>
