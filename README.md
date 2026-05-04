@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
+        /* --- RESET & BASES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
@@ -39,6 +40,7 @@
             position: relative;
         }
 
+        /* Halo blanc en fond */
         .hero::before {
             content: '';
             position: absolute;
@@ -101,46 +103,17 @@
             color: #05051a;
         }
 
-        /* --- MANÈGE FILAIRE ANIMÉ --- */
-        .carousel-container {
-            width: 400px;
-            height: 400px;
-            position: relative;
-        }
-
-        .carousel-svg {
-            width: 100%;
+        /* --- IMAGE MANÈGE STATIQUE --- */
+        .carousel-static {
+            width: 380px;
             height: auto;
-            stroke: #ffffff;
-            stroke-width: 0.8;
-            fill: none;
-        }
-
-        /* Animation Rotation simulée */
-        .horse-group {
-            animation: carouselRotate 8s linear infinite;
-        }
-
-        /* Animation Haut/Bas décalée pour chaque cheval */
-        .horse { animation: gallop 3s ease-in-out infinite; }
-        .h2 { animation-delay: -1s; }
-        .h3 { animation-delay: -2s; }
-
-        @keyframes gallop {
-            0%, 100% { transform: translateY(-8px); }
-            50% { transform: translateY(8px); }
-        }
-
-        @keyframes carouselRotate {
-            0% { transform: translateX(10px); opacity: 0.8; }
-            50% { transform: translateX(-10px); opacity: 1; }
-            100% { transform: translateX(10px); opacity: 0.8; }
+            fill: #ffffff; /* L'image sera en blanc sur ton fond bleu */
         }
 
         @media (max-width: 900px) {
             .hero-layout { flex-direction: column; text-align: center; padding-top: 50px; }
             .hero-text h1 { font-size: 2.2rem; }
-            .carousel-container { width: 280px; height: 280px; }
+            .carousel-static { width: 280px; }
         }
     </style>
 </head>
@@ -156,39 +129,29 @@
             </div>
 
             <div class="hero-visual">
-                <div class="carousel-container">
-                    <svg class="carousel-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Toit (Inspiré de téléchargement.png) -->
-                        <path d="M10,40 L60,10 L110,40 Z" />
-                        <path d="M10,40 Q60,30 110,40" />
-                        <path d="M10,40 C10,45 20,50 30,45 C40,40 50,50 60,45 C70,40 80,50 90,45 C100,40 110,45 110,40" />
-
-                        <!-- Barre Centrale et Plateau -->
-                        <line x1="60" y1="10" x2="60" y2="105" stroke-dasharray="2,2" />
-                        
-                        <g class="horse-group">
-                            <!-- Cheval 1 -->
-                            <g class="horse h1">
-                                <line x1="30" y1="45" x2="30" y2="95" opacity="0.3" />
-                                <path d="M25,75 Q30,65 35,70 Q40,75 38,85 Q35,90 28,88 Z" stroke-width="0.6"/>
-                            </g>
-                            <!-- Cheval 2 (Centre) -->
-                            <g class="horse h2">
-                                <line x1="60" y1="48" x2="60" y2="98" opacity="0.3" />
-                                <path d="M55,78 Q60,68 65,73 Q70,78 68,88 Q65,93 58,91 Z" stroke-width="0.6"/>
-                            </g>
-                            <!-- Cheval 3 -->
-                            <g class="horse h3">
-                                <line x1="90" y1="45" x2="90" y2="95" opacity="0.3" />
-                                <path d="M85,75 Q90,65 95,70 Q100,75 98,85 Q95,90 88,88 Z" stroke-width="0.6"/>
-                            </g>
-                        </g>
-
-                        <!-- Socle -->
-                        <ellipse cx="60" cy="105" rx="50" ry="8" />
-                        <path d="M15,108 L105,108 L110,115 L10,115 Z" />
-                    </svg>
-                </div>
+                <!-- Reproduction fidèle de téléchargement_2.png en SVG blanc -->
+                <svg class="carousel-static" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Toit -->
+                    <path d="M10,40 L50,15 L90,40 Z" />
+                    <path d="M10,40 Q50,30 90,40 L90,45 Q50,35 10,45 Z" />
+                    <path d="M10,45 A5,5 0 0 0 20,45 A5,5 0 0 0 30,45 A5,5 0 0 0 40,45 A5,5 0 0 0 50,45 A5,5 0 0 0 60,45 A5,5 0 0 0 70,45 A5,5 0 0 0 80,45 A5,5 0 0 0 90,45" fill="none" stroke="white" stroke-width="1"/>
+                    
+                    <!-- Barre centrale -->
+                    <rect x="49" y="15" width="2" height="75" />
+                    
+                    <!-- Chevaux (Silhouettes simplifiées de l'image) -->
+                    <!-- Gauche -->
+                    <rect x="24" y="45" width="1" height="35" />
+                    <path d="M18,65 Q25,58 32,65 L32,72 Q25,78 18,72 Z" />
+                    <!-- Centre -->
+                    <path d="M43,68 Q50,61 57,68 L57,75 Q50,81 43,75 Z" />
+                    <!-- Droite -->
+                    <rect x="74" y="45" width="1" height="35" />
+                    <path d="M68,65 Q75,58 82,65 L82,72 Q75,78 68,72 Z" />
+                    
+                    <!-- Socle -->
+                    <path d="M15,90 L85,90 L90,95 L10,95 Z" />
+                </svg>
             </div>
         </div>
     </section>
