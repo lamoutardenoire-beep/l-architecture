@@ -175,7 +175,7 @@
         <div class="container hero-layout">
             <div class="hero-text">
                 <h1>On arrête le cirque,<br>on stabilise ton revenu de coaching !</h1>
-                <p>Architecte de systèmes de vente. Je démantèle le chaos pour bâtir ta structure de conversion.</p>
+                <p>Tu es coach, tu as déjà des clients, mais ton revenu fait le yo-yo. Tu es épuisée par les "stratégies miracles" et les to-do listes infinies</p>
                 <a href="#" class="btn-premium">Démarrer le démantèlement</a>
             </div>
 
