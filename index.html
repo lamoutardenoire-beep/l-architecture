@@ -305,7 +305,7 @@
         </div>
     </section>
 
-        <!-- SLIDE 3 : PROGRAMME (SLIDER 4 SESSIONS) -->
+    <!-- SLIDE 3 : PROGRAMME (SLIDER 4 SESSIONS) -->
     <section style="background-color: var(--bg-3);">
         <div class="container">
             <h2 class="section-title">
@@ -414,61 +414,6 @@
             </p>
         </div>
     </section>
-
-    <script>
-        // Slider des 4 sessions
-        (function() {
-            const sessions = [
-                {
-                    title: '01. Clarté',
-                    text: "On définit qui tu accompagnes, ce que tu promets vraiment et pourquoi on te choisit toi plutôt qu’une autre."
-                },
-                {
-                    title: '02. Message',
-                    text: "On simplifie ta façon de parler de ton coaching : tes angles de contenu et ton invitation à l’appel."
-                },
-                {
-                    title: '03. Système',
-                    text: "On crée ton mini système d’acquisition sans usine à gaz, adapté à ton énergie et à ton canal principal."
-                },
-                {
-                    title: '04. Action',
-                    text: "Ton plan concret sur 30 jours pour passer à l’action, savoir quoi faire chaque semaine et quoi arrêter."
-                }
-            ];
-
-            const titleEl = document.getElementById('session-title');
-            const textEl = document.getElementById('session-text');
-            const dots = document.querySelectorAll('.session-dot');
-
-            function showSession(index) {
-                const session = sessions[index];
-                titleEl.textContent = session.title;
-                textEl.textContent = session.text;
-
-                dots.forEach((dot, i) => {
-                    if (i === index) {
-                        dot.style.background = 'var(--accent)';
-                        dot.style.opacity = '1';
-                    } else {
-                        dot.style.background = '#ffffff';
-                        dot.style.opacity = '0.4';
-                    }
-                });
-            }
-
-            dots.forEach(dot => {
-                dot.addEventListener('click', () => {
-                    const index = parseInt(dot.getAttribute('data-index'), 10);
-                    showSession(index);
-                });
-            });
-
-            // Afficher la première session au chargement
-            showSession(0);
-        })();
-    </script>
-
     <!-- SLIDE 4 : L'OFFRE -->
     <section style="background-color: var(--bg-1);">
         <div class="container">
