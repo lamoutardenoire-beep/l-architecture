@@ -1,250 +1,612 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIORA | Architecte de Systèmes</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIORA | Architecte de Systèmes</title>
 
-    <!-- Fonts & AOS -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <style>
-        :root {
-            --bg-1: #05051a;
-            --bg-2: #080826;
-            --bg-3: #030312;
-            --text: #ffffff;
-            --accent: #00f2ff;
-            --border-white: 3px solid #ffffff;
-            --shadow-white: 8px 8px 0px #ffffff;
-        }
+<style>
+    /* 1. Importation de la police moderne */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+/* 2. Application à TOUT le site pour éviter les mélanges */
+* {
+    font-family: 'Inter', sans-serif !important;
+}
+    
+:root {
+    --bg-1: #05051a;
+    --bg-2: #080826;
+    --bg-3: #030312;
+    --text: #ffffff;
+    --accent: #00f2ff;
+    --border-white: 3px solid #ffffff;
+    --shadow-white: 8px 8px 0px #ffffff;
+}
 
-        body {
-            background-color: var(--bg-1);
-            color: var(--text);
-            font-family: 'Space Grotesk', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Effet de grain Rebel */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://grainy-gradients.vercel.app/noise.svg');
-            opacity: 0.05;
-            pointer-events: none;
-            z-index: 9999;
-        }
+html { scroll-behavior: smooth; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+body {
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    background-color: var(--bg-1);
+    -webkit-font-smoothing: antialiased;
+}
 
-        section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 100px 0;
-            position: relative;
-        }
+@media (max-width: 768px) {
+    body { scroll-snap-type: none; }
+}
 
-        /* TYPOGRAPHIE PUNCHY */
-        .massive-title {
-            font-family: 'Syne', sans-serif;
-            text-transform: uppercase;
-            line-height: 0.85;
-            letter-spacing: -0.03em;
-            font-size: clamp(3rem, 10vw, 6.5rem);
-            margin-bottom: 2rem;
-        }
+section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    scroll-snap-align: start;
+    position: relative;
+}
 
-        .strike-accent {
-            position: relative;
-            display: inline-block;
-            z-index: 1;
-        }
-        .strike-accent::after {
-            content: "";
-            position: absolute;
-            bottom: 15%;
-            left: -2%;
-            width: 104%;
-            height: 15px;
-            background: var(--accent);
-            z-index: -1;
-            transform: rotate(-1deg);
-        }
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
 
-        /* LAYOUTS */
-        .hero-layout {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 60px;
-            align-items: center;
-        }
+/* TYPOGRAPHIE */
+h1, h2, h3, .label-style {
+    font-family: 'Syne', sans-serif;
+    text-transform: uppercase;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+}
 
-        /* COMPOSANTS */
-        .card {
-            border: var(--border-white);
-            padding: 40px;
-            background: transparent;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: var(--shadow-white);
-        }
+h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); }
+.section-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    text-align: center;
+    margin-bottom: 40px;
+}
 
-        .card:hover {
-            background: var(--accent);
-            color: #000;
-            transform: translate(-10px, -10px) rotate(1deg);
-            box-shadow: 15px 15px 0px #fff;
-        }
+p, li, footer {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+}
 
-        .hero-img {
-            border: var(--border-white);
-            box-shadow: var(--shadow-white);
-            filter: grayscale(1);
-            width: 100%;
-            height: auto;
-        }
+/* LAYOUTS */
+.hero-layout {
+    display: flex; /* On passe en Flex pour mieux contrôler l'espace */
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
 
-        .btn-cta {
-            background: var(--accent);
-            color: #000;
-            padding: 20px 45px;
-            text-decoration: none;
-            font-weight: 800;
-            text-transform: uppercase;
-            display: inline-block;
-            transition: 0.3s;
-            margin-top: 30px;
-            font-family: 'Syne', sans-serif;
-        }
+.hero-layout > div:first-child {
+    flex: 1;
+    max-width: 550px;
+    min-width: 320px;
+}
 
-        .btn-cta:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 242, 255, 0.4);
-        }
+.hero-layout > div:last-child {
+    flex: 0 0 350px;
+}
 
-        /* PIVOT SECTION */
-        .pivot-row {
-            display: grid;
-            grid-template-columns: 150px 1fr;
-            gap: 40px;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
+.hero-img-thin-cyan {
+    border: 3px solid var(--accent) !important;
+    box-shadow: 8px 8px 0px #ffffff !important; 
+    filter: grayscale(1);
+    width: 100% !important;
+    height: auto;
+    display: block;
+}
+    
+/* ÉLÉMENTS DESIGN IMAGE (SLIDE 1) */
+.hero-img-thin-cyan {
+    border: 3px solid var(--accent) !important;
+    /* Modification ici : 255, 255, 255 correspond au blanc */
+    box-shadow: 8px 8px 0px rgba(255, 255, 255, 0.8) !important; 
+    filter: grayscale(1);
+    width: 100% !important;
+    max-width: 450px;
+    margin-right: 0 !important;
+    margin-left: auto;
+    display: block;
+    transition: 0.3s ease;
+}
+    
+/* CARTES (SLIDE 2) */
+.card {
+    background: rgba(255, 255, 255, 0.02);
+    border: var(--border-white);
+    padding: 40px;
+    box-shadow: var(--shadow-white);
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+}
 
-        .pivot-text { font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 500; }
+.card:hover {
+    transform: translate(-10px, -10px);
+    box-shadow: 15px 15px 0px var(--accent);
+    border-color: var(--accent);
+}
 
-        /* OFFER BOX */
-        .offer-box {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 60px;
-            border: var(--border-white);
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 40px;
-            box-shadow: var(--shadow-white);
-        }
+/* ANIMATION SOULIGNEMENT (SLIDE 2) */
+.reveal-underline {
+    position: relative;
+    display: inline-block;
+}
 
-        @media (max-width: 960px) {
-            .hero-layout, .offer-box { grid-template-columns: 1fr; text-align: center; }
-            .pivot-row { grid-template-columns: 1fr; gap: 10px; }
-            .massive-title { font-size: 3.5rem; }
-        }
-    </style>
+.reveal-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 4px;
+    background-color: var(--accent);
+    transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+[data-aos].aos-animate .reveal-underline::after {
+    width: 100% !important;
+}
+
+/* AUTRES ÉLÉMENTS */
+.label-style { font-size: 0.9rem; font-weight: 800; letter-spacing: 4px; }
+
+.pivot-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: baseline;
+}
+
+.offer-box {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 60px;
+    border: var(--border-white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-white);
+    gap: 40px;
+}
+
+.btn-cta {
+    background: var(--accent);
+    color: #05051a;
+    padding: 14px 32px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 999px;
+    transition: 0.25s ease;
+}
+
+.diag-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Force les 3 colonnes */
+    gap: 30px;
+    margin-top: 50px;
+}
+    
+ul { list-style: none; margin-top: 25px; padding-left: 0; }
+ul li::before { content: "→ "; color: var(--accent); margin-right: 6px; }
+
+footer { text-align: center; padding: 30px; opacity: 0.6; background: #02020b; }
+
+@media (max-width: 960px) {
+    /* Slide 1 et les lignes de pivot s'empilent */
+    .hero-layout, .pivot-row, .offer-box { 
+        display: flex;
+        flex-direction: column;
+        text-align: center; 
+    }
+
+    /* Le Slide 2 (diag-grid) passe en 1 colonne sur mobile uniquement */
+    .diag-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-img-thin-cyan { 
+        width: 100% !important; 
+        max-width: 320px;
+        margin: 20px auto !important; 
+    }
+    
+    section { height: auto; padding: 60px 20px; }
+}
+
+/* 1. Le conteneur avec marges pour centrer */
+.slider-wrapper {
+    display: flex;
+    gap: 30px;
+    overflow-x: hidden; /* On cache la barre pour que ce soit propre */
+    scroll-behavior: smooth;
+    padding: 40px 0;
+    width: 100%;
+}
+
+.slider-item {
+    flex: 0 0 100%; /* Par défaut, une carte prend toute la place */
+    display: flex;
+    justify-content: center; /* Centre la carte interne */
+}
+
+.slider-item .card {
+    width: 100%;
+    max-width: 500px; /* La carte elle-même ne dépasse pas 500px */
+    margin: 0 auto;
+}
+
+@media (min-width: 960px) {
+    .slider-item {
+        flex: 0 0 100%; /* Garde une carte à la fois pour l'effet Focus */
+    }
+}   
+    
+</style>
 </head>
 <body>
 
-    <!-- SECTION 1 : HERO -->
-    <section>
-        <div class="container hero-layout">
-            <div data-aos="fade-right">
-                <h1 class="massive-title">On arrête le <br><span class="strike-accent">cirque.</span></h1>
-                <p style="font-size: 1.4rem; border-left: 5px solid var(--accent); padding-left: 20px;">
-                    Tu es coach. Ton revenu fait le yo-yo.<br>
-                    Ici, on scalpe le superflu. On garde l'efficacité.
+<nav>
+    <!-- La ligne a été supprimée ici -->
+</nav>
+
+<!-- SLIDE 1 : HERO CORRIGÉ -->
+<section style="background-color: var(--bg-1);">
+    <div class="container hero-layout">
+        
+        <!-- Côté GAUCHE : Texte (avec limite de largeur pour éviter le chevauchement) -->
+        <div data-aos="fade-right" style="max-width: 580px;">
+            <h1>On arrête le cirque.</h1>
+            
+            <p style="font-size: 1.25rem; margin-top: 30px; border-left: 5px solid var(--accent); padding-left: 20px; line-height: 1.5;">
+                Tu es coach, tu as déjà des clientes, mais ton revenu fait le yo-yo et tu es épuisée par les “stratégies” compliquées.
+                <br><br>
+                <strong>Ici, on enlève le superflu et on garde ce qui marche pour que tu repartes avec un plan simple que tu peux tenir.</strong>
+            </p>
+
+            <ul style="margin-top: 25px;">
+                <li>Arrêter de bricoler ta com’ au feeling.</li>
+                <li>Avoir un système clair pour des appels chaque mois.</li>
+                <li>Rester toi‑même sans jouer un personnage.</li>
+            </ul>
+
+            <div style="margin-top: 40px;">
+                <a href="mailto:votre.email@domaine.com" class="btn-cta">
+                    Je veux arrêter le cirque
+                </a>
+                <p style="font-size: 0.9rem; margin-top: 30px; opacity: 0.7;">
+                    30 minutes en visio pour faire le point sur ta situation, sans pression.
                 </p>
-                <a href="mailto:votre.email@domaine.com" class="btn-cta">Je veux arrêter le cirque →</a>
-            </div>
-            <div data-aos="zoom-in">
-                <img src="Cheval.png" alt="Miora Architecture" class="hero-img">
             </div>
         </div>
-    </section>
 
-    <!-- SECTION 2 : DIAGNOSTIC -->
-    <section style="background-color: var(--bg-2);">
-        <div class="container">
-            <h2 style="font-family: 'Syne'; font-size: 3rem; text-align: center; text-transform: uppercase; margin-bottom: 50px;">Est-ce que c'est toi ?</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-                <div class="card" data-aos="fade-up">
-                    <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">LE YO-YO</h3>
-                    <p>Tes revenus sont imprévisibles. Tu ne sais jamais si le mois prochain sera vide ou plein.</p>
+        <!-- Côté DROITE : Image -->
+        <div data-aos="zoom-in" style="flex-shrink: 0;">
+            <img src="Cheval.png" alt="Miora Architecture" class="hero-img-thin-cyan">
+        </div>
+
+    </div>
+</section>
+    
+<!-- SLIDE 2 : DIAGNOSTIC AVEC ICONES -->
+<section style="background-color: var(--bg-2);">
+<div class="container">
+<h2 class="section-title" data-aos="fade-down">
+Est-ce que c'est toi ?
+</h2>
+
+<div class="diag-grid">
+<div class="card" data-aos="fade-up" data-aos-delay="100">
+<div style="margin-bottom: 20px;">
+<img src="yoyo.gif" alt="Revenu en yo-yo" style="width: 72px; height: 72px; object-fit: contain;">
+</div>
+<h3 style="color: var(--accent);">Le Yo-Yo</h3>
+<p>
+Tes revenus sont imprévisibles et tu ne sais jamais vraiment à quoi ressemblera ton mois.
+</p>
+</div>
+
+<div class="card" data-aos="fade-up" data-aos-delay="250">
+<div style="margin-bottom: 20px;">
+<img src="Bricolage.gif" alt="Bricolage de communication" style="width: 72px; height: 72px; object-fit: contain;">
+</div>
+<h3 style="color: var(--accent);">Le Bricolage</h3>
+<p>
+Tu es présente partout, tu testes des idées, mais tu ne sais pas ce qui génère réellement tes ventes.
+</p>
+</div>
+
+<div class="card" data-aos="fade-up" data-aos-delay="400">
+<div style="margin-bottom: 20px;">
+<img src="fatigue.gif" alt="Fatigue" style="width: 72px; height: 72px; object-fit: contain;">
+</div>
+<h3 style="color: var(--accent);">La Fatigue</h3>
+<p>
+Tu veux un système robuste qui respecte ton énergie, pas un second job à plein temps.
+</p>
+</div>
+</div>
+
+<p
+data-aos="fade-up"
+data-aos-delay="600"
+style="
+margin-top: 60px; 
+text-align: center;
+font-family: 'Space Grotesk', sans-serif;
+font-size: 1.25rem; 
+font-weight: 300;
+max-width: 700px;
+margin-left: auto;
+margin-right: auto;
+line-height: 1.6;
+color: var(--text);
+">
+Tu n'as pas besoin d'une énième stratégie miracle,<br>
+<span class="reveal-underline">tu as besoin d'un système qui respecte ton énergie.</span>
+</p>
+</div>
+</section>
+
+<!-- SECTION PIVOT : NEUROMARKETING MINIMALISTE -->
+<section style="background-color: var(--bg-1); padding: 140px 0;">
+    <div class="container">
+        <div data-aos="fade-up">
+            
+            <!-- ÉTAPE 1 : LA CHARGE MENTALE (Hier) -->
+            <div class="pivot-row" style="margin-bottom: 100px; align-items: flex-start;">
+                <span class="label-style" style="opacity: 0.3;">LE CONSTAT</span>
+                <p style="font-size: 1.25rem; font-weight: 300; opacity: 0.4; max-width: 500px; line-height: 1.6;">
+                    Le marketing qui s'essouffle, le bricolage permanent et les revenus qui font le yo-yo.
+                </p>
+            </div>
+
+            <!-- ÉTAPE 2 : LA CLARTÉ (Maintenant) -->
+            <div class="pivot-row" style="align-items: flex-start;">
+                <span class="label-style" style="color: var(--accent);">LA SOLUTION</span>
+                <div style="max-width: 650px;">
+                    <h3 style="font-size: 2.5rem; font-weight: 400; line-height: 1.2; margin-bottom: 30px; letter-spacing: -0.03em;">
+                        Bâtir un système <span style="font-weight: 700; color: var(--accent);">architectural</span> qui travaille pour vous.
+                    </h3>
+                    <p style="font-size: 1.1rem; opacity: 0.8; line-height: 1.7;">
+                        On remplace l'agitation par la structure. Pour que votre business ne dépende plus de votre dernier post, mais de vos fondations.
+                    </p>
                 </div>
-                <div class="card" data-aos="fade-up" data-aos-delay="100">
-                    <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">LE BRICOLAGE</h3>
-                    <p>Tu testes toutes les stratégies à la mode, mais rien n'est automatisé ni fluide.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+    
+<!-- SLIDE 3 : PROGRAMME (4 SESSIONS) -->
+<section style="background-color: var(--bg-3); padding: 100px 0;">
+    <div class="container">
+        <h2 class="section-title">L'Accélérateur en 4 sessions</h2>
+
+        <p data-aos="fade-up" style="text-align: center; font-size: 1.25rem; font-weight: 500; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.8;">
+            4 sessions pour en finir avec les mois à blanc, sortir du bricolage et poser un système simple que tu peux tenir seule.
+        </p>
+
+        <!-- Changement ici : slider-wrapper au lieu de diag-grid -->
+        <div id="prog-slider" class="slider-wrapper">
+            
+            <!-- Carte 01 -->
+            <div class="slider-item">
+                <div class="card" data-aos="fade-up" data-aos-delay="100" style="height: 100%;">
+                    <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">01. Clarté</h3>
+                    <p style="margin-top: 15px; font-weight: 300;">On définit qui tu accompagnes, ce que tu promets vraiment et pourquoi on te choisit toi plutôt qu’une autre.</p>
                 </div>
-                <div class="card" data-aos="fade-up" data-aos-delay="200">
-                    <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">LA FATIGUE</h3>
-                    <p>Tu veux un système robuste qui travaille pour toi, pas devenir esclave de ton contenu.</p>
+            </div>
+
+            <!-- Carte 02 -->
+            <div class="slider-item">
+                <div class="card" data-aos="fade-up" data-aos-delay="200" style="height: 100%;">
+                    <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">02. Message</h3>
+                    <p style="margin-top: 15px; font-weight: 300;">On simplifie ta façon de parler de ton coaching : tes angles de contenu et ton invitation à l’appel.</p>
                 </div>
+            </div>
+
+            <!-- Carte 03 -->
+            <div class="slider-item">
+                <div class="card" data-aos="fade-up" data-aos-delay="300" style="height: 100%;">
+                    <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">03. Système</h3>
+                    <p style="margin-top: 15px; font-weight: 300;">On crée ton mini système d’acquisition sans usine à gaz, adapté à ton énergie et à ton canal principal.</p>
+                </div>
+            </div>
+
+            <!-- Carte 04 -->
+            <div class="slider-item">
+                <div class="card" data-aos="fade-up" data-aos-delay="400" style="height: 100%;">
+                    <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">04. Action</h3>
+                    <p style="margin-top: 15px; font-weight: 300;">Ton plan concret sur 30 jours pour passer à l’action, savoir quoi faire chaque semaine et quoi arrêter.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Phrase de mise en garde -->
+        <p style="font-size: 0.9rem; margin: 40px auto 0 auto; max-width: 600px; opacity: 0.6; text-align:center; font-weight: 400; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-style: italic;">
+            Ce n’est pas pour toi si tu cherches une solution miracle ou si tu n’es pas prête à faire ta part du travail pendant 30 jours.
+        </p>
+    </div>
+</section>
+    
+<!-- SLIDE 4 : L'OFFRE -->
+<section style="background-color: var(--bg-1);">
+<div class="container">
+<div class="offer-box" data-aos="zoom-in">
+<div>
+<h2 style="font-size: clamp(2rem, 4vw, 3.5rem);">
+L'Accélérateur Simple
+</h2>
+
+<p style="font-size: 1.1rem; margin-top: 15px; opacity: 0.8; max-width: 500px;">
+4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d’appel régulières sans cirque marketing.
+</p>
+
+<p style="font-size: 0.9rem; margin-top: 20px; color: var(--accent);">
+Tarif : 800€ · Possibilité de 2×400€
+</p>
+</div>
+
+<div style="
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+min-width: 220px;
+">
+<div style="
+font-family: 'Space Grotesk', sans-serif;
+font-size: clamp(3rem, 6vw, 4rem);
+font-weight: 700;
+letter-spacing: 0.06em;
+color: var(--accent);
+margin-bottom: 10px;
+">
+800&nbsp;€
+</div>
+<div style="
+font-size: 0.9rem;
+opacity: 0.7;
+margin-bottom: 18px;
+">
+1 mois · 4 sessions de 30 minutes
+</div>
+<a href="mailto:votre.email@domaine.com" class="btn-cta">
+Réserver un appel
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 5 : À PROPOS -->
+<section style="background-color: var(--bg-2); padding: 120px 0; border-top: 1px solid rgba(255,255,255,0.05);">
+    <div class="container hero-layout" style="display: flex; align-items: center; gap: 80px;">
+        
+        <!-- TEXTE À GAUCHE -->
+        <div data-aos="fade-right" style="flex: 1.5;">
+            <h2 style="font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin: 0;">Miora.</h2>
+            
+            <div style="width: 50px; height: 4px; background: #00ffff; margin: 30px 0;"></div>
+            
+            <p style="font-size: 1.3rem; line-height: 1.6; font-weight: 300; margin-bottom: 25px;">
+                J'accompagne les coachs à stabiliser leurs revenus via des systèmes 
+                <span style="color: #00ffff; font-weight: 700;">simples, agnostiques et durables.</span>
+            </p>
+            
+            <p style="font-size: 1.1rem; opacity: 0.8; line-height: 1.8; font-weight: 400;">
+                Après avoir construit des architectures complexes pour de gros business, j’ai choisi de revenir à l’essentiel : 
+                <strong>l’efficacité sans le cirque marketing.</strong>
+            </p>
+            
+            <p style="font-size: 0.9rem; margin-top: 35px; text-transform: uppercase; letter-spacing: 2px; color: #00ffff; font-weight: 700;">
+                Prendre le contrôle du moteur.
+            </p>
+        </div>
+
+        <!-- LOGO À DROITE -->
+        <div data-aos="zoom-in" style="flex: 1; display: flex; justify-content: center;">
+            <div style="position: relative; padding: 0; border: 1px solid #ffffff; background: #000; box-shadow: 12px 12px 0px #ffffff; overflow: hidden; line-height: 0;">
+                <img src="Logo.png" alt="Miora Logo" style="display: block; width: 100%; max-width: 320px; height: auto; transform: scale(1.02); object-fit: cover;">
             </div>
         </div>
-    </section>
 
-    <!-- SECTION 3 : LE PIVOT -->
-    <section>
-        <div class="container" data-aos="fade-in">
-            <div class="pivot-row">
-                <span style="opacity: 0.5; font-weight: 800; font-family: 'Syne';">AVANT</span>
-                <p class="pivot-text" style="opacity: 0.6;">Tu postes, tu t'épuises, tu bricoles ta com' au feeling en espérant que ça morde.</p>
-            </div>
-            <div class="pivot-row" style="border: none;">
-                <span style="color: var(--accent); font-weight: 800; font-family: 'Syne';">APRÈS</span>
-                <p class="pivot-text">Tu sais exactement quoi faire chaque semaine pour générer tes appels <span style="color: var(--accent);">sans cirque marketing.</span></p>
-            </div>
-        </div>
-    </section>
+    </div>
+</section> 
+    
+    <!-- SLIDE 6 : COMMENT ÇA SE PASSE ? -->
+<section style="background-color: var(--bg-3);">
+<div class="container">
+<h2 class="section-title" data-aos="fade-down">
+Comment ça se passe ?
+</h2>
+<div class="diag-grid">
+<div class="card" data-aos="fade-up" data-aos-delay="100">
+<h3 style="color: var(--accent);">1. Tu m’écris</h3>
+<p>
+Tu m’envoies quelques lignes sur ton activité, ton revenu actuel et ce que tu veux changer.
+</p>
+</div>
+<div class="card" data-aos="fade-up" data-aos-delay="250">
+<h3 style="color: var(--accent);">2. On se parle</h3>
+<p>
+30 minutes en visio pour faire le point, sans pression. Je te dis clairement si l’Accélérateur Simple est adapté pour toi.
+</p>
+</div>
+<div class="card" data-aos="fade-up" data-aos-delay="400">
+<h3 style="color: var(--accent);">3. Tu décides</h3>
+<p>
+Si c’est oui, on cale les 4 sessions. Si c’est non, tu repars avec plus de clarté que quand tu es arrivée.
+</p>
+</div>
+</div>
+<div style="text-align:center; margin-top:40px;">
+<a href="mailto:votre.email@domaine.com" class="btn-cta">
+Je veux mon plan simple
+</a>
+</div>
+</div>
+</section>
 
-    <!-- SECTION 4 : L'OFFRE -->
-    <section style="background-color: var(--bg-3);">
-        <div class="container">
-            <h2 class="massive-title" style="text-align: center; font-size: clamp(2rem, 5vw, 4rem);">L'Accélérateur Simple</h2>
-            <div class="offer-box" data-aos="zoom-in">
-                <div>
-                    <p style="font-size: 1.2rem; margin-bottom: 30px; font-weight: 500;">4 sessions pour sortir du bricolage et poser un système que tu peux tenir seule.</p>
-                    <ul style="list-style: none; font-size: 1.1rem;">
-                        <li style="margin-bottom: 10px;">⚡ <strong>01. CLARTÉ :</strong> Ton positionnement réel.</li>
-                        <li style="margin-bottom: 10px;">⚡ <strong>02. MESSAGE :</strong> Tes angles de contenu.</li>
-                        <li style="margin-bottom: 10px;">⚡ <strong>03. SYSTÈME :</strong> Ton acquisition simplifiée.</li>
-                        <li style="margin-bottom: 10px;">⚡ <strong>04. ACTION :</strong> Ton plan sur 30 jours.</li>
-                    </ul>
-                </div>
-                <div style="text-align: center; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 20px;">
-                    <div style="font-size: 4rem; font-weight: 800; color: var(--accent); font-family: 'Syne';">800€</div>
-                    <p style="text-transform: uppercase; letter-spacing: 2px;">1 MOIS · 4 SESSIONS</p>
-                    <a href="mailto:votre.email@domaine.com" class="btn-cta" style="width: 100%;">RÉSERVER →</a>
-                </div>
-            </div>
-        </div>
-    </section>
+<footer>
+© 2026 Miora – L’Accélérateur Simple | Architecte de Systèmes
+</footer>
 
-    <footer style="text-align: center; padding: 60px; opacity: 0.3; font-size: 0.8rem; letter-spacing: 2px;">
-        © 2026 MIORA | ARCHITECTE DE SYSTÈMES
-    </footer>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1200, once: false });
 
-    <!-- SCRIPTS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 1000, once: true });
-    </script>
+    const slider = document.getElementById('prog-slider');
+    let currentIndex = 0;
+
+    if (slider) {
+        const items = slider.querySelectorAll('.slider-item');
+        const totalItems = items.length;
+
+        function scrollNext() {
+            currentIndex++;
+            
+            // Si on dépasse la dernière carte, on revient à la première
+            if (currentIndex >= totalItems) {
+                currentIndex = 0;
+            }
+
+            const targetScroll = slider.offsetWidth * currentIndex;
+            
+            slider.scrollTo({
+                left: targetScroll,
+                behavior: 'smooth'
+            });
+        }
+
+        // Relancer l'automate
+        let autoCycle = setInterval(scrollNext, 3000);
+
+        // Pause au survol
+        slider.addEventListener('mouseenter', () => clearInterval(autoCycle));
+        slider.addEventListener('mouseleave', () => {
+            clearInterval(autoCycle);
+            autoCycle = setInterval(scrollNext, 3000);
+        });
+    }
+</script>
+    
 </body>
 </html>
