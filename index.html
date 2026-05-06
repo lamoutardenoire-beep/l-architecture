@@ -184,16 +184,25 @@ p, li, footer {
 }
 
 .btn-cta {
-    background: var(--accent);
-    color: #05051a;
+    background: transparent; /* On vide le fond */
+    color: var(--accent); /* Le texte prend la couleur cyan */
     padding: 14px 32px;
     text-decoration: none;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 700;
+    border: 2px solid var(--accent); /* On ajoute la bordure cyan */
     border-radius: 999px;
-    transition: 0.25s ease;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
+.btn-cta:hover {
+    background: var(--accent); /* Le fond se remplit au survol */
+    color: #05051a; /* Le texte repasse en sombre pour être lisible */
+    box-shadow: 0px 0px 20px rgba(0, 242, 255, 0.4); /* Effet lumineux */
+    transform: translateY(-2px); /* Petit saut dynamique */
+}
+    
 .diag-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Force les 3 colonnes */
@@ -496,40 +505,43 @@ Réserver un appel
 </div>
 </section>
 
-<!-- SLIDE 5 : À PROPOS -->
-<section style="background-color: var(--bg-2); padding: 120px 0; border-top: 1px solid rgba(255,255,255,0.05);">
-    <div class="container hero-layout" style="display: flex; align-items: center; gap: 80px;">
+<!-- SLIDE 5 : À PROPOS (VERSION CASH / NO FRAME) -->
+<section id="a-propos" style="background-color: var(--bg-1); padding: 140px 0;">
+    <div class="container hero-layout" style="display: flex; align-items: center; gap: 100px;">
         
         <!-- TEXTE À GAUCHE -->
-        <div data-aos="fade-right" style="flex: 1.5;">
-            <h2 style="font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin: 0;">Miora.</h2>
+        <div data-aos="fade-right" style="flex: 1.2;">
+            <h2 style="font-size: 4.5rem; font-weight: 900; line-height: 1; margin: 0; letter-spacing: -2px;">Miora.</h2>
             
-            <div style="width: 50px; height: 4px; background: #00ffff; margin: 30px 0;"></div>
+            <div style="width: 80px; height: 6px; background: var(--accent); margin: 40px 0;"></div>
             
-            <p style="font-size: 1.3rem; line-height: 1.6; font-weight: 300; margin-bottom: 25px;">
+            <p style="font-size: 1.4rem; line-height: 1.5; font-weight: 300; margin-bottom: 30px;">
                 J'accompagne les coachs à stabiliser leurs revenus via des systèmes 
-                <span style="color: #00ffff; font-weight: 700;">simples, agnostiques et durables.</span>
+                <span style="color: var(--accent); font-weight: 700;">simples, agnostiques et durables.</span>
             </p>
             
-            <p style="font-size: 1.1rem; opacity: 0.8; line-height: 1.8; font-weight: 400;">
+            <p style="font-size: 1.1rem; opacity: 0.7; line-height: 1.8; font-weight: 400; max-width: 500px;">
                 Après avoir construit des architectures complexes pour de gros business, j’ai choisi de revenir à l’essentiel : 
                 <strong>l’efficacité sans le cirque marketing.</strong>
             </p>
             
-            <p style="font-size: 0.9rem; margin-top: 35px; text-transform: uppercase; letter-spacing: 2px; color: #00ffff; font-weight: 700;">
+            <p style="font-size: 1rem; margin-top: 50px; text-transform: uppercase; letter-spacing: 4px; color: var(--accent); font-weight: 800;">
                 Prendre le contrôle du moteur.
             </p>
         </div>
 
-        <!-- LOGO À DROITE -->
-        <div data-aos="zoom-in" style="flex: 1; display: flex; justify-content: center;">
-            <div style="position: relative; padding: 0; border: 1px solid #ffffff; background: #000; box-shadow: 12px 12px 0px #ffffff; overflow: hidden; line-height: 0;">
-                <img src="Logo.png" alt="Miora Logo" style="display: block; width: 100%; max-width: 320px; height: auto; transform: scale(1.02); object-fit: cover;">
-            </div>
+        <!-- LOGO À DROITE (LIBÉRÉ) -->
+        <div data-aos="fade-left" style="flex: 1; display: flex; justify-content: center; position: relative;">
+            <!-- Décoration architecturale discrète en fond -->
+            <div style="position: absolute; width: 200px; height: 200px; border-left: 2px solid rgba(255,255,255,0.1); border-top: 2px solid rgba(255,255,255,0.1); top: -20px; left: 0;"></div>
+            
+            <img src="Logo.png" alt="Miora Logo" style="width: 100%; max-width: 400px; height: auto; filter: drop-shadow(0px 0px 20px rgba(0,242,255,0.1)); z-index: 2;">
+            
+            <div style="position: absolute; width: 200px; height: 200px; border-right: 2px solid rgba(255,255,255,0.1); border-bottom: 2px solid rgba(255,255,255,0.1); bottom: -20px; right: 0;"></div>
         </div>
 
     </div>
-</section> 
+</section>
     
     <!-- SLIDE 6 : COMMENT ÇA SE PASSE ? -->
 <section style="background-color: var(--bg-3);">
