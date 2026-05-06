@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIORA | Architecte de Systèmes</title>
 
+    <meta name="description" content="J'accompagne les coachs à stabiliser leurs revenus via des systèmes simples et durables.">
+    <meta property="og:title" content="Miora | Architecte de Systèmes pour Coachs">
+
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -22,11 +25,12 @@
             --shadow-white: 8px 8px 0px #ffffff;
         }
 
+/* 1. Reset et Typographie de base */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif !important;
+            /* Suppression du font-family !important ici pour laisser respirer tes titres */
         }
 
         html {
@@ -36,15 +40,21 @@
 
         body {
             color: var(--text);
+            /* On définit Space Grotesk par défaut pour tout le site */
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 300;
-            overflow-y: scroll;
+            overflow-x: hidden;
             background-color: var(--bg-1);
             -webkit-font-smoothing: antialiased;
         }
 
+        /* On force la Syne uniquement pour les titres */
+        h1, h2, h3, .label-style, .massive-title {
+            font-family: 'Syne', sans-serif !important;
+        }
+
         section {
-            min-height: 100vh;
+            min-height: 100vh; /* Minimum toute la hauteur de l'écran */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -52,10 +62,9 @@
             scroll-snap-align: start;
             scroll-snap-stop: always;
             position: relative;
-            height: 100vh;
-            overflow: hidden;
+            /* height: 100vh; <-- SUPPRIMÉ pour éviter de couper le contenu sur petit écran */
+            /* overflow: hidden; <-- SUPPRIMÉ pour permettre le défilement si le texte est long */
         }
-
         .container {
             max-width: 1200px;
             width: 100%;
@@ -70,7 +79,7 @@
             letter-spacing: -0.02em;
         }
 
-        h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); }
+        h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); }
         
         .section-title {
             font-size: clamp(2rem, 5vw, 4rem);
@@ -84,22 +93,37 @@
             line-height: 1.6;
         }
 
-        /* LAYOUTS HERO */
+        /* LAYOUTS HERO - Version optimisée pour l'espace */
         .hero-layout {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 40px;
+            gap: 20px; /* Réduit l'espace entre le texte et l'image */
         }
 
         .hero-layout > div:first-child {
             flex: 1;
-            max-width: 550px;
+            max-width: 500px; /* Réduit légèrement pour laisser de l'air */
             min-width: 320px;
         }
 
+        /* Ajustements internes pour gagner de la hauteur */
+        .hero-layout h1 { 
+            margin-bottom: 15px !important; 
+        }
+        
+        .hero-layout p { 
+            margin-bottom: 10px !important; 
+            font-size: 1.1rem !important; 
+        }
+
+        .hero-layout ul { 
+            margin-top: 10px !important; 
+            margin-bottom: 20px !important; 
+        }
+
         .hero-layout > div:last-child {
-            flex: 0 0 350px;
+            flex: 0 0 320px; /* L'image prend un peu moins de place */
         }
 
         .hero-img-thin-cyan {
@@ -107,13 +131,13 @@
             box-shadow: 8px 8px 0px rgba(255, 255, 255, 0.8) !important;
             filter: grayscale(1);
             width: 100% !important;
-            max-width: 450px;
+            max-width: 380px; /* Image un peu plus petite pour remonter le bouton */
             margin-right: 0 !important;
             margin-left: auto;
             display: block;
             transition: 0.3s ease;
         }
-
+        
         /* COMPOSANTS CARTES */
         .card {
             background: rgba(255, 255, 255, 0.02);
@@ -553,26 +577,30 @@
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
+<script>
+        // 1. Initialisation des animations AOS
         AOS.init({ duration: 1200, once: false });
 
+        // 2. Gestion du Slider (L'Accélérateur)
         const slider = document.getElementById('prog-slider');
-        let currentIndex = 0;
-
         if (slider) {
             const items = slider.querySelectorAll('.slider-item');
-            const totalItems = items.length;
-
-            function scrollNext() {
-                currentIndex++;
-                if (currentIndex >= totalItems) currentIndex = 0;
-
-                const targetScroll = slider.offsetWidth * currentIndex;
-                slider.scrollTo({ left: targetScroll, behavior: 'smooth' });
-            }
+            
+            const scrollNext = () => {
+                // On calcule la largeur d'un item + son gap (30px)
+                const step = items[0].offsetWidth + 30;
+                
+                // Si on arrive au bout, on revient au début, sinon on avance
+                if (slider.scrollLeft >= (slider.scrollWidth - slider.offsetWidth - 10)) {
+                    slider.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    slider.scrollBy({ left: step, behavior: 'smooth' });
+                }
+            };
 
             let autoCycle = setInterval(scrollNext, 3000);
 
+            // Pause quand la souris survole pour laisser lire l'utilisateur
             slider.addEventListener('mouseenter', () => clearInterval(autoCycle));
             slider.addEventListener('mouseleave', () => {
                 clearInterval(autoCycle);
@@ -580,6 +608,7 @@
             });
         }
 
+        // 3. Navigation par points (Dots) & Scroll Interactif
         function scrollToSection(index) {
             const sections = document.querySelectorAll('section');
             sections[index].scrollIntoView({ behavior: 'smooth' });
@@ -592,11 +621,15 @@
 
             sections.forEach((section, index) => {
                 const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 60) current = index;
+                // On active le point quand la section occupe le milieu de l'écran
+                if (window.scrollY >= sectionTop - window.innerHeight / 3) {
+                    current = index;
+                }
             });
 
-            dots.forEach(dot => dot.classList.remove('active'));
-            dots[current].classList.add('active');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === current);
+            });
         });
     </script>
 </body>
