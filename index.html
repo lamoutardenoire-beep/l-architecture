@@ -277,43 +277,72 @@ footer { text-align: center; padding: 30px; opacity: 0.6; background: #02020b; }
     <!-- La ligne a été supprimée ici -->
 </nav>
 
-<!-- SLIDE 1 : HERO CORRIGÉ -->
-<section style="background-color: var(--bg-1);">
-    <div class="container hero-layout">
+<!-- SLIDE 1 : HERO OPTIMISÉ -->
+<section style="background-color: var(--bg-1); overflow: hidden;">
+    <div class="container hero-layout" style="align-items: flex-start;">
         
-        <!-- Côté GAUCHE : Texte (avec limite de largeur pour éviter le chevauchement) -->
-        <div data-aos="fade-right" style="max-width: 580px;">
-            <h1>On arrête le cirque.</h1>
+        <!-- Côté GAUCHE : Hiérarchie de l'information -->
+        <div data-aos="fade-right" style="max-width: 550px;">
+            <h1 class="massive-title" style="font-size: clamp(2.5rem, 6vw, 4.2rem);">
+                Arrête de <br><span class="strike-accent">bricoler</span> <br>ton coaching.
+            </h1>
             
-            <p style="font-size: 1.25rem; margin-top: 30px; border-left: 5px solid var(--accent); padding-left: 20px; line-height: 1.5;">
-                Tu es coach, tu as déjà des clientes, mais ton revenu fait le yo-yo et tu es épuisée par les “stratégies” compliquées.
-                <br><br>
-                <strong>Ici, on enlève le superflu et on garde ce qui marche pour que tu repartes avec un plan simple que tu peux tenir.</strong>
-            </p>
-
-            <ul style="margin-top: 25px;">
-                <li>Arrêter de bricoler ta com’ au feeling.</li>
-                <li>Avoir un système clair pour des appels chaque mois.</li>
-                <li>Rester toi‑même sans jouer un personnage.</li>
-            </ul>
-
-            <div style="margin-top: 40px;">
-                <a href="https://cal.com/miora-rasolofo" class="btn-cta">
-                    Stabiliser mes revenus
-                </a>
-                
-                <p style="font-size: 0.9rem; margin-top: 30px; opacity: 0.7;">
-                    30 minutes en visio pour faire le point sur ta situation, sans pression.
+            <!-- Bloc d'empathie -->
+            <div style="margin: 40px 0; border-left: 5px solid var(--accent); padding-left: 20px;">
+                <p style="font-size: 1.25rem; line-height: 1.5; font-weight: 400;">
+                    Tu es coach, tu as déjà des clientes, mais tes revenus font le yo‑yo parce que ton message, ton offre et ton acquisition ne parlent pas le même langage.
+                </p>
+                <p style="font-size: 1.25rem; line-height: 1.5; margin-top: 20px; font-weight: 700; color: var(--accent);">
+                    Ici, on enlève le superflu et on garde ce qui marche.
                 </p>
             </div>
+
+            <p style="font-size: 1.15rem; opacity: 0.9; margin-bottom: 30px;">
+                On construit un système simple pour que tu saches quoi dire, quoi montrer en ligne et comment générer des appels qualifiés chaque mois, sans te perdre dans des stratégies compliquées.
+            </p>
+
+            <!-- Liste de bénéfices (Texte Blanc, Puces Cyan) -->
+            <div style="margin-bottom: 40px;">
+                <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; opacity: 0.6; margin-bottom: 15px;">À la fin, tu es capable de :</p>
+                <ul style="list-style: none; display: grid; gap: 10px; font-weight: 500;">
+                    <li><span style="color: var(--accent); margin-right: 8px;">⚡</span> arrêter de bricoler ta communication au feeling,</li>
+                    <li><span style="color: var(--accent); margin-right: 8px;">⚡</span> avoir un système clair pour des appels réguliers,</li>
+                    <li><span style="color: var(--accent); margin-right: 8px;">⚡</span> rester toi‑même, sans jouer un personnage.</li>
+                </ul>
+            </div>
+
+            <!-- CTA Uniforme -->
+            <a href="https://cal.com/miora-rasolofo" class="btn-cta">
+                STABILISER MES REVENUS
+            </a>
+            
+            <p style="font-size: 0.9rem; margin-top: 25px; opacity: 0.7; max-width: 380px;">
+                30 minutes en visio pour faire le point sur ta situation, sans pression.
+            </p>
         </div>
 
-        <!-- Côté DROITE : Image -->
-        <div data-aos="zoom-in" style="flex-shrink: 0;">
-            <img src="Cheval.png" alt="Miora Architecture" class="hero-img-thin-cyan">
-        </div>
+        <!-- Côté DROITE : Image traitée "Architecte" -->
+<div data-aos="zoom-in" style="flex-shrink: 0; position: relative;">
+    <!-- Le cadre décoratif Rebel -->
+    <div style="position: absolute; top: -15px; right: -15px; width: 100%; height: 100%; border: 2px solid var(--accent); z-index: 0;"></div>
+    
+    <!-- L'image avec traitement -->
+    <img src="Cheval.png" alt="Miora Architecture" 
+         style="max-width: 400px; 
+                display: block;
+                position: relative;
+                z-index: 1;
+                filter: grayscale(1) contrast(1.3) brightness(0.8);
+                border: var(--border-white);
+                background-color: var(--bg-1);">
 
+    <!-- Badge d'autorité minimaliste -->
+    <div style="position: absolute; bottom: 20px; left: -20px; background: var(--accent); color: #000; padding: 10px 20px; font-weight: 800; font-family: 'Syne'; z-index: 2; transform: rotate(-2deg); font-size: 0.8rem; text-transform: uppercase;">
+        Système & Architecture
     </div>
+    
+</div>
+        
 </section>
     
 <!-- SLIDE 2 : DIAGNOSTIC AVEC ICONES -->
@@ -330,7 +359,7 @@ Est-ce que c'est toi ?
 </div>
 <h3 style="color: var(--accent);">Le Yo-Yo</h3>
 <p>
-Tes revenus sont imprévisibles et tu ne sais jamais vraiment à quoi ressemblera ton mois.
+Tes revenus sont imprévisibles, tu as déjà des clientes mais pas de base stable, alors tu vis dans l’incertitude, pas dans un business qui te tient debout.
 </p>
 </div>
 
@@ -340,7 +369,7 @@ Tes revenus sont imprévisibles et tu ne sais jamais vraiment à quoi ressembler
 </div>
 <h3 style="color: var(--accent);">Le Bricolage</h3>
 <p>
-Tu es présente partout, tu testes des idées, mais tu ne sais pas ce qui génère réellement tes ventes.
+Tu es partout, tu testes des idées, tu ne sais pas ce qui génère réellement tes ventes et tu sautes d’une idée à l’autre comme si tu jouais au marketing plutôt qu’à ton business.
 </p>
 </div>
 
@@ -350,7 +379,7 @@ Tu es présente partout, tu testes des idées, mais tu ne sais pas ce qui génè
 </div>
 <h3 style="color: var(--accent);">La Fatigue</h3>
 <p>
-Tu veux un système robuste qui respecte ton énergie, pas un second job à plein temps.
+Tu en as assez de te vider à “trouver des clients” pendant que ton business ne tient pas debout, tu veux un système robuste qui respecte ton énergie, pas un second job à plein temps.
 </p>
 </div>
 </div>
@@ -371,7 +400,7 @@ line-height: 1.6;
 color: var(--text);
 ">
 Tu n'as pas besoin d'une énième stratégie miracle,<br>
-<span class="reveal-underline">tu as besoin d'un système qui respecte ton énergie.</span>
+<span class="reveal-underline">tu as besoin d’un système qui tient la route.</span>
 </p>
 </div>
 </section>
@@ -385,7 +414,8 @@ Tu n'as pas besoin d'une énième stratégie miracle,<br>
             <div class="pivot-row" style="margin-bottom: 100px; align-items: flex-start;">
                 <span class="label-style" style="opacity: 0.3;">LE CONSTAT</span>
                 <p style="font-size: 1.25rem; font-weight: 300; opacity: 0.4; max-width: 500px; line-height: 1.6;">
-                    Le marketing qui s'essouffle, le bricolage permanent et les revenus qui font le yo-yo.
+                    Le marketing qui s’essouffle, le bricolage permanent et les revenus qui font le yo‑yo.
+Tu as déjà des clientes, mais tout ton business dépend encore de ton dernier post, de ta dernière idée, ou de ton dernier essai.
                 </p>
             </div>
 
@@ -394,10 +424,11 @@ Tu n'as pas besoin d'une énième stratégie miracle,<br>
                 <span class="label-style" style="color: var(--accent);">LA SOLUTION</span>
                 <div style="max-width: 650px;">
                     <h3 style="font-size: 2.5rem; font-weight: 400; line-height: 1.2; margin-bottom: 30px; letter-spacing: -0.03em;">
-                        Bâtir un système <span style="font-weight: 700; color: var(--accent);">architectural</span> qui travaille pour vous.
+                        Bâtir un système <span style="font-weight: 700; color: var(--accent);">architectural</span> qui travaille pour toi, pas contre toi.
                     </h3>
                     <p style="font-size: 1.1rem; opacity: 0.8; line-height: 1.7;">
-                        On remplace l'agitation par la structure. Pour que votre business ne dépende plus de votre dernier post, mais de vos fondations.
+                        On remplace l’agitation par la structure, pour que ton business ne dépende plus de ton dernier post, mais de tes fondations.
+
                     </p>
                 </div>
             </div>
@@ -412,7 +443,7 @@ Tu n'as pas besoin d'une énième stratégie miracle,<br>
         <h2 class="section-title">L'Accélérateur en 4 sessions</h2>
 
         <p data-aos="fade-up" style="text-align: center; font-size: 1.25rem; font-weight: 500; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.8;">
-            4 sessions pour en finir avec les mois à blanc, sortir du bricolage et poser un système simple que tu peux tenir seule.
+            4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d’appel régulières sans cirque marketing.
         </p>
 
         <!-- Changement ici : slider-wrapper au lieu de diag-grid -->
@@ -422,7 +453,7 @@ Tu n'as pas besoin d'une énième stratégie miracle,<br>
             <div class="slider-item">
                 <div class="card" data-aos="fade-up" data-aos-delay="100" style="height: 100%;">
                     <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">01. Clarté</h3>
-                    <p style="margin-top: 15px; font-weight: 300;">On définit qui tu accompagnes, ce que tu promets vraiment et pourquoi on te choisit toi plutôt qu’une autre.</p>
+                    <p style="margin-top: 15px; font-weight: 300;">On définit exactement à qui tu t’adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu’une autre.</p>
                 </div>
             </div>
 
@@ -430,7 +461,7 @@ Tu n'as pas besoin d'une énième stratégie miracle,<br>
             <div class="slider-item">
                 <div class="card" data-aos="fade-up" data-aos-delay="200" style="height: 100%;">
                     <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">02. Message</h3>
-                    <p style="margin-top: 15px; font-weight: 300;">On simplifie ta façon de parler de ton coaching : tes angles de contenu et ton invitation à l’appel.</p>
+                    <p style="margin-top: 15px; font-weight: 300;">On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l’appel et ce que tu mets en avant sans te perdre.</p>
                 </div>
             </div>
 
@@ -438,7 +469,7 @@ Tu n'as pas besoin d'une énième stratégie miracle,<br>
             <div class="slider-item">
                 <div class="card" data-aos="fade-up" data-aos-delay="300" style="height: 100%;">
                     <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">03. Système</h3>
-                    <p style="margin-top: 15px; font-weight: 300;">On crée ton mini système d’acquisition sans usine à gaz, adapté à ton énergie et à ton canal principal.</p>
+                    <p style="margin-top: 15px; font-weight: 300;">On construit ton mini‑système d’acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</p>
                 </div>
             </div>
 
@@ -446,7 +477,7 @@ Tu n'as pas besoin d'une énième stratégie miracle,<br>
             <div class="slider-item">
                 <div class="card" data-aos="fade-up" data-aos-delay="400" style="height: 100%;">
                     <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">04. Action</h3>
-                    <p style="margin-top: 15px; font-weight: 300;">Ton plan concret sur 30 jours pour passer à l’action, savoir quoi faire chaque semaine et quoi arrêter.</p>
+                    <p style="margin-top: 15px; font-weight: 300;">On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d’appel presque automatiquement.</p>
                 </div>
             </div>
 
@@ -510,7 +541,7 @@ margin-bottom: 18px;
 </div>
 </section>
 
-<!-- SLIDE 5 : À PROPOS (VERSION FINALE BRANCHÉE) -->
+<!-- SLIDE 5 : À PROPOS (VERSION FINALE OPTIMISÉE) -->
 <section id="a-propos" style="background-color: var(--bg-1); padding: 140px 0;">
     <div class="container hero-layout" style="display: flex; align-items: center; gap: 100px;">
         
@@ -518,68 +549,108 @@ margin-bottom: 18px;
         <div data-aos="fade-right" style="flex: 1.2;">
             <h2 style="font-size: 4.5rem; font-weight: 900; line-height: 1; margin: 0; letter-spacing: -2px;">Miora.</h2>
             
-            <div style="width: 80px; height: 6px; background: var(--accent); margin: 40px 0;"></div>
+            <div style="width: 80px; height: 6px; background: var(--accent); margin: 30px 0;"></div>
             
-            <p style="font-size: 1.4rem; line-height: 1.5; font-weight: 300; margin-bottom: 30px;">
-                J'accompagne les coachs à stabiliser leurs revenus via des systèmes 
-                <span style="color: var(--accent); font-weight: 700;">simples, agnostiques et durables.</span>
+            <p style="font-size: 1.4rem; line-height: 1.5; font-weight: 300; margin-bottom: 25px;">
+                J'accompagne les coachs à stabiliser leurs revenus via des 
+                <span style="color: var(--accent); font-weight: 700;">systèmes simples, indépendants et durables.</span>
             </p>
             
-            <p style="font-size: 1.1rem; opacity: 0.7; line-height: 1.8; font-weight: 400; max-width: 500px; margin-bottom: 40px;">
+            <p style="font-size: 1.1rem; opacity: 0.7; line-height: 1.8; font-weight: 400; max-width: 500px; margin-bottom: 35px;">
                 Après avoir construit des architectures complexes pour de gros business, j’ai choisi de revenir à l’essentiel : 
                 <strong>l’efficacité sans le cirque marketing.</strong>
             </p>
+
+            <!-- NOUVELLE SECTION : Je t'aide à (Impact Neuromarketing) -->
+            <div style="margin-bottom: 50px; background: rgba(255,255,255,0.02); padding: 30px; border-left: 2px solid var(--accent);">
+                <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; font-weight: 700; color: var(--accent); margin-bottom: 20px;">
+                    Je t’aide à :
+                </p>
+                <ul style="list-style: none; display: grid; gap: 15px; font-size: 1.1rem; line-height: 1.4;">
+                    <li style="display: flex; align-items: flex-start;">
+                        <span style="color: var(--accent); margin-right: 12px; font-weight: bold;">[01]</span>
+                        <span>Transformer ton activité en un <strong>système simple</strong>.</span>
+                    </li>
+                    <li style="display: flex; align-items: flex-start;">
+                        <span style="color: var(--accent); margin-right: 12px; font-weight: bold;">[02]</span>
+                        <span>Parler de ton coaching d’une façon <strong>claire et assumée</strong>.</span>
+                    </li>
+                    <li style="display: flex; align-items: flex-start;">
+                        <span style="color: var(--accent); margin-right: 12px; font-weight: bold;">[03]</span>
+                        <span>Construire un business qui <strong>tient la route</strong>, pas une énième stratégie miracle.</span>
+                    </li>
+                </ul>
+            </div>
             
-            <!-- ICI : ON TRANSFORME LE TEXTE EN BOUTON RÉEL -->
             <a href="https://cal.com/miora-rasolofo" class="btn-cta">
                 Prendre le contrôle du moteur
             </a>
         </div>
 
-        <!-- LOGO À DROITE (LIBÉRÉ) -->
+        <!-- LOGO À DROITE -->
         <div data-aos="fade-left" style="flex: 1; display: flex; justify-content: center; position: relative;">
-            <div style="position: absolute; width: 200px; height: 200px; border-left: 2px solid rgba(255,255,255,0.1); border-top: 2px solid rgba(255,255,255,0.1); top: -20px; left: 0;"></div>
+            <!-- Décoration architecturale -->
+            <div style="position: absolute; width: 150px; height: 150px; border-left: 2px solid rgba(0,242,255,0.2); border-top: 2px solid rgba(0,242,255,0.2); top: -20px; left: 0;"></div>
             
-            <img src="Logo.png" alt="Miora Logo" style="width: 100%; max-width: 400px; height: auto; filter: drop-shadow(0px 0px 20px rgba(0,242,255,0.1)); z-index: 2;">
+            <img src="Logo.png" alt="Miora Logo" style="width: 100%; max-width: 350px; height: auto; filter: drop-shadow(0px 0px 20px rgba(0,242,255,0.15)); z-index: 2;">
             
-            <div style="position: absolute; width: 200px; height: 200px; border-right: 2px solid rgba(255,255,255,0.1); border-bottom: 2px solid rgba(255,255,255,0.1); bottom: -20px; right: 0;"></div>
+            <div style="position: absolute; width: 150px; height: 150px; border-right: 2px solid rgba(0,242,255,0.2); border-bottom: 2px solid rgba(0,242,255,0.2); bottom: -20px; right: 0;"></div>
         </div>
 
     </div>
 </section>
     
-    <!-- SLIDE 6 : COMMENT ÇA SE PASSE ? -->
-<section style="background-color: var(--bg-3);">
-<div class="container">
-<h2 class="section-title" data-aos="fade-down">
-Comment ça se passe ?
-</h2>
-<div class="diag-grid">
-<div class="card" data-aos="fade-up" data-aos-delay="100">
-<h3 style="color: var(--accent);">1. Tu m’écris</h3>
-<p>
-Tu m’envoies quelques lignes sur ton activité, ton revenu actuel et ce que tu veux changer.
-</p>
-</div>
-<div class="card" data-aos="fade-up" data-aos-delay="250">
-<h3 style="color: var(--accent);">2. On se parle</h3>
-<p>
-30 minutes en visio pour faire le point, sans pression. Je te dis clairement si l’Accélérateur Simple est adapté pour toi.
-</p>
-</div>
-<div class="card" data-aos="fade-up" data-aos-delay="400">
-<h3 style="color: var(--accent);">3. Tu décides</h3>
-<p>
-Si c’est oui, on cale les 4 sessions. Si c’est non, tu repars avec plus de clarté que quand tu es arrivée.
-</p>
-</div>
-</div>
-<div style="text-align:center; margin-top:40px;">
-<a href="https://cal.com/miora-rasolofo" class="btn-cta">
-Je veux mon plan simple
-</a>
-</div>
-</div>
+    <!-- SLIDE 6 : COMMENT ÇA SE PASSE ? (PROCESSUS ARCHITECTE) -->
+<section style="background-color: var(--bg-1); padding: 120px 0;">
+    <div class="container">
+        
+        <h2 style="font-family: 'Syne'; font-size: clamp(2rem, 5vw, 3.5rem); text-align: center; text-transform: uppercase; margin-bottom: 80px;" data-aos="fade-down">
+            Le protocole <span class="strike-accent">Simple.</span>
+        </h2>
+
+        <!-- Grille de Diagnostic / Workflow -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; position: relative;">
+            
+            <!-- Étape 1 -->
+            <div class="card" data-aos="fade-up" data-aos-delay="100" style="border-top: 4px solid rgba(255,255,255,0.1); padding: 40px; background: rgba(255,255,255,0.02);">
+                <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">01. INPUT</div>
+                <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu m’écris</h3>
+                <p style="opacity: 0.8; line-height: 1.6;">
+                    Tu m’envoies quelques lignes sur ton activité, ton revenu actuel et ce que tu veux changer.
+                </p>
+            </div>
+
+            <!-- Étape 2 : LA CENTRALE (Mise en avant) -->
+            <div class="card" data-aos="fade-up" data-aos-delay="250" style="border-top: 4px solid var(--accent); padding: 40px; background: rgba(0,242,255,0.03);">
+                <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">02. ANALYSE</div>
+                <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">On se parle</h3>
+                <p style="opacity: 0.9; line-height: 1.6;">
+                    30 minutes en visio pour faire le point, sans pression. Je te dis clairement si <strong>l’Accélérateur Simple</strong> est adapté pour toi.
+                </p>
+            </div>
+
+            <!-- Étape 3 -->
+            <div class="card" data-aos="fade-up" data-aos-delay="400" style="border-top: 4px solid rgba(255,255,255,0.1); padding: 40px; background: rgba(255,255,255,0.02);">
+                <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">03. OUTPUT</div>
+                <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu décides</h3>
+                <p style="opacity: 0.8; line-height: 1.6;">
+                    Si c’est oui, on cale les 4 sessions. Si c’est non, tu repars avec plus de clarté que quand tu es arrivée.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Appel à l'action final -->
+        <div style="text-align: center; margin-top: 80px;" data-aos="zoom-in">
+            <a href="https://cal.com/miora-rasolofo" class="btn-cta" style="padding: 20px 50px; font-size: 1.2rem;">
+                Je veux mon plan simple
+            </a>
+            <p style="margin-top: 25px; font-size: 0.85rem; opacity: 0.5; letter-spacing: 1px; text-transform: uppercase;">
+                Aucun engagement. Juste de la clarté.
+            </p>
+        </div>
+
+    </div>
 </section>
 
 <footer>
