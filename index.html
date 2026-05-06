@@ -1,773 +1,599 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MIORA | Architecte de Systèmes</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
 <style>
+
     /* 1. Importation de la police moderne */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
 
+
+
 /* 2. Application à TOUT le site pour éviter les mélanges */
+
 * {
+
     font-family: 'Inter', sans-serif !important;
+
 }
+
     
+
 :root {
+
     --bg-1: #05051a;
+
     --bg-2: #080826;
+
     --bg-3: #030312;
+
     --text: #ffffff;
+
     --accent: #00f2ff;
+
     --border-white: 3px solid #ffffff;
+
     --shadow-white: 8px 8px 0px #ffffff;
+
 }
+
+
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+
+
 html { scroll-behavior: smooth; }
 
+
+
 body {
+
     color: var(--text);
+
     font-family: 'Space Grotesk', sans-serif;
+
     font-weight: 300;
+
     scroll-snap-type: y mandatory;
+
     overflow-y: scroll;
+
     background-color: var(--bg-1);
+
     -webkit-font-smoothing: antialiased;
+
 }
+
+
 
 @media (max-width: 768px) {
+
     body { scroll-snap-type: none; }
+
 }
+
+
 
 section {
+
     min-height: 100vh;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     padding: 80px 40px;
+
     scroll-snap-align: start;
+
     position: relative;
+
 }
+
+
 
 .container {
+
     max-width: 1200px;
+
     width: 100%;
+
     margin: 0 auto;
+
 }
+
+
 
 /* TYPOGRAPHIE */
+
 h1, h2, h3, .label-style {
+
     font-family: 'Syne', sans-serif;
+
     text-transform: uppercase;
+
     line-height: 0.9;
+
     letter-spacing: -0.02em;
+
 }
+
+
 
 h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); }
+
 .section-title {
+
     font-size: clamp(2rem, 5vw, 4rem);
+
     text-align: center;
+
     margin-bottom: 40px;
+
 }
+
+
 
 p, li, footer {
+
     font-family: 'Space Grotesk', sans-serif;
+
     font-weight: 300;
+
     line-height: 1.6;
+
 }
+
+
 
 /* LAYOUTS */
+
 .hero-layout {
+
     display: flex; /* On passe en Flex pour mieux contrôler l'espace */
+
     justify-content: space-between;
+
     align-items: center;
+
     gap: 40px;
+
 }
+
+
 
 .hero-layout > div:first-child {
+
     flex: 1;
+
     max-width: 550px;
+
     min-width: 320px;
+
 }
+
+
 
 .hero-layout > div:last-child {
+
     flex: 0 0 350px;
+
 }
 
+
+
 .hero-img-thin-cyan {
+
     border: 3px solid var(--accent) !important;
+
     box-shadow: 8px 8px 0px #ffffff !important; 
+
     filter: grayscale(1);
+
     width: 100% !important;
+
     height: auto;
+
     display: block;
+
 }
+
     
+
 /* ÉLÉMENTS DESIGN IMAGE (SLIDE 1) */
+
 .hero-img-thin-cyan {
+
     border: 3px solid var(--accent) !important;
+
     /* Modification ici : 255, 255, 255 correspond au blanc */
+
     box-shadow: 8px 8px 0px rgba(255, 255, 255, 0.8) !important; 
+
     filter: grayscale(1);
+
     width: 100% !important;
+
     max-width: 450px;
+
     margin-right: 0 !important;
+
     margin-left: auto;
+
     display: block;
+
     transition: 0.3s ease;
+
 }
+
     
+
 /* CARTES (SLIDE 2) */
+
 .card {
+
     background: rgba(255, 255, 255, 0.02);
+
     border: var(--border-white);
+
     padding: 40px;
+
     box-shadow: var(--shadow-white);
+
     transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
     text-align: center;
+
 }
+
+
 
 .card:hover {
+
     transform: translate(-10px, -10px);
+
     box-shadow: 15px 15px 0px var(--accent);
+
     border-color: var(--accent);
+
 }
+
+
 
 /* ANIMATION SOULIGNEMENT (SLIDE 2) */
+
 .reveal-underline {
+
     position: relative;
+
     display: inline-block;
+
 }
+
+
 
 .reveal-underline::after {
+
     content: "";
+
     position: absolute;
+
     left: 0;
+
     bottom: -5px;
+
     width: 0%;
+
     height: 4px;
+
     background-color: var(--accent);
+
     transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+
 }
+
+
 
 [data-aos].aos-animate .reveal-underline::after {
+
     width: 100% !important;
+
 }
+
+
 
 /* AUTRES ÉLÉMENTS */
+
 .label-style { font-size: 0.9rem; font-weight: 800; letter-spacing: 4px; }
 
+
+
 .pivot-row {
+
     display: grid;
+
     grid-template-columns: 200px 1fr;
+
     gap: 40px;
+
     max-width: 1000px;
+
     margin: 0 auto;
+
     align-items: baseline;
+
 }
+
+
 
 .offer-box {
+
     background: rgba(255, 255, 255, 0.02);
+
     padding: 60px;
+
     border: var(--border-white);
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
+
     box-shadow: var(--shadow-white);
+
     gap: 40px;
+
 }
+
+
 
 /* 1. État de repos : Épuré et Professionnel */
+
 .btn-cta {
+
     display: inline-block;
+
     background: transparent;
+
     color: var(--accent) !important;
+
     padding: 14px 32px;
+
     text-decoration: none;
+
     text-transform: uppercase;
+
     font-weight: 700;
+
     border: 2px solid var(--accent);
+
     border-radius: 999px; /* Bords arrondis comme souhaité */
+
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
     cursor: pointer;
+
     font-family: 'Inter', sans-serif !important;
+
 }
 
+
+
 /* 2. État de survol : L'impact Rebelle */
+
 .btn-cta:hover {
+
     background: var(--accent) !important;
+
     color: #05051a !important; /* Retour au noir pour la lisibilité */
+
     box-shadow: 0px 0px 20px rgba(0, 242, 255, 0.4);
+
     transform: translateY(-2px);
+
 }
+
     
+
 .diag-grid {
+
     display: grid;
+
     grid-template-columns: repeat(3, 1fr); /* Force les 3 colonnes */
+
     gap: 30px;
+
     margin-top: 50px;
+
 }
+
     
+
 ul { list-style: none; margin-top: 25px; padding-left: 0; }
+
 ul li::before { content: "→ "; color: var(--accent); margin-right: 6px; }
+
+
 
 footer { text-align: center; padding: 30px; opacity: 0.6; background: #02020b; }
 
+
+
 @media (max-width: 960px) {
+
     /* Slide 1 et les lignes de pivot s'empilent */
+
     .hero-layout, .pivot-row, .offer-box { 
+
         display: flex;
+
         flex-direction: column;
+
         text-align: center; 
+
     }
+
+
 
     /* Le Slide 2 (diag-grid) passe en 1 colonne sur mobile uniquement */
+
     .diag-grid {
+
         grid-template-columns: 1fr;
+
     }
+
+
 
     .hero-img-thin-cyan { 
+
         width: 100% !important; 
+
         max-width: 320px;
+
         margin: 20px auto !important; 
+
     }
+
     
+
     section { height: auto; padding: 60px 20px; }
+
 }
+
+
 
 /* 1. Le conteneur avec marges pour centrer */
+
 .slider-wrapper {
+
     display: flex;
+
     gap: 30px;
+
     overflow-x: hidden; /* On cache la barre pour que ce soit propre */
+
     scroll-behavior: smooth;
+
     padding: 40px 0;
+
     width: 100%;
+
 }
+
+
 
 .slider-item {
+
     flex: 0 0 100%; /* Par défaut, une carte prend toute la place */
+
     display: flex;
+
     justify-content: center; /* Centre la carte interne */
+
 }
+
+
 
 .slider-item .card {
+
     width: 100%;
+
     max-width: 500px; /* La carte elle-même ne dépasse pas 500px */
+
     margin: 0 auto;
+
 }
+
+
 
 @media (min-width: 960px) {
+
     .slider-item {
+
         flex: 0 0 100%; /* Garde une carte à la fois pour l'effet Focus */
+
     }
+
 }   
+
     /* Activation du mode Slide par Slide */
+
 html {
+
     scroll-snap-type: y mandatory;
+
 }
+
+
 
 section {
+
     scroll-snap-align: start;
+
     scroll-snap-stop: always;
+
     height: 100vh; /* Chaque section prend exactement l'écran */
+
     overflow: hidden; /* Empêche le scroll interne désordonné */
+
 }
+
+
 
 /* Navigation latérale (les petits points) */
+
 .nav-dots {
+
     position: fixed;
+
     right: 30px;
+
     top: 50%;
+
     transform: translateY(-50%);
+
     display: flex;
+
     flex-direction: column;
+
     gap: 15px;
+
     z-index: 1000;
+
 }
+
+
 
 .dot {
+
     width: 12px;
+
     height: 12px;
+
     border: 2px solid var(--accent);
+
     border-radius: 50%;
+
     background: transparent;
+
     cursor: pointer;
+
     transition: 0.3s;
+
 }
+
+
 
 .dot.active {
+
     background: var(--accent);
+
     transform: scale(1.3);
+
 }
+
     
+
 </style>
-</head>
-<body>
-
-<nav>
-    <!-- La ligne a été supprimée ici -->
-</nav>
-    
-<!-- Navigation par points -->
-<div class="nav-dots">
-    <div class="dot active" onclick="scrollToSection(0)"></div>
-    <div class="dot" onclick="scrollToSection(1)"></div>
-    <div class="dot" onclick="scrollToSection(2)"></div>
-    <div class="dot" onclick="scrollToSection(3)"></div>
-    <div class="dot" onclick="scrollToSection(4)"></div>
-    <div class="dot" onclick="scrollToSection(5)"></div>
-</div>
-    
-<!-- SLIDE 1 : HERO OPTIMISÉ -->
-<section style="background-color: var(--bg-1); overflow: hidden;">
-    <div class="container hero-layout" style="align-items: flex-start;">
-        
-        <!-- Côté GAUCHE : Hiérarchie de l'information -->
-        <div data-aos="fade-right" style="max-width: 550px;">
-            <h1 class="massive-title" style="font-size: clamp(2.5rem, 6vw, 4.2rem);">
-                Arrête de <br><span class="strike-accent">bricoler</span> <br>ton coaching.
-            </h1>
-            
-            <!-- Bloc d'empathie -->
-            <div style="margin: 40px 0; border-left: 5px solid var(--accent); padding-left: 20px;">
-                <p style="font-size: 1.25rem; line-height: 1.5; font-weight: 400;">
-                    Tu es coach, tu as déjà des clientes, mais tes revenus font le yo‑yo parce que ton message, ton offre et ton acquisition ne parlent pas le même langage.
-                </p>
-                <p style="font-size: 1.25rem; line-height: 1.5; margin-top: 20px; font-weight: 700; color: var(--accent);">
-                    Ici, on enlève le superflu et on garde ce qui marche.
-                </p>
-            </div>
-
-            <p style="font-size: 1.15rem; opacity: 0.9; margin-bottom: 30px;">
-                On construit un système simple pour que tu saches quoi dire, quoi montrer en ligne et comment générer des appels qualifiés chaque mois, sans te perdre dans des stratégies compliquées.
-            </p>
-
-            <!-- Liste de bénéfices (Texte Blanc, Puces Cyan) -->
-            <div style="margin-bottom: 40px;">
-                <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; opacity: 0.6; margin-bottom: 15px;">À la fin, tu es capable de :</p>
-                <ul style="list-style: none; display: grid; gap: 10px; font-weight: 500;">
-                    <li><span style="color: var(--accent); margin-right: 8px;">⚡</span> arrêter de bricoler ta communication au feeling,</li>
-                    <li><span style="color: var(--accent); margin-right: 8px;">⚡</span> avoir un système clair pour des appels réguliers,</li>
-                    <li><span style="color: var(--accent); margin-right: 8px;">⚡</span> rester toi‑même, sans jouer un personnage.</li>
-                </ul>
-            </div>
-
-            <!-- CTA Uniforme -->
-            <a href="https://cal.com/miora-rasolofo" class="btn-cta">
-                STABILISER MES REVENUS
-            </a>
-            
-            <p style="font-size: 0.9rem; margin-top: 25px; opacity: 0.7; max-width: 380px;">
-                30 minutes en visio pour faire le point sur ta situation, sans pression.
-            </p>
-        </div>
-
-        <!-- Côté DROITE : Image traitée "Architecte" -->
-<div data-aos="zoom-in" style="flex-shrink: 0; position: relative;">
-    <!-- Le cadre décoratif Rebel -->
-    <div style="position: absolute; top: -15px; right: -15px; width: 100%; height: 100%; border: 2px solid var(--accent); z-index: 0;"></div>
-    
-    <!-- L'image avec traitement -->
-    <img src="Cheval.png" alt="Miora Architecture" 
-         style="max-width: 400px; 
-                display: block;
-                position: relative;
-                z-index: 1;
-                filter: grayscale(1) contrast(1.3) brightness(0.8);
-                border: var(--border-white);
-                background-color: var(--bg-1);">
-
-    <!-- Badge d'autorité minimaliste -->
-    <div style="position: absolute; bottom: 20px; left: -20px; background: var(--accent); color: #000; padding: 10px 20px; font-weight: 800; font-family: 'Syne'; z-index: 2; transform: rotate(-2deg); font-size: 0.8rem; text-transform: uppercase;">
-        Système & Architecture
-    </div>
-    
-</div>
-        
-</section>
-    
-<!-- SLIDE 2 : DIAGNOSTIC AVEC ICONES -->
-<section style="background-color: var(--bg-2);">
-<div class="container">
-<h2 class="section-title" data-aos="fade-down">
-Est-ce que c'est toi ?
-</h2>
-
-<div class="diag-grid">
-<div class="card" data-aos="fade-up" data-aos-delay="100">
-<div style="margin-bottom: 20px;">
-<img src="yoyo.gif" alt="Revenu en yo-yo" style="width: 72px; height: 72px; object-fit: contain;">
-</div>
-<h3 style="color: var(--accent);">Le Yo-Yo</h3>
-<p>
-Tes revenus sont imprévisibles, tu as déjà des clientes mais pas de base stable, alors tu vis dans l’incertitude, pas dans un business qui te tient debout.
-</p>
-</div>
-
-<div class="card" data-aos="fade-up" data-aos-delay="250">
-<div style="margin-bottom: 20px;">
-<img src="Bricolage.gif" alt="Bricolage de communication" style="width: 72px; height: 72px; object-fit: contain;">
-</div>
-<h3 style="color: var(--accent);">Le Bricolage</h3>
-<p>
-Tu es partout, tu testes des idées, tu ne sais pas ce qui génère réellement tes ventes et tu sautes d’une idée à l’autre comme si tu jouais au marketing plutôt qu’à ton business.
-</p>
-</div>
-
-<div class="card" data-aos="fade-up" data-aos-delay="400">
-<div style="margin-bottom: 20px;">
-<img src="fatigue.gif" alt="Fatigue" style="width: 72px; height: 72px; object-fit: contain;">
-</div>
-<h3 style="color: var(--accent);">La Fatigue</h3>
-<p>
-Tu en as assez de te vider à “trouver des clients” pendant que ton business ne tient pas debout, tu veux un système robuste qui respecte ton énergie, pas un second job à plein temps.
-</p>
-</div>
-</div>
-
-<p
-data-aos="fade-up"
-data-aos-delay="600"
-style="
-margin-top: 60px; 
-text-align: center;
-font-family: 'Space Grotesk', sans-serif;
-font-size: 1.25rem; 
-font-weight: 300;
-max-width: 700px;
-margin-left: auto;
-margin-right: auto;
-line-height: 1.6;
-color: var(--text);
-">
-Tu n'as pas besoin d'une énième stratégie miracle,<br>
-<span class="reveal-underline">tu as besoin d’un système qui tient la route.</span>
-</p>
-</div>
-</section>
-
-<!-- SECTION PIVOT : NEUROMARKETING MINIMALISTE -->
-<section style="background-color: var(--bg-1); padding: 140px 0;">
-    <div class="container">
-        <div data-aos="fade-up">
-            
-            <!-- ÉTAPE 1 : LA CHARGE MENTALE (Hier) -->
-            <div class="pivot-row" style="margin-bottom: 100px; align-items: flex-start;">
-                <span class="label-style" style="opacity: 0.3;">LE CONSTAT</span>
-                <p style="font-size: 1.25rem; font-weight: 300; opacity: 0.4; max-width: 500px; line-height: 1.6;">
-                    Le marketing qui s’essouffle, le bricolage permanent et les revenus qui font le yo‑yo.
-Tu as déjà des clientes, mais tout ton business dépend encore de ton dernier post, de ta dernière idée, ou de ton dernier essai.
-                </p>
-            </div>
-
-            <!-- ÉTAPE 2 : LA CLARTÉ (Maintenant) -->
-            <div class="pivot-row" style="align-items: flex-start;">
-                <span class="label-style" style="color: var(--accent);">LA SOLUTION</span>
-                <div style="max-width: 650px;">
-                    <h3 style="font-size: 2.5rem; font-weight: 400; line-height: 1.2; margin-bottom: 30px; letter-spacing: -0.03em;">
-                        Bâtir un système <span style="font-weight: 700; color: var(--accent);">architectural</span> qui travaille pour toi, pas contre toi.
-                    </h3>
-                    <p style="font-size: 1.1rem; opacity: 0.8; line-height: 1.7;">
-                        On remplace l’agitation par la structure, pour que ton business ne dépende plus de ton dernier post, mais de tes fondations.
-
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-    
-<!-- SLIDE 3 : PROGRAMME (4 SESSIONS) -->
-<section style="background-color: var(--bg-3); padding: 100px 0;">
-    <div class="container">
-        <h2 class="section-title">L'Accélérateur en 4 sessions</h2>
-
-        <p data-aos="fade-up" style="text-align: center; font-size: 1.25rem; font-weight: 500; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.8;">
-            4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d’appel régulières sans cirque marketing.
-        </p>
-
-        <!-- Changement ici : slider-wrapper au lieu de diag-grid -->
-        <div id="prog-slider" class="slider-wrapper">
-            
-            <!-- Carte 01 -->
-            <div class="slider-item">
-                <div class="card" data-aos="fade-up" data-aos-delay="100" style="height: 100%;">
-                    <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">01. Clarté</h3>
-                    <p style="margin-top: 15px; font-weight: 300;">On définit exactement à qui tu t’adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu’une autre.</p>
-                </div>
-            </div>
-
-            <!-- Carte 02 -->
-            <div class="slider-item">
-                <div class="card" data-aos="fade-up" data-aos-delay="200" style="height: 100%;">
-                    <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">02. Message</h3>
-                    <p style="margin-top: 15px; font-weight: 300;">On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l’appel et ce que tu mets en avant sans te perdre.</p>
-                </div>
-            </div>
-
-            <!-- Carte 03 -->
-            <div class="slider-item">
-                <div class="card" data-aos="fade-up" data-aos-delay="300" style="height: 100%;">
-                    <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">03. Système</h3>
-                    <p style="margin-top: 15px; font-weight: 300;">On construit ton mini‑système d’acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</p>
-                </div>
-            </div>
-
-            <!-- Carte 04 -->
-            <div class="slider-item">
-                <div class="card" data-aos="fade-up" data-aos-delay="400" style="height: 100%;">
-                    <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">04. Action</h3>
-                    <p style="margin-top: 15px; font-weight: 300;">On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d’appel presque automatiquement.</p>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Phrase de mise en garde -->
-        <p style="font-size: 0.9rem; margin: 40px auto 0 auto; max-width: 600px; opacity: 0.6; text-align:center; font-weight: 400; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-style: italic;">
-            Ce n’est pas pour toi si tu cherches une solution miracle ou si tu n’es pas prête à faire ta part du travail pendant 30 jours.
-        </p>
-    </div>
-</section>
-    
-<!-- SLIDE 4 : L'OFFRE -->
-<section style="background-color: var(--bg-1);">
-<div class="container">
-<div class="offer-box" data-aos="zoom-in">
-<div>
-<h2 style="font-size: clamp(2rem, 4vw, 3.5rem);">
-L'Accélérateur Simple
-</h2>
-
-<p style="font-size: 1.1rem; margin-top: 15px; opacity: 0.8; max-width: 500px;">
-4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d’appel régulières sans cirque marketing.
-</p>
-
-<p style="font-size: 0.9rem; margin-top: 20px; color: var(--accent);">
-Tarif : 800€ · Possibilité de 2×400€
-</p>
-</div>
-
-<div style="
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-text-align: center;
-min-width: 220px;
-">
-<div style="
-font-family: 'Space Grotesk', sans-serif;
-font-size: clamp(3rem, 6vw, 4rem);
-font-weight: 700;
-letter-spacing: 0.06em;
-color: var(--accent);
-margin-bottom: 10px;
-">
-800&nbsp;€
-</div>
-<div style="
-font-size: 0.9rem;
-opacity: 0.7;
-margin-bottom: 18px;
-">
-1 mois · 4 sessions de 30 minutes
-</div>
-<a href="https://cal.com/miora-rasolofo" class="btn-cta">
-    Réserver un appel
-</a>
-</div>
-</div>
-</div>
-</section>
-
-<!-- SLIDE 5 : À PROPOS (VERSION FINALE OPTIMISÉE) -->
-<section id="a-propos" style="background-color: var(--bg-1); padding: 140px 0;">
-    <div class="container hero-layout" style="display: flex; align-items: center; gap: 100px;">
-        
-        <!-- TEXTE À GAUCHE -->
-        <div data-aos="fade-right" style="flex: 1.2;">
-            <h2 style="font-size: 4.5rem; font-weight: 900; line-height: 1; margin: 0; letter-spacing: -2px;">Miora.</h2>
-            
-            <div style="width: 80px; height: 6px; background: var(--accent); margin: 30px 0;"></div>
-            
-            <p style="font-size: 1.4rem; line-height: 1.5; font-weight: 300; margin-bottom: 25px;">
-                J'accompagne les coachs à stabiliser leurs revenus via des 
-                <span style="color: var(--accent); font-weight: 700;">systèmes simples, indépendants et durables.</span>
-            </p>
-            
-            <p style="font-size: 1.1rem; opacity: 0.7; line-height: 1.8; font-weight: 400; max-width: 500px; margin-bottom: 35px;">
-                Après avoir construit des architectures complexes pour de gros business, j’ai choisi de revenir à l’essentiel : 
-                <strong>l’efficacité sans le cirque marketing.</strong>
-            </p>
-
-            <!-- NOUVELLE SECTION : Je t'aide à (Impact Neuromarketing) -->
-            <div style="margin-bottom: 50px; background: rgba(255,255,255,0.02); padding: 30px; border-left: 2px solid var(--accent);">
-                <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; font-weight: 700; color: var(--accent); margin-bottom: 20px;">
-                    Je t’aide à :
-                </p>
-                <ul style="list-style: none; display: grid; gap: 15px; font-size: 1.1rem; line-height: 1.4;">
-                    <li style="display: flex; align-items: flex-start;">
-                        <span style="color: var(--accent); margin-right: 12px; font-weight: bold;">[01]</span>
-                        <span>Transformer ton activité en un <strong>système simple</strong>.</span>
-                    </li>
-                    <li style="display: flex; align-items: flex-start;">
-                        <span style="color: var(--accent); margin-right: 12px; font-weight: bold;">[02]</span>
-                        <span>Parler de ton coaching d’une façon <strong>claire et assumée</strong>.</span>
-                    </li>
-                    <li style="display: flex; align-items: flex-start;">
-                        <span style="color: var(--accent); margin-right: 12px; font-weight: bold;">[03]</span>
-                        <span>Construire un business qui <strong>tient la route</strong>, pas une énième stratégie miracle.</span>
-                    </li>
-                </ul>
-            </div>
-            
-            <a href="https://cal.com/miora-rasolofo" class="btn-cta">
-                Prendre le contrôle du moteur
-            </a>
-        </div>
-
-        <!-- LOGO À DROITE -->
-        <div data-aos="fade-left" style="flex: 1; display: flex; justify-content: center; position: relative;">
-            <!-- Décoration architecturale -->
-            <div style="position: absolute; width: 150px; height: 150px; border-left: 2px solid rgba(0,242,255,0.2); border-top: 2px solid rgba(0,242,255,0.2); top: -20px; left: 0;"></div>
-            
-            <img src="Logo.png" alt="Miora Logo" style="width: 100%; max-width: 350px; height: auto; filter: drop-shadow(0px 0px 20px rgba(0,242,255,0.15)); z-index: 2;">
-            
-            <div style="position: absolute; width: 150px; height: 150px; border-right: 2px solid rgba(0,242,255,0.2); border-bottom: 2px solid rgba(0,242,255,0.2); bottom: -20px; right: 0;"></div>
-        </div>
-
-    </div>
-</section>
-    
-    <!-- SLIDE 6 : COMMENT ÇA SE PASSE ? (PROCESSUS ARCHITECTE) -->
-<section style="background-color: var(--bg-1); padding: 120px 0;">
-    <div class="container">
-        
-        <h2 style="font-family: 'Syne'; font-size: clamp(2rem, 5vw, 3.5rem); text-align: center; text-transform: uppercase; margin-bottom: 80px;" data-aos="fade-down">
-            Le protocole <span class="strike-accent">Simple.</span>
-        </h2>
-
-        <!-- Grille de Diagnostic / Workflow -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; position: relative;">
-            
-            <!-- Étape 1 -->
-            <div class="card" data-aos="fade-up" data-aos-delay="100" style="border-top: 4px solid rgba(255,255,255,0.1); padding: 40px; background: rgba(255,255,255,0.02);">
-                <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">01. INPUT</div>
-                <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu m’écris</h3>
-                <p style="opacity: 0.8; line-height: 1.6;">
-                    Tu m’envoies quelques lignes sur ton activité, ton revenu actuel et ce que tu veux changer.
-                </p>
-            </div>
-
-            <!-- Étape 2 : LA CENTRALE (Mise en avant) -->
-            <div class="card" data-aos="fade-up" data-aos-delay="250" style="border-top: 4px solid var(--accent); padding: 40px; background: rgba(0,242,255,0.03);">
-                <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">02. ANALYSE</div>
-                <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">On se parle</h3>
-                <p style="opacity: 0.9; line-height: 1.6;">
-                    30 minutes en visio pour faire le point, sans pression. Je te dis clairement si <strong>l’Accélérateur Simple</strong> est adapté pour toi.
-                </p>
-            </div>
-
-            <!-- Étape 3 -->
-            <div class="card" data-aos="fade-up" data-aos-delay="400" style="border-top: 4px solid rgba(255,255,255,0.1); padding: 40px; background: rgba(255,255,255,0.02);">
-                <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">03. OUTPUT</div>
-                <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu décides</h3>
-                <p style="opacity: 0.8; line-height: 1.6;">
-                    Si c’est oui, on cale les 4 sessions. Si c’est non, tu repars avec plus de clarté que quand tu es arrivée.
-                </p>
-            </div>
-
-        </div>
-
-        <!-- Appel à l'action final -->
-        <div style="text-align: center; margin-top: 80px;" data-aos="zoom-in">
-            <a href="https://cal.com/miora-rasolofo" class="btn-cta" style="padding: 20px 50px; font-size: 1.2rem;">
-                Je veux mon plan simple
-            </a>
-            <p style="margin-top: 25px; font-size: 0.85rem; opacity: 0.5; letter-spacing: 1px; text-transform: uppercase;">
-                Aucun engagement. Juste de la clarté.
-            </p>
-        </div>
-
-    </div>
-</section>
-
-<footer>
-© 2026 Miora – L’Accélérateur Simple | Architecte de Systèmes
-</footer>
-
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({ duration: 1200, once: false });
-
-    const slider = document.getElementById('prog-slider');
-    let currentIndex = 0;
-
-    if (slider) {
-        const items = slider.querySelectorAll('.slider-item');
-        const totalItems = items.length;
-
-        function scrollNext() {
-            currentIndex++;
-            
-            // Si on dépasse la dernière carte, on revient à la première
-            if (currentIndex >= totalItems) {
-                currentIndex = 0;
-            }
-
-            const targetScroll = slider.offsetWidth * currentIndex;
-            
-            slider.scrollTo({
-                left: targetScroll,
-                behavior: 'smooth'
-            });
-        }
-
-        // Relancer l'automate
-        let autoCycle = setInterval(scrollNext, 3000);
-
-        // Pause au survol
-        slider.addEventListener('mouseenter', () => clearInterval(autoCycle));
-        slider.addEventListener('mouseleave', () => {
-            clearInterval(autoCycle);
-            autoCycle = setInterval(scrollNext, 3000);
-        });
-    }
-</script>
-
-    <script>
-function scrollToSection(index) {
-    const sections = document.querySelectorAll('section');
-    sections[index].scrollIntoView({ behavior: 'smooth' });
-}
-
-// Mise à jour des points au scroll
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section');
-    const dots = document.querySelectorAll('.dot');
-    let current = 0;
-
-    sections.forEach((section, index) => {
-        const sectionTop = section.offsetTop;
-        if (pageYOffset >= sectionTop - 60) {
-            current = index;
-        }
-    });
-
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[current].classList.add('active');
-});
-</script>
-    
-    
-</body>
-</html>
