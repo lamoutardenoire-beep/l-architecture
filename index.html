@@ -9,10 +9,9 @@
     <meta property="og:title" content="Miora | Architecte de Systèmes pour Coachs">
 
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 
     <style>
-        /* 1. Importation et Reset */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
 
         :root {
@@ -25,12 +24,10 @@
             --shadow-white: 8px 8px 0px #ffffff;
         }
 
-/* 1. Reset et Typographie de base */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Suppression du font-family !important ici pour laisser respirer tes titres */
         }
 
         html {
@@ -40,7 +37,6 @@
 
         body {
             color: var(--text);
-            /* On définit Space Grotesk par défaut pour tout le site */
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 300;
             overflow-x: hidden;
@@ -48,13 +44,12 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* On force la Syne uniquement pour les titres */
         h1, h2, h3, .label-style, .massive-title {
             font-family: 'Syne', sans-serif !important;
         }
 
         section {
-            min-height: 100vh; /* Minimum toute la hauteur de l'écran */
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -62,16 +57,14 @@
             scroll-snap-align: start;
             scroll-snap-stop: always;
             position: relative;
-            /* height: 100vh; <-- SUPPRIMÉ pour éviter de couper le contenu sur petit écran */
-            /* overflow: hidden; <-- SUPPRIMÉ pour permettre le défilement si le texte est long */
         }
+
         .container {
             max-width: 1200px;
             width: 100%;
             margin: 0 auto;
         }
 
-        /* TYPOGRAPHIE */
         h1, h2, h3, .label-style {
             font-family: 'Syne', sans-serif;
             text-transform: uppercase;
@@ -80,7 +73,7 @@
         }
 
         h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); }
-        
+
         .section-title {
             font-size: clamp(2rem, 5vw, 4rem);
             text-align: center;
@@ -93,37 +86,25 @@
             line-height: 1.6;
         }
 
-        /* LAYOUTS HERO - Version optimisée pour l'espace */
         .hero-layout {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px; /* Réduit l'espace entre le texte et l'image */
+            gap: 20px;
         }
 
         .hero-layout > div:first-child {
             flex: 1;
-            max-width: 500px; /* Réduit légèrement pour laisser de l'air */
+            max-width: 500px;
             min-width: 320px;
         }
 
-        /* Ajustements internes pour gagner de la hauteur */
-        .hero-layout h1 { 
-            margin-bottom: 15px !important; 
-        }
-        
-        .hero-layout p { 
-            margin-bottom: 10px !important; 
-            font-size: 1.1rem !important; 
-        }
-
-        .hero-layout ul { 
-            margin-top: 10px !important; 
-            margin-bottom: 20px !important; 
-        }
+        .hero-layout h1 { margin-bottom: 15px !important; }
+        .hero-layout p { margin-bottom: 10px !important; font-size: 1.1rem !important; }
+        .hero-layout ul { margin-top: 10px !important; margin-bottom: 20px !important; }
 
         .hero-layout > div:last-child {
-            flex: 0 0 320px; /* L'image prend un peu moins de place */
+            flex: 0 0 320px;
         }
 
         .hero-img-thin-cyan {
@@ -131,14 +112,13 @@
             box-shadow: 8px 8px 0px rgba(255, 255, 255, 0.8) !important;
             filter: grayscale(1);
             width: 100% !important;
-            max-width: 380px; /* Image un peu plus petite pour remonter le bouton */
+            max-width: 380px;
             margin-right: 0 !important;
             margin-left: auto;
             display: block;
             transition: 0.3s ease;
         }
-        
-        /* COMPOSANTS CARTES */
+
         .card {
             background: rgba(255, 255, 255, 0.02);
             border: var(--border-white);
@@ -174,7 +154,6 @@
             width: 100% !important;
         }
 
-        /* GRID & OFFRES */
         .label-style { font-size: 0.9rem; font-weight: 800; letter-spacing: 4px; }
 
         .pivot-row {
@@ -218,6 +197,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             font-family: 'Inter', sans-serif !important;
+            font-size: 1rem;
         }
 
         .btn-cta:hover {
@@ -228,25 +208,173 @@
         }
 
         /* SLIDER */
-        .slider-wrapper {
-            display: flex;
-            gap: 30px;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-            padding: 40px 0;
-            width: 100%;
+        /* SLIDER PROGRAMME */
+        .slider-outer {
+            position: relative;
+            margin-top: 60px;
+            overflow: hidden;
         }
 
-        .slider-item {
-            flex: 0 0 100%;
+        /* Fondu sur les bords */
+        .slider-outer::before,
+        .slider-outer::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 120px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .slider-outer::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-3), transparent);
+        }
+        .slider-outer::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-3), transparent);
+        }
+
+        .slider-track {
+            display: flex;
+            gap: 24px;
+            padding: 20px 80px 30px;
+            transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+            will-change: transform;
+        }
+
+        .slide-card {
+            flex: 0 0 340px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 44px 36px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.5s, background 0.5s, transform 0.7s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.7s;
+            opacity: 0.35;
+            transform: scale(0.94);
+        }
+
+        .slide-card.active {
+            border-color: rgba(0,242,255,0.3);
+            background: rgba(0,242,255,0.04);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Ligne de progression en haut */
+        .slide-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--accent);
+            box-shadow: 0 0 10px rgba(0,242,255,0.6);
+            transition: width 0s;
+        }
+
+        .slide-card.active::before {
+            width: 100%;
+            transition: width 4s linear;
+        }
+
+        /* Halo */
+        .slide-card::after {
+            content: '';
+            position: absolute;
+            top: -100px; left: -100px;
+            width: 250px; height: 250px;
+            background: radial-gradient(circle, rgba(0,242,255,0.07) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s;
+            pointer-events: none;
+        }
+        .slide-card.active::after { opacity: 1; }
+
+        .slide-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: var(--accent);
+            margin-bottom: 28px;
+            display: block;
+        }
+
+        .slide-title {
+            font-family: 'Syne', sans-serif !important;
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            color: #ffffff;
+            margin-bottom: 24px;
+        }
+
+        .slide-body {
+            font-size: 0.9rem;
+            line-height: 1.75;
+            color: rgba(255,255,255,0.55);
+            font-weight: 300;
+        }
+
+        /* Indicateurs */
+        .slide-indicators {
             display: flex;
             justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 44px;
         }
 
-        .slider-item .card {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
+        .slide-dot {
+            width: 24px;
+            height: 2px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.15);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .slide-dot.active {
+            width: 48px;
+            background: var(--accent);
+            box-shadow: 0 0 8px rgba(0,242,255,0.5);
+        }
+
+        /* Boutons nav */
+        .slide-nav {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .slide-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: transparent;
+            color: rgba(255,255,255,0.5);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .slide-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 12px rgba(0,242,255,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .slide-card { flex: 0 0 80vw; }
+            .slider-outer::before,
+            .slider-outer::after { width: 40px; }
+            .slider-track { padding: 20px 10vw 30px; }
         }
 
         /* NAVIGATION DOTS */
@@ -276,10 +404,229 @@
             transform: scale(1.3);
         }
 
-        /* LISTES & FOOTER */
         ul { list-style: none; margin-top: 25px; padding-left: 0; }
         ul li::before { content: "→ "; color: var(--accent); margin-right: 6px; }
         footer { text-align: center; padding: 30px; opacity: 0.6; background: #02020b; }
+
+        /* POP-UP */
+        #rdv-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 3, 18, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+
+        #rdv-modal {
+            background: #080826;
+            border: 1px solid rgba(0, 242, 255, 0.25);
+            box-shadow: 0 0 0 1px rgba(0,242,255,0.08), 0 40px 80px rgba(0,0,0,0.7);
+            max-width: 1020px;
+            width: 100%;
+            height: min(96vh, 860px);
+            position: relative;
+            font-family: 'Space Grotesk', sans-serif;
+            animation: modalIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        @keyframes modalIn {
+            from { transform: scale(0.94) translateY(20px); opacity: 0; }
+            to   { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        /* Panneau gauche */
+        #rdv-sidebar {
+            background: linear-gradient(160deg, #0a0a2e 0%, #05051a 100%);
+            border-right: 1px solid rgba(0,242,255,0.15);
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #rdv-sidebar::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: -60px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0,242,255,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        #rdv-sidebar::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            right: -40px;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(0,242,255,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .rdv-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid rgba(0,242,255,0.35);
+            padding: 5px 14px;
+            border-radius: 999px;
+            margin-bottom: 32px;
+        }
+
+        .rdv-sidebar-title {
+            font-family: 'Syne', sans-serif !important;
+            font-size: 2.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1.0;
+            letter-spacing: -0.03em;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .rdv-sidebar-desc {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .rdv-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin-bottom: 28px;
+            opacity: 0.6;
+        }
+
+        .rdv-pills {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .rdv-pill {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.3;
+        }
+
+        .rdv-pill-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+            box-shadow: 0 0 6px rgba(0,242,255,0.5);
+        }
+
+        .rdv-sidebar-footer {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.2);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 22px;
+        }
+
+        /* Panneau droit — calendrier */
+        #rdv-cal-panel {
+            position: relative;
+            overflow: hidden;
+            background: #06061f;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #cal-embed {
+            width: 100%;
+            flex: 1;
+            min-height: 0;
+        }
+
+        /* Force Cal.com iframe to fill panel */
+        #cal-embed iframe {
+            width: 100% !important;
+            height: 100% !important;
+            min-height: 700px;
+        }
+
+        /* Bouton fermeture */
+        #rdv-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 10;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.6);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+
+        #rdv-close:hover {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+            border-color: rgba(255,255,255,0.25);
+        }
+
+        /* Responsive mobile */
+        @media (max-width: 700px) {
+            #rdv-modal {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr;
+                height: 95vh;
+                border-radius: 12px 12px 0 0;
+                align-self: flex-end;
+                margin: 0 -20px -20px -20px;
+                width: calc(100% + 40px);
+                max-width: none;
+                animation: modalInMobile 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+
+            @keyframes modalInMobile {
+                from { transform: translateY(40px); opacity: 0; }
+                to   { transform: translateY(0); opacity: 1; }
+            }
+
+            #rdv-sidebar {
+                padding: 28px 24px 20px;
+                border-right: none;
+                border-bottom: 1px solid rgba(0,242,255,0.15);
+            }
+
+            .rdv-sidebar-title { font-size: 1.3rem; }
+            .rdv-sidebar-desc { display: none; }
+            .rdv-pills { flex-direction: row; flex-wrap: wrap; }
+        }
 
         /* RESPONSIVE */
         @media (max-width: 960px) {
@@ -320,15 +667,45 @@
         <div class="dot" onclick="scrollToSection(5)"></div>
     </div>
 
+    <!-- POP-UP RDV -->
+    <div id="rdv-overlay">
+        <div id="rdv-modal">
+
+            <!-- Panneau gauche : contexte -->
+            <div id="rdv-sidebar">
+                <div>
+                    <span class="rdv-tag">Appel découverte</span>
+                    <h2 class="rdv-sidebar-title">30 min<br>pour faire<br>le point</h2>
+                    <p class="rdv-sidebar-desc">Sans pression. On regarde ensemble si l'Accélérateur Simple est fait pour toi.</p>
+                    <div class="rdv-divider"></div>
+                    <div class="rdv-pills">
+                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Visio · 30 minutes</div>
+                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Aucun engagement</div>
+                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Réponse directe à ta situation</div>
+                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Si ce n'est pas fait pour toi, je te le dis</div>
+                    </div>
+                </div>
+                <p class="rdv-sidebar-footer">Miora · Architecte de Systèmes</p>
+            </div>
+
+            <!-- Panneau droit : calendrier Cal.com -->
+            <div id="rdv-cal-panel">
+                <button id="rdv-close" onclick="closeRdv()">✕</button>
+                <div id="cal-embed"></div>
+            </div>
+
+        </div>
+    </div>
+
     <!-- SLIDE 1 : HERO -->
     <section style="background-color: var(--bg-1); overflow: hidden;">
         <div class="container hero-layout" style="align-items: flex-start;">
-            
+
             <div data-aos="fade-right" style="max-width: 550px;">
                 <h1 class="massive-title" style="font-size: clamp(2.5rem, 6vw, 4.2rem);">
                     Arrête de <br><span class="strike-accent">bricoler</span> <br>ton coaching.
                 </h1>
-                
+
                 <div style="margin: 40px 0; border-left: 5px solid var(--accent); padding-left: 20px;">
                     <p style="font-size: 1.25rem; line-height: 1.5; font-weight: 400;">
                         Tu es coach, tu as déjà des clientes, mais tes revenus font le yo‑yo parce que ton message, ton offre et ton acquisition ne parlent pas le même langage.
@@ -351,8 +728,8 @@
                     </ul>
                 </div>
 
-                <a href="https://cal.com/miora-rasolofo" class="btn-cta">STABILISER MES REVENUS</a>
-                
+                <button onclick="openRdv()" class="btn-cta">STABILISER MES REVENUS</button>
+
                 <p style="font-size: 0.9rem; margin-top: 25px; opacity: 0.7; max-width: 380px;">
                     30 minutes en visio pour faire le point sur ta situation, sans pression.
                 </p>
@@ -360,7 +737,7 @@
 
             <div data-aos="zoom-in" style="flex-shrink: 0; position: relative;">
                 <div style="position: absolute; top: -15px; right: -15px; width: 100%; height: 100%; border: 2px solid var(--accent); z-index: 0;"></div>
-                <img src="Cheval.png" alt="Miora Architecture" 
+                <img src="Cheval.png" alt="Miora Architecture"
                      style="max-width: 400px; display: block; position: relative; z-index: 1; filter: grayscale(1) contrast(1.3) brightness(0.8); border: var(--border-white); background-color: var(--bg-1);">
                 <div style="position: absolute; bottom: 20px; left: -20px; background: var(--accent); color: #000; padding: 10px 20px; font-weight: 800; font-family: 'Syne'; z-index: 2; transform: rotate(-2deg); font-size: 0.8rem; text-transform: uppercase;">
                     Système & Architecture
@@ -380,7 +757,7 @@
                         <img src="yoyo.gif" alt="Revenu en yo-yo" style="width: 72px; height: 72px; object-fit: contain;">
                     </div>
                     <h3 style="color: var(--accent);">Le Yo-Yo</h3>
-                    <p>Tes revenus sont imprévisibles, tu as déjà des clientes mais pas de base stable, alors tu vis dans l’incertitude, pas dans un business qui te tient debout.</p>
+                    <p>Tes revenus sont imprévisibles, tu as déjà des clientes mais pas de base stable, alors tu vis dans l'incertitude, pas dans un business qui te tient debout.</p>
                 </div>
 
                 <div class="card" data-aos="fade-up" data-aos-delay="250">
@@ -388,7 +765,7 @@
                         <img src="Bricolage.gif" alt="Bricolage de communication" style="width: 72px; height: 72px; object-fit: contain;">
                     </div>
                     <h3 style="color: var(--accent);">Le Bricolage</h3>
-                    <p>Tu es partout, tu testes des idées, tu ne sais pas ce qui génère réellement tes ventes et tu sautes d’une idée à l’autre comme si tu jouais au marketing plutôt qu’à ton business.</p>
+                    <p>Tu es partout, tu testes des idées, tu ne sais pas ce qui génère réellement tes ventes et tu sautes d'une idée à l'autre comme si tu jouais au marketing plutôt qu'à ton business.</p>
                 </div>
 
                 <div class="card" data-aos="fade-up" data-aos-delay="400">
@@ -396,13 +773,13 @@
                         <img src="fatigue.gif" alt="Fatigue" style="width: 72px; height: 72px; object-fit: contain;">
                     </div>
                     <h3 style="color: var(--accent);">La Fatigue</h3>
-                    <p>Tu en as assez de te vider à “trouver des clients” pendant que ton business ne tient pas debout, tu veux un système robuste qui respecte ton énergie, pas un second job à plein temps.</p>
+                    <p>Tu en as assez de te vider à "trouver des clients" pendant que ton business ne tient pas debout, tu veux un système robuste qui respecte ton énergie, pas un second job à plein temps.</p>
                 </div>
             </div>
 
             <p data-aos="fade-up" data-aos-delay="600" style="margin-top: 60px; text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 300; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6; color: var(--text);">
                 Tu n'as pas besoin d'une énième stratégie miracle,<br>
-                <span class="reveal-underline">tu as besoin d’un système qui tient la route.</span>
+                <span class="reveal-underline">tu as besoin d'un système qui tient la route.</span>
             </p>
         </div>
     </section>
@@ -414,7 +791,7 @@
                 <div class="pivot-row" style="margin-bottom: 100px; align-items: flex-start;">
                     <span class="label-style" style="opacity: 0.3;">LE CONSTAT</span>
                     <p style="font-size: 1.25rem; font-weight: 300; opacity: 0.4; max-width: 500px; line-height: 1.6;">
-                        Le marketing qui s’essouffle, le bricolage permanent et les revenus qui font le yo‑yo.
+                        Le marketing qui s'essouffle, le bricolage permanent et les revenus qui font le yo‑yo.
                         Tu as déjà des clientes, mais tout ton business dépend encore de ton dernier post, de ta dernière idée, ou de ton dernier essai.
                     </p>
                 </div>
@@ -426,7 +803,7 @@
                             Bâtir un système <span style="font-weight: 700; color: var(--accent);">architectural</span> qui travaille pour toi, pas contre toi.
                         </h3>
                         <p style="font-size: 1.1rem; opacity: 0.8; line-height: 1.7;">
-                            On remplace l’agitation par la structure, pour que ton business ne dépende plus de ton dernier post, mais de tes fondations.
+                            On remplace l'agitation par la structure, pour que ton business ne dépende plus de ton dernier post, mais de tes fondations.
                         </p>
                     </div>
                 </div>
@@ -439,38 +816,47 @@
         <div class="container">
             <h2 class="section-title">L'Accélérateur en 4 sessions</h2>
             <p data-aos="fade-up" style="text-align: center; font-size: 1.25rem; font-weight: 500; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.8;">
-                4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d’appel régulières sans cirque marketing.
+                4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d'appel régulières sans cirque marketing.
             </p>
 
-            <div id="prog-slider" class="slider-wrapper">
-                <div class="slider-item">
-                    <div class="card" data-aos="fade-up" data-aos-delay="100" style="height: 100%;">
-                        <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">01. Clarté</h3>
-                        <p style="margin-top: 15px; font-weight: 300;">On définit exactement à qui tu t’adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu’une autre.</p>
+            <div class="slider-outer" data-aos="fade-up">
+                <div class="slider-track" id="slide-track">
+                    <div class="slide-card active">
+                        <span class="slide-num">01 — 04</span>
+                        <div class="slide-title">Clarté</div>
+                        <p class="slide-body">On définit exactement à qui tu t'adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu'une autre.</p>
                     </div>
-                </div>
-                <div class="slider-item">
-                    <div class="card" data-aos="fade-up" data-aos-delay="200" style="height: 100%;">
-                        <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">02. Message</h3>
-                        <p style="margin-top: 15px; font-weight: 300;">On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l’appel et ce que tu mets en avant sans te perdre.</p>
+                    <div class="slide-card">
+                        <span class="slide-num">02 — 04</span>
+                        <div class="slide-title">Message</div>
+                        <p class="slide-body">On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l'appel et ce que tu mets en avant sans te perdre.</p>
                     </div>
-                </div>
-                <div class="slider-item">
-                    <div class="card" data-aos="fade-up" data-aos-delay="300" style="height: 100%;">
-                        <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">03. Système</h3>
-                        <p style="margin-top: 15px; font-weight: 300;">On construit ton mini‑système d’acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</p>
+                    <div class="slide-card">
+                        <span class="slide-num">03 — 04</span>
+                        <div class="slide-title">Système</div>
+                        <p class="slide-body">On construit ton mini‑système d'acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</p>
                     </div>
-                </div>
-                <div class="slider-item">
-                    <div class="card" data-aos="fade-up" data-aos-delay="400" style="height: 100%;">
-                        <h3 style="color: var(--accent); letter-spacing: 0.08em; font-size: 1.3rem;">04. Action</h3>
-                        <p style="margin-top: 15px; font-weight: 300;">On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d’appel presque automatiquement.</p>
+                    <div class="slide-card">
+                        <span class="slide-num">04 — 04</span>
+                        <div class="slide-title">Action</div>
+                        <p class="slide-body">On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d'appel presque automatiquement.</p>
                     </div>
                 </div>
             </div>
 
+            <div class="slide-indicators" id="slide-dots">
+                <div class="slide-dot active" onclick="slideTo(0)"></div>
+                <div class="slide-dot" onclick="slideTo(1)"></div>
+                <div class="slide-dot" onclick="slideTo(2)"></div>
+                <div class="slide-dot" onclick="slideTo(3)"></div>
+            </div>
+            <div class="slide-nav">
+                <button class="slide-btn" onclick="slidePrev()">←</button>
+                <button class="slide-btn" onclick="slideNext()">→</button>
+            </div>
+
             <p style="font-size: 0.9rem; margin: 40px auto 0 auto; max-width: 600px; opacity: 0.6; text-align:center; font-weight: 400; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-style: italic;">
-                Ce n’est pas pour toi si tu cherches une solution miracle ou si tu n’es pas prête à faire ta part du travail pendant 30 jours.
+                Ce n'est pas pour toi si tu cherches une solution miracle ou si tu n'es pas prête à faire ta part du travail pendant 30 jours.
             </p>
         </div>
     </section>
@@ -482,7 +868,7 @@
                 <div>
                     <h2 style="font-size: clamp(2rem, 4vw, 3.5rem);">L'Accélérateur Simple</h2>
                     <p style="font-size: 1.1rem; margin-top: 15px; opacity: 0.8; max-width: 500px;">
-                        4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d’appel régulières sans cirque marketing.
+                        4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d'appel régulières sans cirque marketing.
                     </p>
                     <p style="font-size: 0.9rem; margin-top: 20px; color: var(--accent);">Tarif : 800€ · Possibilité de 2×400€</p>
                 </div>
@@ -491,7 +877,7 @@
                         800&nbsp;€
                     </div>
                     <div style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 18px;">1 mois · 4 sessions de 30 minutes</div>
-                    <a href="https://cal.com/miora-rasolofo" class="btn-cta">Réserver un appel</a>
+                    <button onclick="openRdv()" class="btn-cta">Réserver un appel</button>
                 </div>
             </div>
         </div>
@@ -507,11 +893,11 @@
                     J'accompagne les coachs à stabiliser leurs revenus via des <span style="color: var(--accent); font-weight: 700;">systèmes simples, indépendants et durables.</span>
                 </p>
                 <p style="font-size: 1.1rem; opacity: 0.7; line-height: 1.8; font-weight: 400; max-width: 500px; margin-bottom: 35px;">
-                    Après avoir construit des architectures complexes pour de gros business, j’ai choisi de revenir à l’essentiel : <strong>l’efficacité sans le cirque marketing.</strong>
+                    Après avoir construit des architectures complexes pour de gros business, j'ai choisi de revenir à l'essentiel : <strong>l'efficacité sans le cirque marketing.</strong>
                 </p>
 
                 <div style="margin-bottom: 50px; background: rgba(255,255,255,0.02); padding: 30px; border-left: 2px solid var(--accent);">
-                    <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; font-weight: 700; color: var(--accent); margin-bottom: 20px;">Je t’aide à :</p>
+                    <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; font-weight: 700; color: var(--accent); margin-bottom: 20px;">Je t'aide à :</p>
                     <ul style="list-style: none; display: grid; gap: 15px; font-size: 1.1rem; line-height: 1.4;">
                         <li style="display: flex; align-items: flex-start;">
                             <span style="color: var(--accent); margin-right: 12px; font-weight: bold;">[01]</span>
@@ -519,7 +905,7 @@
                         </li>
                         <li style="display: flex; align-items: flex-start;">
                             <span style="color: var(--accent); margin-right: 12px; font-weight: bold;">[02]</span>
-                            <span>Parler de ton coaching d’une façon <strong>claire et assumée</strong>.</span>
+                            <span>Parler de ton coaching d'une façon <strong>claire et assumée</strong>.</span>
                         </li>
                         <li style="display: flex; align-items: flex-start;">
                             <span style="color: var(--accent); margin-right: 12px; font-weight: bold;">[03]</span>
@@ -527,7 +913,7 @@
                         </li>
                     </ul>
                 </div>
-                <a href="https://cal.com/miora-rasolofo" class="btn-cta">Prendre le contrôle du moteur</a>
+                <button onclick="openRdv()" class="btn-cta">Prendre le contrôle du moteur</button>
             </div>
 
             <div data-aos="fade-left" style="flex: 1; display: flex; justify-content: center; position: relative;">
@@ -548,67 +934,141 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; position: relative;">
                 <div class="card" data-aos="fade-up" data-aos-delay="100" style="border-top: 4px solid rgba(255,255,255,0.1); padding: 40px; background: rgba(255,255,255,0.02);">
                     <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">01. INPUT</div>
-                    <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu m’écris</h3>
-                    <p style="opacity: 0.8; line-height: 1.6;">Tu m’envoies quelques lignes sur ton activité, ton revenu actuel et ce que tu veux changer.</p>
+                    <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu m'écris</h3>
+                    <p style="opacity: 0.8; line-height: 1.6;">Tu m'envoies quelques lignes sur ton activité, ton revenu actuel et ce que tu veux changer.</p>
                 </div>
 
                 <div class="card" data-aos="fade-up" data-aos-delay="250" style="border-top: 4px solid var(--accent); padding: 40px; background: rgba(0,242,255,0.03);">
                     <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">02. ANALYSE</div>
                     <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">On se parle</h3>
-                    <p style="opacity: 0.9; line-height: 1.6;">30 minutes en visio pour faire le point, sans pression. Je te dis clairement si <strong>l’Accélérateur Simple</strong> est adapté pour toi.</p>
+                    <p style="opacity: 0.9; line-height: 1.6;">30 minutes en visio pour faire le point, sans pression. Je te dis clairement si <strong>l'Accélérateur Simple</strong> est adapté pour toi.</p>
                 </div>
 
                 <div class="card" data-aos="fade-up" data-aos-delay="400" style="border-top: 4px solid rgba(255,255,255,0.1); padding: 40px; background: rgba(255,255,255,0.02);">
                     <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">03. OUTPUT</div>
                     <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu décides</h3>
-                    <p style="opacity: 0.8; line-height: 1.6;">Si c’est oui, on cale les 4 sessions. Si c’est non, tu repars avec plus de clarté que quand tu es arrivée.</p>
+                    <p style="opacity: 0.8; line-height: 1.6;">Si c'est oui, on cale les 4 sessions. Si c'est non, tu repars avec plus de clarté que quand tu es arrivée.</p>
                 </div>
             </div>
 
             <div style="text-align: center; margin-top: 80px;" data-aos="zoom-in">
-                <a href="https://cal.com/miora-rasolofo" class="btn-cta" style="padding: 20px 50px; font-size: 1.2rem;">Je veux mon plan simple</a>
+                <button onclick="openRdv()" class="btn-cta" style="padding: 20px 50px; font-size: 1.2rem;">Je veux mon plan simple</button>
                 <p style="margin-top: 25px; font-size: 0.85rem; opacity: 0.5; letter-spacing: 1px; text-transform: uppercase;">Aucun engagement. Juste de la clarté.</p>
             </div>
         </div>
     </section>
 
     <footer>
-        © 2026 Miora – L’Accélérateur Simple | Architecte de Systèmes
+        © 2026 Miora – L'Accélérateur Simple | Architecte de Systèmes
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-        // 1. Initialisation des animations AOS
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // 1. Initialisation AOS
         AOS.init({ duration: 1200, once: false });
 
-        // 2. Gestion du Slider (L'Accélérateur)
-        const slider = document.getElementById('prog-slider');
-        if (slider) {
-            const items = slider.querySelectorAll('.slider-item');
-            
-            const scrollNext = () => {
-                // On calcule la largeur d'un item + son gap (30px)
-                const step = items[0].offsetWidth + 30;
-                
-                // Si on arrive au bout, on revient au début, sinon on avance
-                if (slider.scrollLeft >= (slider.scrollWidth - slider.offsetWidth - 10)) {
-                    slider.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                    slider.scrollBy({ left: step, behavior: 'smooth' });
+        // Cal.com embed officiel
+        (function (C, A, L) {
+            let p = function (a, ar) { a.q.push(ar); };
+            let d = C.document;
+            C.Cal = C.Cal || function () {
+                let cal = C.Cal; let ar = arguments;
+                if (!cal.loaded) {
+                    cal.ns = {}; cal.q = cal.q || [];
+                    d.head.appendChild(d.createElement("script")).src = A;
+                    cal.loaded = true;
                 }
+                if (ar[0] === L) {
+                    const api = function () { p(api, arguments); };
+                    const namespace = ar[1];
+                    api.q = api.q || [];
+                    if (typeof namespace === "string") {
+                        cal.ns[namespace] = cal.ns[namespace] || api;
+                        p(cal.ns[namespace], ar); p(cal, ["-", namespace, api]);
+                    } else { p(cal, ar); p(api, ar); }
+                    return;
+                }
+                p(cal, ar);
             };
+        })(window, "https://app.cal.com/embed/embed.js", "init");
 
-            let autoCycle = setInterval(scrollNext, 3000);
+        Cal("init", "30min", { origin: "https://cal.com" });
+        Cal.ns["30min"]("inline", {
+            elementOrSelector: "#cal-embed",
+            calLink: "miora-rasolofo/30min",
+            layout: "month_view"
+        });
+        Cal.ns["30min"]("ui", {
+            theme: "dark",
+            styles: { branding: { brandColor: "#00f2ff" } },
+            hideEventTypeDetails: false,
+            layout: "month_view"
+        });
 
-            // Pause quand la souris survole pour laisser lire l'utilisateur
-            slider.addEventListener('mouseenter', () => clearInterval(autoCycle));
-            slider.addEventListener('mouseleave', () => {
-                clearInterval(autoCycle);
-                autoCycle = setInterval(scrollNext, 3000);
+        // 2. Slider programme
+        let slideCurrent = 0;
+        let slideTimer = null;
+        const SLIDE_DURATION = 4000;
+        const CARD_WIDTH = 340;
+        const CARD_GAP = 24;
+
+        function slideTo(index) {
+            const track  = document.getElementById('slide-track');
+            const cards  = track.querySelectorAll('.slide-card');
+            const dots   = document.querySelectorAll('.slide-dot');
+            const outer  = track.parentElement;
+            const outerW = outer.offsetWidth;
+
+            // Reset toutes les cartes (force le reflow pour relancer l'animation ::before)
+            cards.forEach(c => {
+                c.classList.remove('active');
+                void c.offsetWidth; // reflow
+            });
+            dots.forEach(d => d.classList.remove('active'));
+
+            cards[index].classList.add('active');
+            dots[index].classList.add('active');
+
+            // Centrer la carte active
+            const cardOffset = index * (CARD_WIDTH + CARD_GAP);
+            const centerOffset = (outerW / 2) - (CARD_WIDTH / 2) - 80; // 80 = padding
+            const translateX = -cardOffset + centerOffset;
+            track.style.transform = `translateX(${translateX}px)`;
+
+            slideCurrent = index;
+
+            clearInterval(slideTimer);
+            slideTimer = setInterval(() => {
+                slideTo((slideCurrent + 1) % cards.length);
+            }, SLIDE_DURATION);
+        }
+
+        function slideNext() { slideTo((slideCurrent + 1) % 4); }
+        function slidePrev() { slideTo((slideCurrent + 3) % 4); }
+
+        // Pause on hover
+        const slideOuter = document.querySelector('.slider-outer');
+        if (slideOuter) {
+            slideOuter.addEventListener('mouseenter', () => clearInterval(slideTimer));
+            slideOuter.addEventListener('mouseleave', () => {
+                slideTimer = setInterval(() => slideTo((slideCurrent + 1) % 4), SLIDE_DURATION);
             });
         }
 
-        // 3. Navigation par points (Dots) & Scroll Interactif
+        // Swipe tactile
+        let touchStartX = 0;
+        if (slideOuter) {
+            slideOuter.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+            slideOuter.addEventListener('touchend', e => {
+                const dx = e.changedTouches[0].clientX - touchStartX;
+                if (Math.abs(dx) > 40) dx < 0 ? slideNext() : slidePrev();
+            });
+        }
+
+        // Start
+        slideTo(0);
+
+        // 3. Navigation par points
         function scrollToSection(index) {
             const sections = document.querySelectorAll('section');
             sections[index].scrollIntoView({ behavior: 'smooth' });
@@ -618,18 +1078,36 @@
             const sections = document.querySelectorAll('section');
             const dots = document.querySelectorAll('.dot');
             let current = 0;
-
             sections.forEach((section, index) => {
-                const sectionTop = section.offsetTop;
-                // On active le point quand la section occupe le milieu de l'écran
-                if (window.scrollY >= sectionTop - window.innerHeight / 3) {
+                if (window.scrollY >= section.offsetTop - window.innerHeight / 3) {
                     current = index;
                 }
             });
-
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === current);
             });
+        });
+
+        // 4. Pop-up RDV
+        function openRdv() {
+            const overlay = document.getElementById('rdv-overlay');
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeRdv() {
+            document.getElementById('rdv-overlay').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // Fermer en cliquant sur le fond
+        document.getElementById('rdv-overlay').addEventListener('click', function(e) {
+            if (e.target === this) closeRdv();
+        });
+
+        // Fermer avec Échap
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeRdv();
         });
     </script>
 </body>
