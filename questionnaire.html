@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avant notre appel — Miora</title>
+  <meta name="description" content="Questionnaire de filtre avant notre appel découverte — Miora, Architecte de Systèmes pour Coachs." />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-1: #05051a;
+      --bg-2: #080826;
+      --surface: rgba(255,255,255,0.03);
+      --border: rgba(255,255,255,0.10);
+      --border-accent: rgba(0,212,232,0.35);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.45);
+      --accent: #00d4e8;
+      --accent-glow: rgba(0,212,232,0.15);
+      --error: #ff6b6b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 300;
+      background-color: var(--bg-1);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── FOND ANIMÉ ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 10% 20%, rgba(0,212,232,0.05) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 300px at 90% 80%, rgba(0,212,232,0.03) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── GRID LINES ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,232,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,232,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── BARRE SUPÉRIEURE ── */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      background: rgba(5,5,26,0.7);
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar-brand {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .topbar-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--border-accent);
+      padding: 5px 14px;
+      border-radius: 999px;
+    }
+
+    /* ── LAYOUT PRINCIPAL ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 140px 40px 100px;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      margin-bottom: 72px;
+      animation: fadeUp 0.7s cubic-bezier(0.77,0,0.175,1) both;
+    }
+
+    .header-eyebrow {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.7;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    .header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+      margin-bottom: 28px;
+    }
+
+    .header h1 span {
+      color: var(--accent);
+      display: block;
+    }
+
+    .header-desc {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 480px;
+      border-left: 2px solid rgba(0,212,232,0.3);
+      padding-left: 20px;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.5;
+      margin: 56px 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(0,212,232,0.2), transparent);
+    }
+
+    /* ── QUESTION BLOCK ── */
+    .q-block {
+      margin-bottom: 32px;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .q-label {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .q-hint {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* ── INPUTS ── */
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+      width: 100%;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 14px 18px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      appearance: none;
+      border-radius: 2px;
+    }
+
+    input[type="text"]::placeholder,
+    input[type="email"]::placeholder,
+    textarea::placeholder {
+      color: rgba(255,255,255,0.2);
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: rgba(0,212,232,0.5);
+      background: rgba(0,212,232,0.04);
+      box-shadow: 0 0 0 3px rgba(0,212,232,0.08);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 96px;
+      line-height: 1.65;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2300d4e8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    select option { background: var(--bg-2); color: var(--text); }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 500px) {
+      .input-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── RADIO / CHECKBOX ── */
+    .choice-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .choice-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .choice-option::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px; height: 100%;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: transform 0.2s cubic-bezier(0.77,0,0.175,1);
+    }
+
+    .choice-option:hover {
+      border-color: var(--border-accent);
+      background: rgba(0,212,232,0.04);
+    }
+
+    .choice-option:has(input:checked) {
+      border-color: rgba(0,212,232,0.45);
+      background: rgba(0,212,232,0.06);
+    }
+
+    .choice-option:has(input:checked)::before {
+      transform: scaleY(1);
+    }
+
+    .choice-option input[type="radio"],
+    .choice-option input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      border: 1.5px solid rgba(0,212,232,0.4);
+      background: transparent;
+      margin-top: 2px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    .choice-option input[type="radio"] { border-radius: 50%; }
+
+    .choice-label {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    /* ── FOOTER DU FORM ── */
+    .form-footer {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .form-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+      line-height: 1.7;
+      opacity: 0.6;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .form-note::before {
+      content: '⚡';
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: transparent;
+      color: var(--accent);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: 2px solid var(--accent);
+      border-radius: 999px;
+      padding: 16px 40px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-submit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      z-index: 0;
+    }
+
+    .btn-submit:hover::before { transform: translateX(0); }
+
+    .btn-submit:hover {
+      color: #05051a;
+      box-shadow: 0 0 24px rgba(0,212,232,0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-submit span, .btn-submit svg { position: relative; z-index: 1; }
+
+    .btn-submit svg {
+      width: 16px; height: 16px;
+      transition: transform 0.25s;
+    }
+
+    .btn-submit:hover svg { transform: translateX(4px); }
+
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .success-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: var(--bg-1);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 40px;
+      animation: fadeIn 0.6s ease both;
+    }
+
+    .success-screen.show { display: flex; }
+
+    .success-icon {
+      width: 64px; height: 64px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 32px;
+      color: var(--accent);
+      font-size: 1.4rem;
+      box-shadow: 0 0 30px rgba(0,212,232,0.2);
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(0,212,232,0.2); }
+      50%       { box-shadow: 0 0 40px rgba(0,212,232,0.4); }
+    }
+
+    .success-screen h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .success-screen h2 span { color: var(--accent); }
+
+    .success-screen p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 440px;
+      margin: 0 auto 40px;
+    }
+
+    .success-back {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-decoration: none;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+
+    .success-back:hover { opacity: 0.8; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: var(--accent);
+      box-shadow: 0 0 8px rgba(0,212,232,0.6);
+      transition: width 0.3s ease;
+      z-index: 200;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .topbar { padding: 16px 20px; }
+      .page { padding: 110px 20px 80px; }
+      .header h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barre de progression -->
+  <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <a href="index.html" class="topbar-brand">Miora</a>
+    <span class="topbar-tag">Avant notre appel</span>
+  </div>
+
+  <!-- Success screen -->
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">✦</div>
+    <h2>C'est <span>envoyé.</span></h2>
+    <p>
+      Merci pour ta franchise — c'est exactement ce qui rend notre futur échange utile.
+      Je lis tes réponses et je reviens vers toi dans les <strong style="color:var(--accent);">48h</strong> pour te proposer un créneau si on est alignées.
+    </p>
+    <a href="index.html" class="success-back">← Retour au site</a>
+  </div>
+
+  <!-- Page principale -->
+  <div class="page">
+
+    <div class="header">
+      <p class="header-eyebrow">Questionnaire de filtre</p>
+      <h1>
+        Dis-moi<br>
+        où tu en es,
+        <span>vraiment.</span>
+      </h1>
+      <p class="header-desc">
+        Ce questionnaire me permet de comprendre ta situation avant qu'on se parle.
+        Il n'y a pas de bonne ou mauvaise réponse — juste de la franchise.
+        Compte environ 5 minutes.
+      </p>
+    </div>
+
+    <form id="filtre-form" action="https://formspree.io/f/xbdwzwqa" method="POST" novalidate>
+
+      <!-- ── BLOC 1 : Qui tu es ── -->
+      <div class="section-label">01 — Qui tu es</div>
+
+      <div class="q-block">
+        <label class="q-label">Ton prénom & ton email</label>
+        <p class="q-hint">Pour que je puisse lire tes réponses avant l'appel et te recontacter.</p>
+        <div class="input-row">
+          <input type="text" name="prenom" placeholder="Ton prénom" required />
+          <input type="email" name="email" placeholder="ton@email.com" required />
+        </div>
+      </div>
+
+      <div class="q-block">
+        <label class="q-label">Sur quoi porte ton coaching ?</label>
+        <p class="q-hint">En tes propres mots — vie, carrière, mindset, bien-être, business, autre.</p>
+        <textarea name="type_coaching" placeholder="Ex : je fais du coaching de carrière pour des femmes qui veulent changer de voie…" required></textarea>
+      </div>
+
+      <div class="q-block">
+        <label class="q-label">Depuis combien de temps & combien de clients ?</label>
+        <textarea name="experience" placeholder="Ex : lancée il y a 8 mois, 4 clients jusqu'ici…" required></textarea>
+      </div>
+
+      <div class="q-block">
+        <label class="q-label">Où es-tu basée ?</label>
+        <div class="choice-group">
+          <label class="choice-option">
+            <input type="radio" name="localisation" value="Quebec" required />
+            <span class="choice-label">Québec</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="localisation" value="Autre Canada" />
+            <span class="choice-label">Autre province canadienne</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="localisation" value="Belgique" />
+            <span class="choice-label">Belgique</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="localisation" value="France" />
+            <span class="choice-label">France</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="localisation" value="Autre" />
+            <span class="choice-label">Autre</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- ── BLOC 2 : Situation ── -->
+      <div class="section-label">02 — Ta situation actuelle</div>
+
+      <div class="q-block">
+        <label class="q-label">Ton revenu mensuel lié au coaching ?</label>
+        <div class="choice-group">
+          <label class="choice-option">
+            <input type="radio" name="revenu" value="0-500" required />
+            <span class="choice-label">0 – 500 €/mois</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="revenu" value="500-1500" />
+            <span class="choice-label">500 – 1 500 €/mois</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="revenu" value="1500-3000" />
+            <span class="choice-label">1 500 – 3 000 €/mois</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="revenu" value="+3000" />
+            <span class="choice-label">Plus de 3 000 €/mois</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <label class="q-label">Comment décrirais-tu ta situation en ce moment ?</label>
+        <div class="choice-group">
+          <label class="choice-option">
+            <input type="radio" name="situation" value="A" required />
+            <span class="choice-label">Je démarre — pas encore de clients réguliers.</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="situation" value="B" />
+            <span class="choice-label">Quelques clients, mais pas de stabilité — je veux structurer.</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="situation" value="C" />
+            <span class="choice-label">J'ai un revenu, mais pas de système clair pour en avoir plus.</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <label class="q-label">Qu'est-ce qui bloque ta croissance ?</label>
+        <p class="q-hint">Coche tout ce qui te correspond.</p>
+        <div class="choice-group">
+          <label class="choice-option">
+            <input type="checkbox" name="blocage[]" value="cible" />
+            <span class="choice-label">Je ne sais pas à qui m'adresser précisément</span>
+          </label>
+          <label class="choice-option">
+            <input type="checkbox" name="blocage[]" value="offre" />
+            <span class="choice-label">Mon offre n'est pas claire ou je ne sais pas quoi vendre</span>
+          </label>
+          <label class="choice-option">
+            <input type="checkbox" name="blocage[]" value="prospects" />
+            <span class="choice-label">Je n'arrive pas à attirer assez de prospects</span>
+          </label>
+          <label class="choice-option">
+            <input type="checkbox" name="blocage[]" value="vente" />
+            <span class="choice-label">J'ai du mal à closer — j'évite de vendre</span>
+          </label>
+          <label class="choice-option">
+            <input type="checkbox" name="blocage[]" value="tout" />
+            <span class="choice-label">Tout ça à la fois</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- ── BLOC 3 : Objectif ── -->
+      <div class="section-label">03 — Objectif & engagement</div>
+
+      <div class="q-block">
+        <label class="q-label">Quel revenu mensuel vises-tu dans les 3 prochains mois ?</label>
+        <div class="choice-group">
+          <label class="choice-option">
+            <input type="radio" name="objectif_revenu" value="1000" required />
+            <span class="choice-label">Autour de 1 000 €/mois</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="objectif_revenu" value="2000" />
+            <span class="choice-label">Autour de 2 000 €/mois</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="objectif_revenu" value="3000" />
+            <span class="choice-label">Autour de 3 000 €/mois</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="objectif_revenu" value="4000+" />
+            <span class="choice-label">4 000 €/mois ou plus</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <label class="q-label">Combien de temps peux-tu investir chaque semaine hors séances client ?</label>
+        <div class="choice-group">
+          <label class="choice-option">
+            <input type="radio" name="temps" value="moins3h" required />
+            <span class="choice-label">Moins de 3h</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="temps" value="3-7h" />
+            <span class="choice-label">Entre 3 et 7h</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="temps" value="7-15h" />
+            <span class="choice-label">Entre 7 et 15h</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="temps" value="15h+" />
+            <span class="choice-label">Plus de 15h</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <label class="q-label">As-tu déjà investi dans une formation ou un accompagnement ?</label>
+        <div class="choice-group" style="margin-bottom: 12px;">
+          <label class="choice-option">
+            <input type="radio" name="formation_avant" value="oui" required />
+            <span class="choice-label">Oui</span>
+          </label>
+          <label class="choice-option">
+            <input type="radio" name="formation_avant" value="non" />
+            <span class="choice-label">Non</span>
+          </label>
+        </div>
+        <textarea name="formation_detail" placeholder="Si oui : qu'as-tu retenu, et pourquoi ça n'a pas suffi ?"></textarea>
+      </div>
+
+      <div class="q-block">
+        <label class="q-label">Pourquoi maintenant ?</label>
+        <p class="q-hint">Qu'est-ce qui t'a poussée à chercher de l'aide à ce moment précis ? C'est souvent la question la plus révélatrice — laisse-toi aller.</p>
+        <textarea name="pourquoi_maintenant" placeholder="Prends le temps de répondre honnêtement…" style="min-height: 130px;" required></textarea>
+      </div>
+
+      <div class="form-footer">
+        <p class="form-note">
+          Tes réponses restent confidentielles et ne servent qu'à préparer notre échange. Je te recontacte dans les 48h si on est alignées.
+        </p>
+        <button type="submit" class="btn-submit" id="submit-btn">
+          <span>Envoyer mes réponses</span>
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    // ── Barre de progression dynamique ──
+    const progressBar = document.getElementById('progress-bar');
+    const form = document.getElementById('filtre-form');
+    const requiredFields = form.querySelectorAll('[required]');
+
+    function updateProgress() {
+      let filled = 0;
+      const groups = {};
+
+      requiredFields.forEach(field => {
+        if (field.type === 'radio') {
+          if (!groups[field.name]) groups[field.name] = false;
+          if (field.checked) groups[field.name] = true;
+        } else if (field.value.trim() !== '') {
+          filled++;
+        }
+      });
+
+      Object.values(groups).forEach(v => { if (v) filled++; });
+
+      const total = [...new Set([...requiredFields].map(f => f.type === 'radio' ? f.name : f.name))].length;
+      const pct = Math.min((filled / total) * 100, 100);
+      progressBar.style.width = pct + '%';
+    }
+
+    form.addEventListener('input', updateProgress);
+    form.addEventListener('change', updateProgress);
+    updateProgress();
+
+    // ── Soumission ──
+    const btn = document.getElementById('submit-btn');
+    const successScreen = document.getElementById('success-screen');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.querySelector('span').textContent = 'Envoi en cours…';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          successScreen.classList.add('show');
+          window.scrollTo({ top: 0 });
+        } else {
+          btn.querySelector('span').textContent = 'Erreur — réessaie';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.querySelector('span').textContent = 'Erreur — réessaie';
+        btn.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>
