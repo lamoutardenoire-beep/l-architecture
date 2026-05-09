@@ -19,9 +19,9 @@
             --bg-2: #080826;
             --bg-3: #030312;
             --text: #ffffff;
-            --accent: #00f2ff;
-            --border-white: 3px solid #ffffff;
-            --shadow-white: 8px 8px 0px #ffffff;
+            --accent: #00d4e8;
+            --border-white: 1px solid rgba(255,255,255,0.18);
+            --shadow-white: 6px 6px 0px rgba(255,255,255,0.15);
         }
 
         * {
@@ -129,9 +129,9 @@
         }
 
         .card:hover {
-            transform: translate(-10px, -10px);
-            box-shadow: 15px 15px 0px var(--accent);
-            border-color: var(--accent);
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0px rgba(0,212,232,0.2);
+            border-color: rgba(0,212,232,0.4);
         }
 
         .reveal-underline {
@@ -146,7 +146,7 @@
             bottom: -5px;
             width: 0%;
             height: 4px;
-            background-color: var(--accent);
+            background-color: var(--accent); opacity: 0.8;
             transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
         }
 
@@ -168,11 +168,11 @@
         .offer-box {
             background: rgba(255, 255, 255, 0.02);
             padding: 60px;
-            border: var(--border-white);
+            border: 1px solid rgba(255,255,255,0.12);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: var(--shadow-white);
+            box-shadow: 0 0 0 1px rgba(0,212,232,0.08), 0 30px 60px rgba(0,0,0,0.4);
             gap: 40px;
         }
 
@@ -303,13 +303,13 @@
 
         .slide-title {
             font-family: 'Syne', sans-serif !important;
-            font-size: 2rem;
-            font-weight: 800;
+            font-size: 1.3rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: -0.03em;
-            line-height: 0.95;
-            color: #ffffff;
-            margin-bottom: 24px;
+            letter-spacing: 0.08em;
+            line-height: 1.1;
+            color: var(--accent);
+            margin-bottom: 16px;
         }
 
         .slide-body {
@@ -424,7 +424,7 @@
 
         #rdv-modal {
             background: #080826;
-            border: 1px solid rgba(0, 242, 255, 0.25);
+            border: 1px solid rgba(0, 212, 232, 0.18);
             box-shadow: 0 0 0 1px rgba(0,242,255,0.08), 0 40px 80px rgba(0,0,0,0.7);
             max-width: 1020px;
             width: 100%;
@@ -446,7 +446,7 @@
         /* Panneau gauche */
         #rdv-sidebar {
             background: linear-gradient(160deg, #0a0a2e 0%, #05051a 100%);
-            border-right: 1px solid rgba(0,242,255,0.15);
+            border-right: 1px solid rgba(0,212,232,0.1);
             padding: 40px 32px;
             display: flex;
             flex-direction: column;
@@ -651,6 +651,440 @@
             html { scroll-snap-type: none; }
             body { scroll-snap-type: none; }
         }
+
+        /* ── PROGRAMME FULLSCREEN SLIDES ── */
+        .prog-section {
+            min-height: 100vh;
+            height: 100vh;
+            display: block !important;
+            padding: 0 !important;
+        }
+
+        .prog-slides {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .prog-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 0.75s cubic-bezier(0.77,0,0.175,1),
+                        transform 0.75s cubic-bezier(0.77,0,0.175,1);
+            pointer-events: none;
+        }
+
+        .prog-slide.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .prog-slide.exit-up {
+            opacity: 0;
+            transform: translateY(-60px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+
+        .prog-slide-inner {
+            max-width: 780px;
+            width: 100%;
+            padding: 0 60px;
+            position: relative;
+        }
+
+        .prog-slide-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 36px;
+        }
+
+        .prog-slide-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            opacity: 0.6;
+        }
+
+        .prog-counter {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .prog-slide-title {
+            font-family: 'Syne', sans-serif !important;
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+            color: #ffffff;
+            margin-bottom: 32px;
+        }
+
+        .prog-slide-line {
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            margin-bottom: 32px;
+            box-shadow: 0 0 10px rgba(0,242,255,0.5);
+            animation: lineGrow 0.6s cubic-bezier(0.77,0,0.175,1) forwards;
+        }
+
+        @keyframes lineGrow {
+            from { width: 0; }
+            to   { width: 60px; }
+        }
+
+        .prog-slide-body {
+            font-size: clamp(1rem, 1.8vw, 1.3rem);
+            line-height: 1.75;
+            color: rgba(255,255,255,0.6);
+            font-weight: 300;
+            max-width: 560px;
+            margin-bottom: 48px;
+        }
+
+        .prog-slide-note {
+            font-size: 0.8rem;
+            font-style: italic;
+            color: rgba(255,255,255,0.2);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 24px;
+            max-width: 480px;
+        }
+
+        /* Barre verticale de progression */
+        .prog-vbar {
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 160px;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .prog-vbar-fill {
+            width: 100%;
+            background: var(--accent);
+            height: 25%;
+            transition: height 0.6s cubic-bezier(0.77,0,0.175,1);
+            box-shadow: 0 0 8px rgba(0,242,255,0.5);
+        }
+
+        /* UI dots + arrows */
+        .prog-ui {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .prog-dots-v {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .prog-dot-v {
+            width: 2px;
+            height: 24px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.15);
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+
+        .prog-dot-v.active {
+            height: 44px;
+            background: var(--accent);
+            box-shadow: 0 0 8px rgba(0,242,255,0.5);
+        }
+
+        .prog-arrows {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .prog-slide-inner { padding: 0 30px; }
+            .prog-vbar { left: 16px; }
+            .prog-ui { right: 16px; }
+            .prog-slide-title { font-size: clamp(3rem, 14vw, 5rem); }
+        }
+
+        /* ── ACCORDÉON ── */
+        .accordion { display: flex; flex-direction: column; gap: 0; max-width: 860px; margin: 0 auto; }
+
+        .acc-item {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            cursor: pointer;
+            transition: background 0.35s;
+            overflow: hidden;
+        }
+        .acc-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .acc-item.active { background: rgba(0,242,255,0.03); }
+
+        .acc-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 28px 32px;
+            user-select: none;
+        }
+
+        .acc-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: var(--accent);
+            opacity: 0.5;
+            min-width: 28px;
+            transition: opacity 0.3s;
+        }
+        .acc-item.active .acc-num { opacity: 1; }
+
+        .acc-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            color: rgba(255,255,255,0.45);
+            flex: 1;
+            transition: color 0.3s;
+        }
+        .acc-item.active .acc-title { color: #fff; }
+
+        .acc-icon {
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 300;
+            transition: transform 0.35s cubic-bezier(0.77,0,0.175,1), opacity 0.3s;
+            opacity: 0.4;
+            line-height: 1;
+        }
+        .acc-item.active .acc-icon { transform: rotate(45deg); opacity: 1; }
+
+        .acc-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.77,0,0.175,1), padding 0.35s;
+            padding: 0 32px 0 84px;
+        }
+        .acc-item.active .acc-body { max-height: 200px; padding: 0 32px 32px 84px; }
+
+        .acc-body p { font-size: 0.95rem; line-height: 1.75; color: rgba(255,255,255,0.55); }
+
+        .acc-result {
+            margin-top: 14px !important;
+            font-size: 0.85rem !important;
+            color: var(--accent) !important;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+
+        /* ── SECTION "CE QUE TU REPARS AVEC" ── */
+        .repars-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .repars-card {
+            background: var(--bg-2);
+            padding: 44px 40px;
+            transition: background 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .repars-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .repars-card:hover::before { transform: scaleX(1); }
+        .repars-card:hover { background: rgba(0,242,255,0.03); }
+
+        .repars-icon {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: var(--accent);
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        .repars-title {
+            font-family: 'Syne', sans-serif !important;
+            font-size: 1.05rem !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            color: #fff;
+            margin-bottom: 14px;
+            line-height: 1.2 !important;
+        }
+
+        .repars-body {
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .repars-grid { grid-template-columns: 1fr; }
+            .acc-body.active { padding: 0 20px 24px 20px; }
+            .acc-header { padding: 22px 20px; }
+        }
+
+        /* ── POPUP SIMPLIFIÉE ── */
+        #rdv-modal {
+            background: #080826;
+            border: 1px solid rgba(0, 212, 232, 0.18);
+            box-shadow: 0 0 0 1px rgba(0,242,255,0.08), 0 40px 80px rgba(0,0,0,0.7);
+            max-width: 860px;
+            width: 95%;
+            height: min(92vh, 780px);
+            position: relative;
+            animation: modalIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            border-radius: 4px;
+            overflow: hidden;
+            padding: 44px 0 0 0;
+        }
+
+        #cal-embed { width: 100%; flex: 1; min-height: 0; }
+        #cal-embed iframe { width: 100% !important; height: 100% !important; min-height: 680px; }
+
+        /* ── PROTOCOLE ── */
+        .protocole-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            max-width: 960px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Ligne horizontale qui relie les étapes */
+        .protocole-grid::before {
+            content: '';
+            position: absolute;
+            top: 28px;
+            left: calc(16.66% + 20px);
+            right: calc(16.66% + 20px);
+            height: 1px;
+            background: linear-gradient(to right, rgba(0,242,255,0.15), rgba(0,242,255,0.4), rgba(0,242,255,0.15));
+        }
+
+        .protocole-step {
+            padding: 0 40px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .protocole-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: var(--accent);
+            opacity: 0.4;
+            margin-bottom: 28px;
+            display: block;
+            transition: opacity 0.3s;
+        }
+
+        .protocole-step:hover .protocole-num { opacity: 1; }
+
+        /* Point sur la ligne */
+        .protocole-connector {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,242,255,0.3);
+            background: var(--bg-1);
+            margin: 0 auto 20px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .protocole-step:hover .protocole-connector,
+        .protocole-step--accent .protocole-connector {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(0,242,255,0.4);
+            background: var(--accent);
+        }
+
+        .protocole-title {
+            font-family: 'Syne', sans-serif !important;
+            font-size: 1.3rem !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent) !important;
+            margin-bottom: 16px;
+            line-height: 1.1 !important;
+        }
+
+        .protocole-body {
+            font-size: 0.9rem;
+            line-height: 1.75;
+            color: rgba(255,255,255,0.5);
+            font-weight: 300;
+        }
+
+        .protocole-step--accent {
+            position: relative;
+        }
+
+        .protocole-step--accent::before {
+            content: '';
+            position: absolute;
+            inset: -20px 10px;
+            background: rgba(0,242,255,0.03);
+            border: 1px solid rgba(0,242,255,0.12);
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .protocole-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .protocole-grid::before { display: none; }
+            .protocole-step { padding: 0; text-align: left; display: flex; flex-direction: column; align-items: flex-start; }
+            .protocole-connector { margin: 0 0 16px 0; }
+            .protocole-step--accent::before { inset: -16px -16px; }
+        }
     </style>
 </head>
 <body>
@@ -665,80 +1099,47 @@
         <div class="dot" onclick="scrollToSection(3)"></div>
         <div class="dot" onclick="scrollToSection(4)"></div>
         <div class="dot" onclick="scrollToSection(5)"></div>
+        <div class="dot" onclick="scrollToSection(6)"></div>
+        <div class="dot" onclick="scrollToSection(7)"></div>
     </div>
 
     <!-- POP-UP RDV -->
     <div id="rdv-overlay">
         <div id="rdv-modal">
-
-            <!-- Panneau gauche : contexte -->
-            <div id="rdv-sidebar">
-                <div>
-                    <span class="rdv-tag">Appel découverte</span>
-                    <h2 class="rdv-sidebar-title">30 min<br>pour faire<br>le point</h2>
-                    <p class="rdv-sidebar-desc">Sans pression. On regarde ensemble si l'Accélérateur Simple est fait pour toi.</p>
-                    <div class="rdv-divider"></div>
-                    <div class="rdv-pills">
-                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Visio · 30 minutes</div>
-                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Aucun engagement</div>
-                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Réponse directe à ta situation</div>
-                        <div class="rdv-pill"><span class="rdv-pill-dot"></span> Si ce n'est pas fait pour toi, je te le dis</div>
-                    </div>
-                </div>
-                <p class="rdv-sidebar-footer">Miora · Architecte de Systèmes</p>
-            </div>
-
-            <!-- Panneau droit : calendrier Cal.com -->
-            <div id="rdv-cal-panel">
-                <button id="rdv-close" onclick="closeRdv()">✕</button>
-                <div id="cal-embed"></div>
-            </div>
-
+            <button id="rdv-close" onclick="closeRdv()">✕</button>
+            <div id="cal-embed"></div>
         </div>
     </div>
 
     <!-- SLIDE 1 : HERO -->
     <section style="background-color: var(--bg-1); overflow: hidden;">
-        <div class="container hero-layout" style="align-items: flex-start;">
+        <div class="container hero-layout">
 
-            <div data-aos="fade-right" style="max-width: 550px;">
-                <h1 class="massive-title" style="font-size: clamp(2.5rem, 6vw, 4.2rem);">
-                    Arrête de <br><span class="strike-accent">bricoler</span> <br>ton coaching.
+            <div data-aos="fade-right">
+                <!-- Label discret -->
+                <p style="font-size: 0.7rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); opacity: 0.7; margin-bottom: 28px;">Architecte de Systèmes · Coachs</p>
+
+                <!-- Titre — une seule idée, forte -->
+                <h1 class="massive-title" style="font-size: clamp(2.8rem, 6vw, 4.5rem); margin-bottom: 28px;">
+                    Tes revenus<br>font le yo‑yo.<br><span style="color: var(--accent);">Arrêtons ça.</span>
                 </h1>
 
-                <div style="margin: 40px 0; border-left: 5px solid var(--accent); padding-left: 20px;">
-                    <p style="font-size: 1.25rem; line-height: 1.5; font-weight: 400;">
-                        Tu es coach, tu as déjà des clientes, mais tes revenus font le yo‑yo parce que ton message, ton offre et ton acquisition ne parlent pas le même langage.
-                    </p>
-                    <p style="font-size: 1.25rem; line-height: 1.5; margin-top: 20px; font-weight: 700; color: var(--accent);">
-                        Ici, on enlève le superflu et on garde ce qui marche.
-                    </p>
-                </div>
-
-                <p style="font-size: 1.15rem; opacity: 0.9; margin-bottom: 30px;">
-                    On construit un système simple pour que tu saches quoi dire, quoi montrer en ligne et comment générer des appels qualifiés chaque mois, sans te perdre dans des stratégies compliquées.
+                <!-- Une phrase. Pas trois. -->
+                <p style="font-size: 1.2rem; line-height: 1.65; font-weight: 300; max-width: 440px; opacity: 0.8; margin-bottom: 44px;">
+                    Tu as déjà des clientes, mais ton message, ton offre et ton acquisition ne parlent pas le même langage. On construit le système qui les aligne.
                 </p>
 
-                <div style="margin-bottom: 40px;">
-                    <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; opacity: 0.6; margin-bottom: 15px;">À la fin, tu es capable de :</p>
-                    <ul style="list-style: none; display: grid; gap: 10px; font-weight: 500;">
-                        <li><span style="color: var(--accent); margin-right: 8px;">⚡</span> arrêter de bricoler ta communication au feeling,</li>
-                        <li><span style="color: var(--accent); margin-right: 8px;">⚡</span> avoir un système clair pour des appels réguliers,</li>
-                        <li><span style="color: var(--accent); margin-right: 8px;">⚡</span> rester toi‑même, sans jouer un personnage.</li>
-                    </ul>
-                </div>
+                <!-- CTA principal -->
+                <button onclick="openRdv()" class="btn-cta" style="padding: 18px 40px; font-size: 1rem;">Réserver 30 min gratuit</button>
 
-                <button onclick="openRdv()" class="btn-cta">STABILISER MES REVENUS</button>
-
-                <p style="font-size: 0.9rem; margin-top: 25px; opacity: 0.7; max-width: 380px;">
-                    30 minutes en visio pour faire le point sur ta situation, sans pression.
-                </p>
+                <!-- Réassurance minimale sous le bouton -->
+                <p style="font-size: 0.8rem; margin-top: 16px; opacity: 0.4; letter-spacing: 1px; text-transform: uppercase;">Sans engagement · Visio · Réponse directe</p>
             </div>
 
             <div data-aos="zoom-in" style="flex-shrink: 0; position: relative;">
-                <div style="position: absolute; top: -15px; right: -15px; width: 100%; height: 100%; border: 2px solid var(--accent); z-index: 0;"></div>
+                <div style="position: absolute; top: -12px; right: -12px; width: 100%; height: 100%; border: 1px solid rgba(0,212,232,0.3); z-index: 0;"></div>
                 <img src="Cheval.png" alt="Miora Architecture"
-                     style="max-width: 400px; display: block; position: relative; z-index: 1; filter: grayscale(1) contrast(1.3) brightness(0.8); border: var(--border-white); background-color: var(--bg-1);">
+                     style="max-width: 400px; display: block; position: relative; z-index: 1; filter: grayscale(1) contrast(1.2) brightness(0.85); border: 1px solid rgba(255,255,255,0.15); background-color: var(--bg-1);">
                 <div style="position: absolute; bottom: 20px; left: -20px; background: var(--accent); color: #000; padding: 10px 20px; font-weight: 800; font-family: 'Syne'; z-index: 2; transform: rotate(-2deg); font-size: 0.8rem; text-transform: uppercase;">
                     Système & Architecture
                 </div>
@@ -814,48 +1215,59 @@
     <!-- SLIDE 3 : PROGRAMME -->
     <section style="background-color: var(--bg-3); padding: 100px 0;">
         <div class="container">
-            <h2 class="section-title">L'Accélérateur en 4 sessions</h2>
-            <p data-aos="fade-up" style="text-align: center; font-size: 1.25rem; font-weight: 500; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.8;">
-                4 sessions pour en finir avec les mois à blanc, simplifier ton système et recevoir des demandes d'appel régulières sans cirque marketing.
+            <h2 class="section-title" data-aos="fade-down">L'Accélérateur en 4 sessions</h2>
+            <p data-aos="fade-up" style="text-align: center; font-size: 1.1rem; font-weight: 300; max-width: 580px; margin: 0 auto 60px auto; opacity: 0.6;">
+                4 sessions · 1 mois · Un système qui tient la route.
             </p>
 
-            <div class="slider-outer" data-aos="fade-up">
-                <div class="slider-track" id="slide-track">
-                    <div class="slide-card active">
-                        <span class="slide-num">01 — 04</span>
-                        <div class="slide-title">Clarté</div>
-                        <p class="slide-body">On définit exactement à qui tu t'adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu'une autre.</p>
+            <div class="accordion" id="accordion" data-aos="fade-up">
+                <div class="acc-item active" onclick="accToggle(0)">
+                    <div class="acc-header">
+                        <span class="acc-num">01</span>
+                        <span class="acc-title">Clarté</span>
+                        <span class="acc-icon">+</span>
                     </div>
-                    <div class="slide-card">
-                        <span class="slide-num">02 — 04</span>
-                        <div class="slide-title">Message</div>
-                        <p class="slide-body">On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l'appel et ce que tu mets en avant sans te perdre.</p>
+                    <div class="acc-body">
+                        <p>On définit exactement à qui tu t'adresses, ce que tu vends vraiment et pourquoi on te choisit toi plutôt qu'une autre.</p>
+                        <p class="acc-result">→ Tu repars avec : ton positionnement en une phrase, ta cliente idéale définie précisément.</p>
                     </div>
-                    <div class="slide-card">
-                        <span class="slide-num">03 — 04</span>
-                        <div class="slide-title">Système</div>
-                        <p class="slide-body">On construit ton mini‑système d'acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</p>
+                </div>
+                <div class="acc-item" onclick="accToggle(1)">
+                    <div class="acc-header">
+                        <span class="acc-num">02</span>
+                        <span class="acc-title">Message</span>
+                        <span class="acc-icon">+</span>
                     </div>
-                    <div class="slide-card">
-                        <span class="slide-num">04 — 04</span>
-                        <div class="slide-title">Action</div>
-                        <p class="slide-body">On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d'appel presque automatiquement.</p>
+                    <div class="acc-body">
+                        <p>On simplifie ta façon de parler de ton coaching : tes angles de contenu, ton invitation à l'appel et ce que tu mets en avant sans te perdre.</p>
+                        <p class="acc-result">→ Tu repars avec : 3 angles de contenu prêts à l'emploi, un script d'invitation à l'appel.</p>
+                    </div>
+                </div>
+                <div class="acc-item" onclick="accToggle(2)">
+                    <div class="acc-header">
+                        <span class="acc-num">03</span>
+                        <span class="acc-title">Système</span>
+                        <span class="acc-icon">+</span>
+                    </div>
+                    <div class="acc-body">
+                        <p>On construit ton mini‑système d'acquisition sans usine à gaz, adapté à ton énergie, ton canal principal et ta réalité.</p>
+                        <p class="acc-result">→ Tu repars avec : ton mini-système d'acquisition documenté, prêt à activer.</p>
+                    </div>
+                </div>
+                <div class="acc-item" onclick="accToggle(3)">
+                    <div class="acc-header">
+                        <span class="acc-num">04</span>
+                        <span class="acc-title">Action</span>
+                        <span class="acc-icon">+</span>
+                    </div>
+                    <div class="acc-body">
+                        <p>On pose un plan concret sur 30 jours : tu sais quoi faire, dans quel ordre, quoi arrêter, et tu commences à générer des demandes d'appel presque automatiquement.</p>
+                        <p class="acc-result">→ Tu repars avec : ton plan 30 jours action par action, ce que tu arrêtes immédiatement.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="slide-indicators" id="slide-dots">
-                <div class="slide-dot active" onclick="slideTo(0)"></div>
-                <div class="slide-dot" onclick="slideTo(1)"></div>
-                <div class="slide-dot" onclick="slideTo(2)"></div>
-                <div class="slide-dot" onclick="slideTo(3)"></div>
-            </div>
-            <div class="slide-nav">
-                <button class="slide-btn" onclick="slidePrev()">←</button>
-                <button class="slide-btn" onclick="slideNext()">→</button>
-            </div>
-
-            <p style="font-size: 0.9rem; margin: 40px auto 0 auto; max-width: 600px; opacity: 0.6; text-align:center; font-weight: 400; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-style: italic;">
+            <p data-aos="fade-up" style="font-size: 0.85rem; margin: 50px auto 0 auto; max-width: 500px; opacity: 0.35; text-align:center; font-style: italic; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 30px;">
                 Ce n'est pas pour toi si tu cherches une solution miracle ou si tu n'es pas prête à faire ta part du travail pendant 30 jours.
             </p>
         </div>
@@ -878,6 +1290,40 @@
                     </div>
                     <div style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 18px;">1 mois · 4 sessions de 30 minutes</div>
                     <button onclick="openRdv()" class="btn-cta">Réserver un appel</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION : CE QUE TU REPARS AVEC -->
+    <section style="background-color: var(--bg-2); padding: 120px 0;">
+        <div class="container">
+            <p data-aos="fade-up" style="text-align:center; font-size:0.7rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--accent); opacity:0.7; margin-bottom:20px;">Concret. Mesurable. Immédiat.</p>
+            <h2 class="section-title" data-aos="fade-up">Ce que tu repars avec</h2>
+            <p data-aos="fade-up" style="text-align:center; font-size:1.05rem; opacity:0.5; max-width:520px; margin:0 auto 70px; font-weight:300; line-height:1.7;">
+                Pas des slides oubliés le lendemain. Des livrables que tu utilises dès le lendemain de chaque session.
+            </p>
+
+            <div class="repars-grid" data-aos="fade-up">
+                <div class="repars-card">
+                    <div class="repars-icon">01</div>
+                    <h3 class="repars-title">Ton positionnement en une phrase</h3>
+                    <p class="repars-body">Tu sais exactement quoi dire quand on te demande ce que tu fais. Plus d'hésitation, plus de formulations floues.</p>
+                </div>
+                <div class="repars-card">
+                    <div class="repars-icon">02</div>
+                    <h3 class="repars-title">3 angles de contenu prêts</h3>
+                    <p class="repars-body">Tu n'ouvres plus une page blanche chaque semaine. Tu as un cadre clair pour créer du contenu qui attire les bonnes personnes.</p>
+                </div>
+                <div class="repars-card">
+                    <div class="repars-icon">03</div>
+                    <h3 class="repars-title">Ton système d'acquisition documenté</h3>
+                    <p class="repars-body">Un mini-système simple, adapté à ton énergie et ton canal principal. Tu sais quoi faire chaque semaine pour générer des appels.</p>
+                </div>
+                <div class="repars-card">
+                    <div class="repars-icon">04</div>
+                    <h3 class="repars-title">Ton plan 30 jours action par action</h3>
+                    <p class="repars-body">Tu sais quoi faire, dans quel ordre, et quoi arrêter immédiatement. Plus de paralysie, plus de bricolage au feeling.</p>
                 </div>
             </div>
         </div>
@@ -927,33 +1373,41 @@
     <!-- SLIDE 6 : PROCESSUS -->
     <section style="background-color: var(--bg-1); padding: 120px 0;">
         <div class="container">
-            <h2 style="font-family: 'Syne'; font-size: clamp(2rem, 5vw, 3.5rem); text-align: center; text-transform: uppercase; margin-bottom: 80px;" data-aos="fade-down">
-                Le protocole <span class="strike-accent">Simple.</span>
-            </h2>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; position: relative;">
-                <div class="card" data-aos="fade-up" data-aos-delay="100" style="border-top: 4px solid rgba(255,255,255,0.1); padding: 40px; background: rgba(255,255,255,0.02);">
-                    <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">01. INPUT</div>
-                    <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu m'écris</h3>
-                    <p style="opacity: 0.8; line-height: 1.6;">Tu m'envoies quelques lignes sur ton activité, ton revenu actuel et ce que tu veux changer.</p>
+            <p data-aos="fade-up" style="text-align:center; font-size:0.7rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--accent); opacity:0.7; margin-bottom:20px;">3 étapes. Pas plus.</p>
+            <h2 class="section-title" data-aos="fade-down">Le protocole Simple.</h2>
+            <p data-aos="fade-up" style="text-align:center; font-size:1.05rem; opacity:0.5; max-width:480px; margin:0 auto 80px; font-weight:300; line-height:1.7;">
+                Tu m'écris. On se parle. Tu décides.
+            </p>
+
+            <div class="protocole-grid" data-aos="fade-up">
+
+                <div class="protocole-step">
+                    <div class="protocole-connector"></div>
+                    <div class="protocole-num">01</div>
+                    <h3 class="protocole-title">Tu m'écris</h3>
+                    <p class="protocole-body">Quelques lignes sur ton activité, tes revenus actuels et ce que tu veux changer. Pas de formulaire à rallonge.</p>
                 </div>
 
-                <div class="card" data-aos="fade-up" data-aos-delay="250" style="border-top: 4px solid var(--accent); padding: 40px; background: rgba(0,242,255,0.03);">
-                    <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">02. ANALYSE</div>
-                    <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">On se parle</h3>
-                    <p style="opacity: 0.9; line-height: 1.6;">30 minutes en visio pour faire le point, sans pression. Je te dis clairement si <strong>l'Accélérateur Simple</strong> est adapté pour toi.</p>
+                <div class="protocole-step protocole-step--accent">
+                    <div class="protocole-connector"></div>
+                    <div class="protocole-num">02</div>
+                    <h3 class="protocole-title">On se parle</h3>
+                    <p class="protocole-body">30 minutes en visio. Je te dis clairement si l'Accélérateur Simple est fait pour toi — ou pas.</p>
                 </div>
 
-                <div class="card" data-aos="fade-up" data-aos-delay="400" style="border-top: 4px solid rgba(255,255,255,0.1); padding: 40px; background: rgba(255,255,255,0.02);">
-                    <div style="font-family: 'Syne'; font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;">03. OUTPUT</div>
-                    <h3 style="font-family: 'Syne'; margin-bottom: 15px; font-size: 1.5rem;">Tu décides</h3>
-                    <p style="opacity: 0.8; line-height: 1.6;">Si c'est oui, on cale les 4 sessions. Si c'est non, tu repars avec plus de clarté que quand tu es arrivée.</p>
+                <div class="protocole-step">
+                    <div class="protocole-connector"></div>
+                    <div class="protocole-num">03</div>
+                    <h3 class="protocole-title">Tu décides</h3>
+                    <p class="protocole-body">Si c'est oui, on cale les 4 sessions. Si c'est non, tu repars avec plus de clarté que quand tu es arrivée.</p>
                 </div>
+
             </div>
 
             <div style="text-align: center; margin-top: 80px;" data-aos="zoom-in">
-                <button onclick="openRdv()" class="btn-cta" style="padding: 20px 50px; font-size: 1.2rem;">Je veux mon plan simple</button>
-                <p style="margin-top: 25px; font-size: 0.85rem; opacity: 0.5; letter-spacing: 1px; text-transform: uppercase;">Aucun engagement. Juste de la clarté.</p>
+                <button onclick="openRdv()" class="btn-cta" style="padding: 18px 48px; font-size: 1rem;">Réserver 30 min gratuit</button>
+                <p style="margin-top: 16px; font-size: 0.75rem; opacity: 0.35; letter-spacing: 2px; text-transform: uppercase;">Aucun engagement · Juste de la clarté.</p>
             </div>
         </div>
     </section>
@@ -1005,68 +1459,13 @@
             layout: "month_view"
         });
 
-        // 2. Slider programme
-        let slideCurrent = 0;
-        let slideTimer = null;
-        const SLIDE_DURATION = 4000;
-        const CARD_WIDTH = 340;
-        const CARD_GAP = 24;
-
-        function slideTo(index) {
-            const track  = document.getElementById('slide-track');
-            const cards  = track.querySelectorAll('.slide-card');
-            const dots   = document.querySelectorAll('.slide-dot');
-            const outer  = track.parentElement;
-            const outerW = outer.offsetWidth;
-
-            // Reset toutes les cartes (force le reflow pour relancer l'animation ::before)
-            cards.forEach(c => {
-                c.classList.remove('active');
-                void c.offsetWidth; // reflow
-            });
-            dots.forEach(d => d.classList.remove('active'));
-
-            cards[index].classList.add('active');
-            dots[index].classList.add('active');
-
-            // Centrer la carte active
-            const cardOffset = index * (CARD_WIDTH + CARD_GAP);
-            const centerOffset = (outerW / 2) - (CARD_WIDTH / 2) - 80; // 80 = padding
-            const translateX = -cardOffset + centerOffset;
-            track.style.transform = `translateX(${translateX}px)`;
-
-            slideCurrent = index;
-
-            clearInterval(slideTimer);
-            slideTimer = setInterval(() => {
-                slideTo((slideCurrent + 1) % cards.length);
-            }, SLIDE_DURATION);
-        }
-
-        function slideNext() { slideTo((slideCurrent + 1) % 4); }
-        function slidePrev() { slideTo((slideCurrent + 3) % 4); }
-
-        // Pause on hover
-        const slideOuter = document.querySelector('.slider-outer');
-        if (slideOuter) {
-            slideOuter.addEventListener('mouseenter', () => clearInterval(slideTimer));
-            slideOuter.addEventListener('mouseleave', () => {
-                slideTimer = setInterval(() => slideTo((slideCurrent + 1) % 4), SLIDE_DURATION);
+        // 2. Accordéon programme
+        function accToggle(index) {
+            const items = document.querySelectorAll('.acc-item');
+            items.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
             });
         }
-
-        // Swipe tactile
-        let touchStartX = 0;
-        if (slideOuter) {
-            slideOuter.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-            slideOuter.addEventListener('touchend', e => {
-                const dx = e.changedTouches[0].clientX - touchStartX;
-                if (Math.abs(dx) > 40) dx < 0 ? slideNext() : slidePrev();
-            });
-        }
-
-        // Start
-        slideTo(0);
 
         // 3. Navigation par points
         function scrollToSection(index) {
