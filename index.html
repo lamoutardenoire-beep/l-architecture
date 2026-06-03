@@ -119,14 +119,6 @@
             overflow: hidden;
         }
 
-        #dataCanvas {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.18;
-        }
-
         .hero-content {
             display: flex;
             flex-direction: column;
@@ -890,7 +882,7 @@
 
     <!-- HERO -->
     <section class="hero">
-        <div class="hero-bg"><canvas id="dataCanvas"></canvas></div>
+        <div class="hero-bg"></div>
         <div class="hero-content">
             <p class="hero-kicker">Auditrice financière reconvertie · Francophone</p>
             <h1 class="hero-title">
@@ -1150,74 +1142,6 @@
             });
         });
 
-        // FINANCIAL DATA RAIN
-        const canvas = document.getElementById('dataCanvas');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const fontSize = 11;
-        const colWidth = 52;
-
-        // Financial data fragments — numbers, percentages, ratios
-        const chars = [
-            '0.00','1.24','−3.2','98.4','12.5','0.87','44.1',
-            '−0.5','7.3%','2.1%','0.03','15.0','−8.4','3.56',
-            '100%','0.92','6.7%','−1.1','28.3','0.44','55.2',
-            '12.8','−0.8','4.91','0.15','33.3','−5.0','1.00'
-        ];
-
-        let columns = Math.floor(canvas.width / colWidth);
-        let drops = Array.from({ length: columns }, () => Math.random() * -80);
-        let opacities = Array.from({ length: columns }, () => Math.random() * 0.6 + 0.2);
-        let speeds = Array.from({ length: columns }, () => Math.random() * 0.4 + 0.15);
-
-        function drawRain() {
-            // Fade trail
-            ctx.fillStyle = 'rgba(26, 26, 24, 0.06)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.font = `300 ${fontSize}px "DM Mono", monospace`;
-
-            for (let i = 0; i < drops.length; i++) {
-                const char = chars[Math.floor(Math.random() * chars.length)];
-                const x = i * colWidth + 10;
-                const y = drops[i] * fontSize;
-
-                // Lead character — brighter
-                const alpha = opacities[i];
-                ctx.fillStyle = `rgba(184, 149, 106, ${alpha})`;
-                ctx.fillText(char, x, y);
-
-                // Trail — dimmer characters above
-                for (let t = 1; t <= 4; t++) {
-                    const trailAlpha = alpha * (1 - t * 0.22);
-                    if (trailAlpha > 0.02) {
-                        ctx.fillStyle = `rgba(184, 149, 106, ${trailAlpha})`;
-                        const trailChar = chars[Math.floor(Math.random() * chars.length)];
-                        ctx.fillText(trailChar, x, y - t * fontSize * 1.8);
-                    }
-                }
-
-                drops[i] += speeds[i];
-
-                // Reset when off screen
-                if (drops[i] * fontSize > canvas.height + 100) {
-                    drops[i] = Math.random() * -40;
-                    opacities[i] = Math.random() * 0.5 + 0.15;
-                    speeds[i] = Math.random() * 0.4 + 0.15;
-                }
-            }
-
-            requestAnimationFrame(drawRain);
-        }
-
-        drawRain();
 
         // SCROLL ANIMATIONS
         const obs = new IntersectionObserver(entries => {
