@@ -35,29 +35,27 @@
             cursor: none;
         }
 
-        /* CURSOR */
+        /* CURSOR — LOSANGE */
         .cursor {
-            width: 6px;
-            height: 6px;
+            width: 10px;
+            height: 10px;
             background: var(--copper);
-            border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s;
+            transform: translate(-50%, -50%) rotate(45deg);
+            transition: transform 0.1s, width 0.25s, height 0.25s;
         }
 
         .cursor-ring {
-            width: 32px;
-            height: 32px;
-            border: 1px solid rgba(184, 149, 106, 0.5);
-            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(184, 149, 106, 0.4);
             position: fixed;
             pointer-events: none;
             z-index: 9998;
-            transform: translate(-50%, -50%);
-            transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
+            transform: translate(-50%, -50%) rotate(45deg);
+            transition: left 0.15s ease-out, top 0.15s ease-out, width 0.3s, height 0.3s, opacity 0.3s;
         }
 
         /* NAV */
@@ -75,9 +73,13 @@
         }
 
         .nav-logo {
-            height: 36px;
-            width: auto;
-            filter: brightness(0) invert(1);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--stone);
+            text-decoration: none;
             opacity: 0.9;
         }
 
@@ -818,9 +820,12 @@
         }
 
         .footer-logo {
-            height: 28px;
-            width: auto;
-            filter: brightness(0) invert(1);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--stone);
             opacity: 0.4;
         }
 
@@ -886,7 +891,7 @@
 
     <!-- NAV -->
     <nav>
-        <img src="logo.png" alt="Miora Rasolofo" class="nav-logo">
+        <span></span>
         <a href="https://calendly.com/miora-rasolofo/30min" class="nav-cta" target="_blank">Audit gratuit</a>
     </nav>
 
@@ -1107,13 +1112,12 @@
 
     <!-- FOOTER -->
     <footer>
-        <img src="logo.png" alt="Miora Rasolofo" class="footer-logo">
-        <span class="footer-copy">© 2026 · Audit Process de Vente</span>
+        <span class="footer-copy">© 2026 · Miora Rasolofo · Audit Process de Vente</span>
         <a href="mailto:la.moutarde.noire@gmail.com" class="footer-email">la.moutarde.noire@gmail.com</a>
     </footer>
 
     <script>
-        // CURSOR
+        // CURSOR LOSANGE
         const cursor = document.getElementById('cursor');
         const ring = document.getElementById('cursorRing');
         let mx = 0, my = 0, rx = 0, ry = 0;
@@ -1125,8 +1129,8 @@
         });
 
         (function animRing() {
-            rx += (mx - rx) * 0.12;
-            ry += (my - ry) * 0.12;
+            rx += (mx - rx) * 0.10;
+            ry += (my - ry) * 0.10;
             ring.style.left = rx + 'px';
             ring.style.top = ry + 'px';
             requestAnimationFrame(animRing);
@@ -1134,16 +1138,22 @@
 
         document.querySelectorAll('a, button').forEach(el => {
             el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
-                ring.style.borderColor = 'rgba(184, 149, 106,0.9)';
-                ring.style.width = '48px';
-                ring.style.height = '48px';
+                cursor.style.width = '16px';
+                cursor.style.height = '16px';
+                cursor.style.background = 'transparent';
+                cursor.style.border = '1px solid #B8956A';
+                ring.style.width = '44px';
+                ring.style.height = '44px';
+                ring.style.borderColor = 'rgba(184,149,106,0.8)';
             });
             el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                ring.style.borderColor = 'rgba(184, 149, 106,0.5)';
-                ring.style.width = '32px';
-                ring.style.height = '32px';
+                cursor.style.width = '10px';
+                cursor.style.height = '10px';
+                cursor.style.background = '#B8956A';
+                cursor.style.border = 'none';
+                ring.style.width = '28px';
+                ring.style.height = '28px';
+                ring.style.borderColor = 'rgba(184,149,106,0.4)';
             });
         });
 
