@@ -847,22 +847,28 @@
         .fade-up-delay-2 { transition-delay: 0.2s; }
         .fade-up-delay-3 { transition-delay: 0.3s; }
 
-        /* RESPONSIVE */
         @media (max-width: 900px) {
             nav { padding: 20px 24px; }
             section { padding: 80px 24px; }
             .hero { padding: 120px 24px 60px; }
+            .hero-title { font-size: clamp(3.5rem, 14vw, 6rem); }
             .hero-bottom { grid-template-columns: 1fr; gap: 40px; }
             .hero-right { align-items: flex-start; }
             .pain-layout { grid-template-columns: 1fr; gap: 60px; }
+            .pain-title { font-size: clamp(2.5rem, 10vw, 4rem); }
+            .position-big { font-size: clamp(2rem, 8vw, 3.5rem); }
             .position-cols { grid-template-columns: 1fr; gap: 24px; }
             .process-header { flex-direction: column; align-items: flex-start; }
+            .process-title { font-size: clamp(2.5rem, 10vw, 4rem); }
             .process-intro { text-align: left; }
             .process-grid { grid-template-columns: 1fr; }
             .process-cta { flex-direction: column; align-items: flex-start; }
             .about-grid { grid-template-columns: 1fr; gap: 60px; }
+            .about-name { font-size: clamp(3rem, 12vw, 5rem); }
+            .proof-card { padding: 40px 24px; }
             .offer-box { grid-template-columns: 1fr; padding: 40px 24px; gap: 40px; }
             .offer-price-block { text-align: left; }
+            .btn-primary, .btn-ghost { padding: 14px 28px; font-size: 0.65rem; }
             footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
             body { cursor: auto; }
             .cursor, .cursor-ring { display: none; }
